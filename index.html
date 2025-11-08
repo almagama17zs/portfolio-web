@@ -9,60 +9,92 @@
 </head>
 <body>
   <header>
-    <div class="container header-content">
-      <h1>Hola, soy <span>Alejandro Martín García</span></h1>
-      <p>Experto en audiovisuales y tecnología con enfoque en datos</p>
+    <div class="header-container">
+      <div class="photo">
+        <img src="foto.jpg" alt="Foto de Alejandro Martín García">
+      </div>
+      <div class="intro">
+        <h1>Alejandro Martín García</h1>
+        <p>Experto en audiovisuales y tecnología con enfoque en datos</p>
+      </div>
     </div>
   </header>
 
   <main class="container">
-    <section id="about">
+
+    <!-- SOBRE MÍ -->
+    <section class="card" id="about">
       <h2>Sobre mí</h2>
-      <p>Me dedico a la creación y postproducción de audio y video, combinando conocimientos técnicos con pasión por la innovación. Además, aplico análisis de datos y programación para optimizar procesos y proyectos digitales.</p>
+      <p>Soy un técnico en sonido, audiovisuales y telecomunicaciones con un enfoque multidisciplinar. 
+      Mi trayectoria combina la creación audiovisual, la postproducción profesional y el análisis de datos con herramientas de programación y visualización. 
+      Me apasiona la innovación tecnológica, la grabación en estudio y exteriores, y la aplicación de la inteligencia artificial y el análisis de datos en proyectos creativos y empresariales.</p>
     </section>
 
-    <section id="skills">
-      <h2>Habilidades</h2>
-      <div class="skills-grid">
-        <div class="skill-card">
-          <h3>Audio & Música</h3>
-          <p>Grabación, mezcla y masterización usando Cubase, Pro Tools, Fruity Loops y Audacity.</p>
-        </div>
-        <div class="skill-card">
-          <h3>Video & Imagen</h3>
-          <p>Edición y postproducción con Premiere, Final Cut, DaVinci, Blender y After Effects. Fotografía y retoque con Photoshop y Lightroom.</p>
-        </div>
-        <div class="skill-card">
-          <h3>Programación & Datos</h3>
-          <p>Python, SQL/NoSQL, análisis de datos, Jupyter Notebook, Power BI, Spark/PySpark y Big Data.</p>
-        </div>
-        <div class="skill-card">
-          <h3>Informática & Web</h3>
-          <p>Windows, Linux, Apple; gestión de redes sociales; WordPress; Visual Studio Code; Azure; CSS; Java; Grafana.</p>
-        </div>
-      </div>
+    <!-- HABILIDADES -->
+    <section class="card" id="skills">
+      <h2>Competencias técnicas</h2>
+
+      <details>
+        <summary>🎧 Audio y Música</summary>
+        <p>Grabación, mezcla y mastering profesional. Experiencia con Cubase, Pro Tools, Fruity Loops, Sonar, Audacity y Zara Radio. He trabajado con más de 30 artistas urbanos, diseñando el sonido de proyectos musicales completos.</p>
+      </details>
+
+      <details>
+        <summary>🎬 Vídeo e Imagen</summary>
+        <p>Producción y edición audiovisual con Premiere, Final Cut, Da Vinci, Blender, After Effects, CapCut, Photoshop y Lightroom. Creación de videoclips, animaciones y contenido corporativo para marcas y empresas.</p>
+      </details>
+
+      <details>
+        <summary>💻 Programación y Datos</summary>
+        <p>Desarrollo en Python, Java, SQL, CSS y HTML. Experiencia en análisis de datos, Jupyter Notebook, Power BI, Spark/PySpark, Big Data y Microsoft Azure. Aplicación práctica en proyectos de predicción y visualización de datos.</p>
+      </details>
+
+      <details>
+        <summary>🖥️ Informática y Web</summary>
+        <p>Amplio conocimiento de sistemas Windows, macOS y Linux. Experiencia en WordPress, redes sociales, diseño con Canvas, gestión en Microsoft 365, SketchUp, Visual Studio Code, Azure y Cisco Packet Tracer.</p>
+      </details>
     </section>
 
-    <section id="experience">
-      <h2>Experiencia</h2>
-      <div class="experience-item">
-        <h3>Producción Audiovisual</h3>
-        <p>Grabación y edición de programas, entrevistas, webinars y videoclips para marcas, medios y artistas independientes.</p>
-      </div>
-      <div class="experience-item">
-        <h3>Postproducción y Diseño</h3>
-        <p>Creación de branding, cabeceras, transiciones y edición de contenido corporativo y formativo para empresas como La Caixa, El Corte Inglés y Prosegur.</p>
-      </div>
-      <div class="experience-item">
-        <h3>Big Data & Análisis</h3>
-        <p>Procesamiento de datasets clínicos y empresariales, análisis exploratorio de datos y preparación de información para predicción y visualización interactiva.</p>
-      </div>
+    <!-- EXPERIENCIA -->
+    <section class="card" id="experience">
+      <h2>Experiencia profesional</h2>
+
+      <details>
+        <summary>🎙️ Producción Audiovisual</summary>
+        <p>Realización y supervisión de programas en directo, grabaciones exteriores, entrevistas y edición para radio y televisión. Creación de branding, cabeceras y transiciones para medios como Onda Cero y 7tv. 
+        Montaje de estudios insonorizados y gestión técnica integral de producciones audiovisuales.</p>
+      </details>
+
+      <details>
+        <summary>🎞️ Postproducción y Diseño</summary>
+        <p>Edición de contenido para marcas como La Caixa, El Corte Inglés, Puerto de Indias y Prosegur. Creación de vídeos corporativos, animaciones y materiales de formación. Dirección de sesiones fotográficas y gestión de redes visuales de empresas.</p>
+      </details>
+
+      <details>
+        <summary>📊 Análisis de Datos y Tecnología</summary>
+        <p>Procesamiento de datasets clínicos y empresariales para proyectos de investigación. Desarrollo de análisis exploratorio, visualización con Power BI y Python, e integración de soluciones basadas en IA y automatización de flujos de trabajo.</p>
+      </details>
     </section>
 
-    <section id="contact">
+    <!-- FORMACIÓN -->
+    <section class="card" id="education">
+      <h2>Formación</h2>
+      <p><strong>Grado en Comunicación Audiovisual, 3D y FX</strong> — EUSA (2023)<br>
+      <strong>Técnico Superior en Sonido para Audiovisuales y Espectáculos</strong> — AXATI (2017)<br>
+      <strong>Técnico Superior en Sistemas de Telecomunicaciones e Informáticos</strong> — AXATI (2017)</p>
+
+      <p><strong>Certificado de Profesionalidad:</strong> Montaje y Postproducción de Vídeo — CESUR (2024)<br>
+      <strong>Especialista en Big Data</strong> — CEDECO (2025)<br>
+      <strong>Programación en Python</strong> — Santander Open Academy (2025)<br>
+      <strong>Ciberseguridad avanzada en entornos OT</strong> — APRENDEA (2025)</p>
+    </section>
+
+    <!-- CONTACTO -->
+    <section class="card" id="contact">
       <h2>Contacto</h2>
-      <p>📞 672125940 | ✉️ <a href="mailto:Aemartingarcia93@gmail.com">Aemartingarcia93@gmail.com</a></p>
-      <p>🔗 <a href="https://github.com/almagama17zs">GitHub</a> | <a href="https://www.linkedin.com/in/alejandro-emilio-martin-garcia/">LinkedIn</a> | IG: @aemgvisual.mp4</p>
+      <p>📞 672 125 940</p>
+      <p>✉️ <a href="mailto:Aemartingarcia93@gmail.com">Aemartingarcia93@gmail.com</a></p>
+      <p>🌐 <a href="https://github.com/almagama17zs">GitHub</a> | <a href="https://www.linkedin.com/in/alejandro-emilio-martin-garcia/">LinkedIn</a> | IG: @aemgvisual.mp4</p>
     </section>
   </main>
 
