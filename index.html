@@ -3,33 +3,50 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mi Portafolio</title>
+  <title>Portafolio de [Tu Nombre]</title>
   <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
   <header>
-    <h1>👋 Hola, soy [Tu Nombre]</h1>
-    <p>Técnico Informático & Programador</p>
+    <div class="container">
+      <h1>Hola, soy <span>[Tu Nombre]</span></h1>
+      <p>Técnico Informático & Programador</p>
+    </div>
   </header>
 
-  <main>
+  <main class="container">
     <section id="about">
       <h2>Sobre mí</h2>
-      <p>Soy un apasionado de la tecnología, la programación y la resolución de problemas.</p>
+      <p>Soy un apasionado de la tecnología y la programación. Me encanta aprender y crear proyectos que aporten soluciones reales.</p>
     </section>
 
     <section id="projects">
       <h2>Proyectos</h2>
-      <ul>
-        <li>🧠 Chatbot con IA</li>
-        <li>📱 App móvil de tareas</li>
-        <li>🛒 Tienda online</li>
-      </ul>
+      <div class="projects-grid">
+        <div class="project-card">
+          <h3>Chatbot IA</h3>
+          <p>Un chatbot inteligente para resolver dudas automáticamente.</p>
+        </div>
+        <div class="project-card">
+          <h3>App de Tareas</h3>
+          <p>Aplicación móvil para gestionar tareas diarias de manera eficiente.</p>
+        </div>
+        <div class="project-card">
+          <h3>Tienda Online</h3>
+          <p>Proyecto de ecommerce para practicar integración de pagos y UX.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h2>Contacto</h2>
+      <p>📫 <a href="mailto:tuemail@gmail.com">tuemail@gmail.com</a> | 💻 <a href="https://github.com/tuusuario">GitHub</a></p>
     </section>
   </main>
 
   <footer>
-    <p>📫 <a href="mailto:tuemail@gmail.com">tuemail@gmail.com</a> | 💻 <a href="https://github.com/tuusuario">GitHub</a></p>
+    <p>© 2025 [Tu Nombre]. Todos los derechos reservados.</p>
   </footer>
 </body>
 </html>
