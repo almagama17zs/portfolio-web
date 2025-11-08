@@ -1,0 +1,21 @@
+body {
+  font-family: system-ui, sans-serif;
+  background: #f9f9f9;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+header, main, footer {
+  text-align: center;
+  padding: 2rem;
+}
+
+h1 {
+  color: #2a4d9b;
+}
+
+a {
+  color: #2a4d9b;
+  text-decoration: none;
+}
