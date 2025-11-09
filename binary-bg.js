@@ -1,5 +1,5 @@
 class BinaryBackground {
-  constructor(canvasId, speed = 1.5) {
+  constructor(canvasId, speed = 2) {
     this.canvas = document.getElementById(canvasId);
     this.ctx = this.canvas.getContext("2d");
     this.speed = speed;
@@ -21,7 +21,7 @@ class BinaryBackground {
 
   update() {
     const ctx = this.ctx;
-    ctx.fillStyle = "rgba(0,0,0,0.2)";
+    ctx.fillStyle = "rgba(0, 0, 0, 0.2)";
     ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
     ctx.fillStyle = "#0F0";
     ctx.font = "16px monospace";

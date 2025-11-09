@@ -7,9 +7,9 @@
 }
 
 body {
-  background-color: #111;
-  color: #0f0;
-  line-height: 1.5;
+  background-color: #fafafa; /* fondo claro */
+  color: #333;
+  line-height: 1.6;
   text-align: center;
 }
 
@@ -18,10 +18,10 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: #000;
+  background: linear-gradient(135deg, #1565c0, #1e88e5);
   color: white;
   padding: 0 60px;
-  height: 200px;
+  height: 180px;
   position: relative;
   overflow: hidden;
 }
@@ -59,92 +59,100 @@ header .header-text {
   z-index: 1;
 }
 
-header h1 {
-  font-size: 2em;
-  margin-bottom: 5px;
-}
+header h1 { font-size: 2em; margin-bottom: 5px; }
+header h2 { font-size: 1.2em; font-weight: normal; }
 
-header h2 {
-  font-size: 1.2em;
-  font-weight: normal;
-}
-
-/* SECCIONES */
-section.bloques,
-section.sobre-mi,
-section.contacto {
+/* SECCIONES GENERALES */
+section.bloques, section.sobre-mi, section.contacto {
   margin: 40px auto;
   padding: 20px;
   max-width: 900px;
-  background: linear-gradient(135deg, #111, #222);
+  background: linear-gradient(135deg, #ffffff, #e0f7fa);
   border-radius: 15px;
-  box-shadow: 0px 5px 15px rgba(0,255,0,0.2);
+  box-shadow: 0px 5px 15px rgba(0,0,0,0.1);
   text-align: center;
 }
 
-section h2 {
+section.bloques h2,
+section.sobre-mi h2,
+section.contacto h2 {
   margin-bottom: 15px;
   font-size: 1.8em;
   text-align: center;
-  color: #0f0;
 }
 
-/* SOBRE MI */
-.sobre-mi-list,
-.subblock-desc,
+/* BLOQUE SOBRE MI */
+.sobre-mi-list {
+  list-style-type: none;
+  display: inline-block;
+  text-align: left;
+  text-align-last: left;
+  max-width: 80%;
+}
+
+.sobre-mi-list li::before {
+  content: "* ";
+  color: #1565c0;
+}
+
+.subblock {
+  margin: 20px 0;
+  border-radius: 10px;
+  padding: 15px;
+  background: #f5f5f5;
+  text-align: left;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+}
+
+.subblock-header {
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 1.2em;
+  margin-bottom: 10px;
+}
+
+.subblock-content {
+  display: none;
+}
+
+.subblock-content.show {
+  display: block;
+}
+
+.subblock-list, .subblock-desc {
+  margin-left: 20px;
+}
+
+.fade li {
+  opacity: 0;
+  animation: fadeIn 0.5s forwards;
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+/* CONTACTO */
 .contacto-list {
   list-style: none;
-  padding-left: 0;
-}
-
-.sobre-mi-list li {
-  margin: 10px 0;
-  font-size: 1.05em;
-  text-align: left;
-  white-space: nowrap; /* evita salto de línea */
-}
-
-/* BLOQUES SUBLIST */
-.subblock-list li {
-  opacity: 0;
-  margin: 3px 0;
-  line-height: 1.2;
-}
-
-.subblock-desc li {
-  margin: 5px 0;
-}
-
-/* CONTACTO EN HORIZONTAL */
-.contacto-list.horizontal {
   display: flex;
-  justify-content: space-around;
-  align-items: center;
+  justify-content: center;
+  gap: 20px;
   flex-wrap: wrap;
 }
 
-.contacto-list.horizontal li {
-  margin: 5px 10px;
-  font-size: 1.1em;
-}
-
-.contacto-list.horizontal li a {
-  color: #0f0;
-  text-decoration: none;
-}
-
-.contacto-list.horizontal li a:hover {
-  text-decoration: underline;
-}
+.contacto-list li a { color: #1a73e8; text-decoration: none; }
+.contacto-list li a:hover { text-decoration: underline; }
 
 /* FOOTER */
 footer {
   margin-top: 50px;
   padding: 20px;
-  background: #000;
-  color: #0f0;
+  background: linear-gradient(135deg, #1565c0, #1e88e5);
+  color: white;
   text-align: center;
   position: relative;
+  overflow: hidden;
 }
 
 footer canvas {
@@ -156,6 +164,11 @@ footer canvas {
   z-index: 0;
 }
 
+footer p {
+  position: relative;
+  z-index: 1;
+}
+
 /* MEDIA QUERIES */
 @media (max-width: 768px) {
   header {
@@ -164,26 +177,9 @@ footer canvas {
     padding: 20px;
   }
 
-  header .header-left,
-  header .header-right {
-    width: auto;
-    margin: 10px 0;
-  }
+  header .header-left, header .header-right { width: auto; margin: 10px 0; }
+  header img { width: 120px; height: 120px; }
+  header .header-text { text-align: center; }
 
-  header img {
-    width: 120px;
-    height: 120px;
-  }
-
-  header .header-text {
-    text-align: center;
-  }
-
-  .contacto-list.horizontal {
-    flex-direction: column;
-  }
-
-  .sobre-mi-list li {
-    white-space: normal;
-  }
+  .sobre-mi-list { max-width: 90%; }
 }
