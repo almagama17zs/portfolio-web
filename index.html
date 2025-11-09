@@ -11,21 +11,23 @@
   <!-- CABECERA -->
   <header>
     <canvas id="binary-header"></canvas>
-    <div class="header-left">
-      <img src="https://raw.githubusercontent.com/almagama17zs/portfolio-web/main/foto.jpg" alt="Foto izquierda">
-    </div>
-    <div class="header-text">
-      <h1>Alejandro Emilio Martín García</h1>
-      <h2>Experto en audiovisuales y informática con enfoque en análisis de datos</h2>
-    </div>
-    <div class="header-right">
-      <img src="https://raw.githubusercontent.com/almagama17zs/portfolio-web/main/foto.jpg" alt="Foto derecha">
+    <div class="header-content">
+      <div class="header-left">
+        <img src="https://raw.githubusercontent.com/almagama17zs/portfolio-web/main/foto.jpg" alt="Foto izquierda">
+      </div>
+      <div class="header-text">
+        <h1>Alejandro Emilio Martín García</h1>
+        <h2>Experto en audiovisuales y informática con enfoque en análisis de datos</h2>
+      </div>
+      <div class="header-right">
+        <img src="https://raw.githubusercontent.com/almagama17zs/portfolio-web/main/foto.jpg" alt="Foto derecha">
+      </div>
     </div>
   </header>
 
   <main>
     <!-- SOBRE MÍ -->
-    <section class="sobre-mi block">
+    <section class="block sobre-mi">
       <h2>Sobre mí</h2>
       <ul class="sobre-mi-list fade">
         <li>Profesional multidisciplinar con formación en sonido, imagen y telecomunicaciones.</li>
@@ -35,7 +37,7 @@
     </section>
 
     <!-- HABILIDADES -->
-    <section class="bloques block">
+    <section class="block habilidades">
       <h2>Habilidades técnicas</h2>
 
       <div class="subblock">
@@ -126,9 +128,8 @@
     </section>
 
     <!-- FORMACIÓN -->
-    <section class="bloques block">
+    <section class="block formacion">
       <h2>Formación</h2>
-
       <div class="subblock">
         <div class="subblock-header">🎓 Formación Académica</div>
         <div class="subblock-content">
@@ -166,9 +167,9 @@
     </section>
 
     <!-- CONTACTO -->
-    <section class="bloques block contacto">
+    <section class="block contacto">
       <h2>Contacto</h2>
-      <ul class="contacto-list fade horizontal">
+      <ul class="contacto-list horizontal fade">
         <li>📞 <a href="tel:672125940">672125940</a></li>
         <li>📧 <a href="mailto:aemartingarcia93@gmail.com">Gmail</a></li>
         <li>🔗 <a href="https://www.linkedin.com/in/aemartingarcia93/" target="_blank">LinkedIn</a></li>
@@ -176,7 +177,6 @@
         <li>📷 <a href="https://www.instagram.com/aemgvisual.mp4/" target="_blank">Instagram</a></li>
       </ul>
     </section>
-
   </main>
 
   <footer>
@@ -186,5 +186,14 @@
 
   <script src="binary-bg.js"></script>
   <script src="typewriter.js"></script>
+  <script>
+    // Subblocks toggle
+    document.querySelectorAll('.subblock-header').forEach(header => {
+      header.addEventListener('click', () => {
+        const content = header.nextElementSibling;
+        content.style.display = content.style.display === 'block' ? 'none' : 'block';
+      });
+    });
+  </script>
 </body>
 </html>
