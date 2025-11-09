@@ -69,25 +69,30 @@ header h2 {
   font-weight: normal;
 }
 
-/* BLOQUES */
 section.bloques, section.sobre-mi, section.contacto {
-  margin: 40px auto;          /* mantiene el bloque centrado */
+  margin: 40px auto;          
   padding: 20px;
   max-width: 900px;
   background: linear-gradient(135deg, #ffffff, #e0f7fa);
   border-radius: 15px;
   box-shadow: 0px 5px 15px rgba(0,0,0,0.1);
+  text-align: center;  /* centra el contenido dentro del bloque */
 }
 
 section.bloques h2, section.sobre-mi h2, section.contacto h2 {
   margin-bottom: 15px;
   font-size: 1.8em;
-  text-align: center;         /* títulos centrados */
+  text-align: center; /* títulos centrados */
 }
 
+/* párrafos centrados y justificados */
 section.bloques p, section.sobre-mi p, section.contacto p {
-  text-align: justify;        /* texto justificado */
-  line-height: 1.2em;         /* interlineado ajustado */
+  display: inline-block;     /* permite centrar el bloque de texto */
+  text-align: justify;       /* justificado dentro del bloque */
+  text-align-last: center;   /* última línea centrada */
+  max-width: 80%;            /* controla el ancho del párrafo */
+  line-height: 1.4;          /* interlineado cómodo */
+  margin: 10px 0;            /* separación entre párrafos */
 }
 
 /* Detalles expandibles */
