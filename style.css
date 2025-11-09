@@ -108,20 +108,22 @@ section.sobre-mi {
 
 section.sobre-mi .texto {
   display: inline-block;
-  text-align: left;       /* alinea internamente las líneas */
+  text-align: left;
   text-align-last: left;
   max-width: 75%;
   margin: 0 auto;
-  line-height: 1.2;       /* interlineado más ajustado */
+  line-height: 1.2;
   font-size: 1.05em;
+  position: relative;
+  left: -40px; /* mueve el bloque un poco más a la izquierda para evitar saltos */
 }
 
 /* alinear los guiones exactamente */
 section.sobre-mi .texto p {
-  text-indent: -0.6em;    /* saca el guion fuera del margen */
-  padding-left: 0.6em;    /* alinea visualmente el texto */
+  text-indent: -0.6em;
+  padding-left: 0.6em;
   margin: 5px 0;
-  white-space: normal;    /* permite saltos de línea naturales */
+  white-space: normal;
 }
 
 /* DETALLES EXPANDIBLES */
@@ -203,5 +205,9 @@ footer {
 
   header .header-text {
     text-align: center;
+  }
+
+  section.sobre-mi .texto {
+    left: 0; /* vuelve a centrar en pantallas pequeñas */
   }
 }
