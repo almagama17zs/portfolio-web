@@ -7,33 +7,22 @@
 }
 
 body {
-  background: linear-gradient(to bottom, #121212, #1c1c1c);
+  background-color: #121212; /* fondo oscuro */
   color: #f2f2f2;
   line-height: 1.6;
   text-align: center;
-  font-family: 'Arial', sans-serif;
 }
 
-
-/* HEADER */
+/* CABECERA */
 header {
   display: flex;
   align-items: center;
-  justify-content: center;
-  position: relative;
-  height: 180px;
+  justify-content: space-between;
   background: linear-gradient(135deg, #1565c0, #1e88e5);
   color: white;
   padding: 0 60px;
-}
-
-header canvas {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
+  height: 180px;
+  position: relative;
 }
 
 header .header-left,
@@ -42,16 +31,6 @@ header .header-right {
   display: flex;
   justify-content: center;
   align-items: center;
-  position: relative;
-  z-index: 1;
-}
-
-header .header-left { margin-right: 20px; }
-header .header-right { margin-left: 20px; }
-
-header .header-text {
-  text-align: center;
-  z-index: 1;
 }
 
 header img {
@@ -61,120 +40,117 @@ header img {
   object-fit: cover;
 }
 
+header .header-text {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+header h1 {
+  font-size: 2em;
+  margin-bottom: 5px;
+}
+
+header h2 {
+  font-size: 1.2em;
+  font-weight: normal;
+}
+
 /* BLOQUES */
 section.bloques,
 section.sobre-mi,
-section.contacto {
+section.contacto,
+section.formacion {
   margin: 40px auto;
-  padding: 20px;
+  padding: 25px 30px;
   max-width: 900px;
-  background: linear-gradient(135deg, #ffffff, #e0f7fa);
+  background-color: #000; /* negro */
+  color: #fff;
   border-radius: 15px;
-  box-shadow: 0px 5px 15px rgba(0,0,0,0.1);
+  box-shadow: 0px 5px 15px rgba(0,0,0,0.5);
   text-align: center;
 }
 
-/* Títulos */
-section.bloques h2,
-section.sobre-mi h2,
-section.contacto h2 {
-  margin-bottom: 15px;
+section h2 {
+  margin-bottom: 20px;
   font-size: 1.8em;
-  text-align: center;
 }
 
-/* SOBRE MI */
-.sobre-mi-list p {
-  text-align: left;
-  max-width: 800px;
-  margin: 5px auto;
+/* Sobre mí */
+.sobre-mi li {
+  margin: 8px 0;
   font-size: 1.05em;
-  line-height: 1.3;
+  list-style-type: disc;
+  text-align: left;
+  max-width: 90%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* SUBBLOQUES */
 .subblock {
-  margin: 20px 0;
-  text-align: left;
+  background-color: #111;
+  margin: 15px 0;
+  border-radius: 10px;
+  padding: 15px;
 }
 
 .subblock-header {
-  background: linear-gradient(120deg, #d9e4f5, #f0f4ff);
-  padding: 10px 15px;
-  border-radius: 8px;
   font-weight: bold;
   font-size: 1.2em;
+  margin-bottom: 10px;
   cursor: pointer;
-  margin-bottom: 5px;
+  background-color: #222;
+  padding: 8px 12px;
+  border-radius: 8px;
 }
 
 .subblock-content {
   display: none;
-  margin-top: 5px;
+  text-align: left;
+  padding-top: 10px;
 }
 
-.subblock-list.fade li {
+.subblock-content ul {
+  list-style-type: disc;
+  margin-left: 20px;
+}
+
+.subblock-content li {
+  margin: 5px 0;
+}
+
+.subblock-content li.fade {
   opacity: 0;
   transform: translateY(10px);
-  animation: fadeInUp 0.6s forwards;
+  transition: all 0.5s ease-in-out;
 }
 
-.subblock-list.fade li:nth-child(1) { animation-delay: 0.1s; }
-.subblock-list.fade li:nth-child(2) { animation-delay: 0.2s; }
-.subblock-list.fade li:nth-child(3) { animation-delay: 0.3s; }
-
-@keyframes fadeInUp {
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* Typewriter */
-.typewriter p,
-.typewriter li {
-  display: inline-block;
-  overflow: hidden;
-  border-right: .15em solid orange;
-  white-space: nowrap;
-}
-
-/* CONTACTO horizontal */
+/* CONTACTO */
 .contacto-list {
   list-style: none;
   padding: 0;
   display: flex;
   justify-content: center;
-  gap: 15px;
-  flex-wrap: wrap;
+  gap: 25px;
 }
 
-.contacto-list li {
-  margin: 0;
+.contacto-list li a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.contacto-list li a:hover {
+  text-decoration: underline;
 }
 
 /* FOOTER */
 footer {
   position: relative;
-  margin-top: 50px;
-  padding: 20px;
+  padding: 30px;
   background: linear-gradient(135deg, #1565c0, #1e88e5);
   color: white;
   text-align: center;
-  height: auto; /* ajusta la altura automáticamente según contenido */
-  overflow: hidden; /* evita que el canvas genere espacio extra */
-}
-
-footer canvas {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
-}
-
-footer p {
-  position: relative;
-  z-index: 1;
-  margin: 0; /* elimina márgenes extra que generan espacio */
 }
 
 /* MEDIA QUERIES */
@@ -196,12 +172,16 @@ footer p {
     height: 120px;
   }
 
-  .sobre-mi-list p {
-    font-size: 1em;
+  section.bloques,
+  section.sobre-mi,
+  section.contacto,
+  section.formacion {
+    max-width: 95%;
+    padding: 20px;
   }
 
   .contacto-list {
     flex-direction: column;
-    gap: 5px;
+    gap: 10px;
   }
 }
