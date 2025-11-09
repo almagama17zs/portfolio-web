@@ -91,7 +91,7 @@ details p, details ul {
 /* Ajuste del margen de las listas */
 .bloques ul,
 .bloques li {
-  margin-left: 1.8rem;
+  margin-left: 3rem;
   padding-left: 0.5rem;
 }
 
