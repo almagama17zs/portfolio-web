@@ -17,11 +17,12 @@ body {
 header {
   display: flex;
   align-items: center;
-  justify-content: flex-start; /* Foto más a la izquierda relativa al contenido */
-  background: linear-gradient(135deg, #155ab6, #1a73e8); /* Azul más oscuro */
+  justify-content: center; /* Centra el contenido principal */
+  position: relative; /* Para poder posicionar la foto */
+  background: linear-gradient(135deg, #155ab6, #1a73e8);
   color: white;
-  padding: 30px 50px; /* Más espacio para mover la foto a la derecha */
-  width: 100%; /* Ocupa todo el ancho */
+  padding: 30px 50px;
+  width: 100%;
   box-sizing: border-box;
 }
 
@@ -30,12 +31,14 @@ header img {
   height: 150px;
   border-radius: 50%;
   object-fit: cover;
-  margin-right: 30px;
-  flex-shrink: 0;
+  position: absolute; /* Para colocar la foto independientemente */
+  right: 50px; /* Ajusta la distancia del borde derecho */
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 header .header-text {
-  text-align: left;
+  text-align: center; /* Centra el texto horizontalmente */
   max-width: 800px;
 }
 
