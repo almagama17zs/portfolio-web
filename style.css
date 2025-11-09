@@ -156,6 +156,8 @@ footer {
   background: linear-gradient(135deg, #1565c0, #1e88e5);
   color: white;
   text-align: center;
+  height: auto; /* ajusta la altura automáticamente según contenido */
+  overflow: hidden; /* evita que el canvas genere espacio extra */
 }
 
 footer canvas {
@@ -170,6 +172,7 @@ footer canvas {
 footer p {
   position: relative;
   z-index: 1;
+  margin: 0; /* elimina márgenes extra que generan espacio */
 }
 
 /* MEDIA QUERIES */
