@@ -1,28 +1,42 @@
-document.addEventListener("DOMContentLoaded", () => {
-  function typeWriter(el) {
-    const paragraphs = el.querySelectorAll("p");
-    let i = 0;
-
-    function typeParagraph() {
-      if (i >= paragraphs.length) return;
-      const p = paragraphs[i];
-      const text = p.textContent;
-      p.textContent = "";
-      let j = 0;
-
-      const interval = setInterval(() => {
-        p.textContent += text[j];
-        j++;
-        if (j === text.length) {
-          clearInterval(interval);
-          i++;
-          typeParagraph();
-        }
-      }, 30);
+// --- TYPEWRITER EFFECT ---
+function typeWriter(element, delay = 50) {
+  const text = element.innerText;
+  element.innerText = '';
+  let i = 0;
+  function typing() {
+    if (i < text.length) {
+      element.innerText += text.charAt(i);
+      i++;
+      setTimeout(typing, delay);
     }
-
-    typeParagraph();
   }
+  typing();
+}
 
-  document.querySelectorAll(".typewriter").forEach(el => typeWriter(el));
+// Aplicar efecto a todos los <p> dentro de typewriter
+document.querySelectorAll('.typewriter p').forEach(p => {
+  typeWriter(p);
+});
+
+// --- SUBBLOCK TOGGLE ---
+document.querySelectorAll('.subblock-header').forEach(header => {
+  header.addEventListener('click', () => {
+    const content = header.nextElementSibling;
+    if (content.style.display === 'block') {
+      content.style.display = 'none';
+    } else {
+      content.style.display = 'block';
+
+      // reiniciar efectos fade y typewriter al abrir
+      content.querySelectorAll('.fade li').forEach((li, index) => {
+        li.style.opacity = 0;
+        li.style.transform = 'translateY(10px)';
+        li.style.animation = `fadeInUp 0.5s forwards ${0.2 + index*0.2}s`;
+      });
+
+      content.querySelectorAll('.typewriter p').forEach(p => {
+        typeWriter(p);
+      });
+    }
+  });
 });

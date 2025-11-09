@@ -159,16 +159,6 @@ h2 {
   overflow: hidden;
   border-right: 0.15em solid #0f0;
   white-space: nowrap;
-  animation: typing 3s steps(40, end) forwards, blink 0.75s step-end infinite;
-}
-
-@keyframes typing {
-  from { width: 0; }
-  to { width: 100%; }
-}
-
-@keyframes blink {
-  50% { border-color: transparent; }
 }
 
 /* SOBRE MI lista */

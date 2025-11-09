@@ -1,5 +1,5 @@
 class BinaryBackground {
-  constructor(canvasId, speed = 1.5) {
+  constructor(canvasId, speed = 2) {
     this.canvas = document.getElementById(canvasId);
     this.ctx = this.canvas.getContext("2d");
     this.speed = speed;
