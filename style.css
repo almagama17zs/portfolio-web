@@ -115,7 +115,7 @@ section.sobre-mi .texto {
   line-height: 1.2;
   font-size: 1.05em;       /* un poco más pequeño */
   position: relative;
-  left: -50px;          /* desplazamiento mayor hacia la izquierda */
+  left: -30px;          /* desplazamiento mayor hacia la izquierda */
 }
 
 /* Alineación precisa de los guiones */
