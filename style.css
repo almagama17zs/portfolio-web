@@ -11,6 +11,7 @@ body {
   color: #333;
   line-height: 1.6;
   text-align: center;
+  overflow-x: hidden;
 }
 
 /* CABECERA */
@@ -18,13 +19,15 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  background: linear-gradient(135deg, #1565c0, #1e88e5);
   color: white;
   padding: 0 60px;
   height: 180px;
+  border-radius: 0;
   position: relative;
-  overflow: hidden;
 }
 
+/* Contenedores de imágenes con desplazamiento */
 header .header-left,
 header .header-right {
   width: 180px; 
@@ -34,13 +37,8 @@ header .header-right {
   position: relative;
 }
 
-header .header-left {
-  left: 10cm;
-}
-
-header .header-right {
-  right: 10cm;
-}
+header .header-left { left: 10cm; }
+header .header-right { right: 10cm; }
 
 header img {
   width: 140px;
@@ -49,29 +47,17 @@ header img {
   object-fit: cover;
 }
 
+/* Texto centrado */
 header .header-text {
   text-align: center;
   max-width: 800px;
   margin: 0 auto;
-  position: relative;
-  z-index: 1;
 }
 
 header h1 { font-size: 2em; margin-bottom: 5px; }
 header h2 { font-size: 1.2em; font-weight: normal; }
 
-/* Canvas animado header/footer */
-header canvas#binary-header,
-footer canvas#binary-footer {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
-}
-
-/* SECCIONES */
+/* SECCIONES GENERALES */
 section.bloques,
 section.sobre-mi,
 section.contacto {
@@ -92,18 +78,18 @@ section.contacto h2 {
   text-align: center;
 }
 
-/* Párrafos en bloques */
+/* PÁRRAFOS GENERALES */
 section.bloques p,
-details p {
+section.contacto p {
   display: inline-block;
   text-align: justify;
-  text-align-last: left;
-  max-width: 85%;
+  text-align-last: center;
+  max-width: 80%;
   line-height: 1.3;
-  margin: 6px 0;
+  margin: 10px 0;
 }
 
-/* SOBRE MÍ */
+/* BLOQUE "SOBRE MÍ" */
 section.sobre-mi .texto {
   display: inline-block;
   text-align: left;
@@ -123,7 +109,7 @@ section.sobre-mi .texto p {
   white-space: nowrap;
 }
 
-/* DETALLES */
+/* Detalles expandibles */
 details {
   margin: 15px 0;
   padding: 10px 15px;
@@ -143,32 +129,43 @@ details[open] {
   background: linear-gradient(120deg, #d9e4f5, #f0f4ff);
 }
 
+details p, details ul { margin-top: 10px; }
+details p { margin: 3px 0; line-height: 1.2; }
 details ul, details li { padding-left: 20px; margin: 3px 0; line-height: 1.2; list-style-position: inside; }
+
+/* EFECTO FADE-IN PARA <LI> */
+.fade-in-list li {
+  opacity: 0;
+  transform: translateY(15px);
+}
+
+@keyframes fadeInUp {
+  0% { opacity: 0; transform: translateY(15px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
 
 /* CONTACTO */
 section.contacto a {
   color: #1a73e8;
   text-decoration: none;
 }
-
-section.contacto a:hover {
-  text-decoration: underline;
-}
+section.contacto a:hover { text-decoration: underline; }
 
 /* FOOTER */
 footer {
   margin-top: 50px;
   padding: 20px;
+  background: linear-gradient(135deg, #1565c0, #1e88e5);
   color: white;
   text-align: center;
-  position: relative;
-  overflow: hidden;
+  border-radius: 0;
 }
 
 /* MEDIA QUERIES */
 @media (max-width: 768px) {
   header { flex-direction: column; height: auto; padding: 20px; }
-  header .header-left, header .header-right { width: auto; margin: 10px 0; }
+  header .header-left,
+  header .header-right { width: auto; margin: 10px 0; }
   header img { width: 120px; height: 120px; }
   header .header-text { text-align: center; }
   section.sobre-mi .texto { left: 0; max-width: 90%; font-size: 1em; }

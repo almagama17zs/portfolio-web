@@ -1,61 +1,39 @@
-// Binary background animation para header y footer
-class BinaryBg {
-  constructor(canvasId) {
+class BinaryBackground {
+  constructor(canvasId, speed = 2) {
     this.canvas = document.getElementById(canvasId);
-    this.ctx = this.canvas.getContext('2d');
-    this.characters = '01';
-    this.fontSize = 16;
+    this.ctx = this.canvas.getContext("2d");
+    this.speed = speed;
     this.columns = [];
     this.resize();
-    window.addEventListener('resize', () => this.resize());
-    this.initColumns();
-    this.animate();
+    window.addEventListener("resize", () => this.resize());
+    requestAnimationFrame(() => this.update());
   }
 
   resize() {
     this.canvas.width = this.canvas.offsetWidth;
     this.canvas.height = this.canvas.offsetHeight;
+    const columns = Math.floor(this.canvas.width / 20);
     this.columns = [];
-    this.initColumns();
-  }
-
-  initColumns() {
-    const colCount = Math.floor(this.canvas.width / this.fontSize);
-    for (let i = 0; i < colCount; i++) {
-      this.columns[i] = Math.floor(Math.random() * this.canvas.height / this.fontSize);
+    for (let i = 0; i < columns; i++) {
+      this.columns.push(Math.random() * this.canvas.height);
     }
   }
 
-  draw() {
+  update() {
     const ctx = this.ctx;
-    ctx.fillStyle = 'rgba(0, 0, 0, 0.15)'; // semitransparente para efecto rastro
+    ctx.fillStyle = "rgba(0, 0, 0, 0.2)";
     ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
-
-    ctx.fillStyle = '#0F0'; // color verde clásico Matrix
-    ctx.font = `${this.fontSize}px monospace`;
-
+    ctx.fillStyle = "#0F0";
+    ctx.font = "16px monospace";
     for (let i = 0; i < this.columns.length; i++) {
-      const text = this.characters.charAt(Math.floor(Math.random() * this.characters.length));
-      const x = i * this.fontSize;
-      const y = this.columns[i] * this.fontSize;
-      ctx.fillText(text, x, y);
-
-      if (y > this.canvas.height && Math.random() > 0.975) {
-        this.columns[i] = 0;
-      }
-
-      this.columns[i]++;
+      const char = Math.random() > 0.5 ? "0" : "1";
+      ctx.fillText(char, i * 20, this.columns[i]);
+      this.columns[i] += this.speed + Math.random();
+      if (this.columns[i] > this.canvas.height) this.columns[i] = 0;
     }
-  }
-
-  animate() {
-    this.draw();
-    requestAnimationFrame(() => this.animate());
+    requestAnimationFrame(() => this.update());
   }
 }
 
-// Inicializa animación para header y footer
-document.addEventListener('DOMContentLoaded', () => {
-  new BinaryBg('binary-header');
-  new BinaryBg('binary-footer');
-});
+new BinaryBackground("binary-header", 1.5);
+new BinaryBackground("binary-footer", 1.5);
