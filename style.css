@@ -7,9 +7,9 @@
 }
 
 body {
-  background-color: #f2f2f2;
-  color: #333;
-  line-height: 1.6;
+  background-color: #111;
+  color: #0f0;
+  line-height: 1.5;
   text-align: center;
 }
 
@@ -18,11 +18,11 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  position: relative;
-  height: 180px;
-  padding: 0 60px;
-  background-color: #000;
+  background: #000;
   color: white;
+  padding: 0 60px;
+  height: 200px;
+  position: relative;
   overflow: hidden;
 }
 
@@ -37,16 +37,13 @@ header canvas {
 
 header .header-left,
 header .header-right {
-  width: 180px; 
+  width: 180px;
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
   z-index: 1;
 }
-
-header .header-left { left: 10cm; }
-header .header-right { right: 10cm; }
 
 header img {
   width: 140px;
@@ -59,105 +56,134 @@ header .header-text {
   text-align: center;
   max-width: 800px;
   margin: 0 auto;
-  position: relative;
   z-index: 1;
 }
 
-header h1 { font-size: 2em; margin-bottom: 5px; }
-header h2 { font-size: 1.2em; font-weight: normal; }
+header h1 {
+  font-size: 2em;
+  margin-bottom: 5px;
+}
+
+header h2 {
+  font-size: 1.2em;
+  font-weight: normal;
+}
 
 /* SECCIONES */
-section.bloques, section.sobre-mi, section.contacto {
+section.bloques,
+section.sobre-mi,
+section.contacto {
   margin: 40px auto;
   padding: 20px;
   max-width: 900px;
-  background: linear-gradient(135deg, #ffffff, #e0f7fa);
+  background: linear-gradient(135deg, #111, #222);
   border-radius: 15px;
-  box-shadow: 0px 5px 15px rgba(0,0,0,0.1);
+  box-shadow: 0px 5px 15px rgba(0,255,0,0.2);
+  text-align: center;
 }
 
-section.bloques h2,
-section.sobre-mi h2,
-section.contacto h2 {
+section h2 {
   margin-bottom: 15px;
   font-size: 1.8em;
   text-align: center;
-}
-
-/* Párrafos y listas */
-section.bloques p,
-section.contacto p {
-  text-align: justify;
-  text-align-last: center;
-  line-height: 1.3;
-  margin: 8px 0;
-}
-
-section.bloques ul, section.bloques li {
-  text-align: left;
-  line-height: 1.2;
+  color: #0f0;
 }
 
 /* SOBRE MI */
-section.sobre-mi .texto {
-  display: inline-block;
-  text-align: left;
-  max-width: 100%;
-  margin: 0 auto;
+.sobre-mi-list,
+.subblock-desc,
+.contacto-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+.sobre-mi-list li {
+  margin: 10px 0;
   font-size: 1.05em;
+  text-align: left;
   white-space: nowrap; /* evita salto de línea */
 }
 
-/* DETALLES */
-details {
-  margin: 15px 0;
-  padding: 10px 15px;
-  background: linear-gradient(120deg, #f5f5f5, #d9d9d9);
-  border-radius: 8px;
-  cursor: pointer;
-  text-align: left;
+/* BLOQUES SUBLIST */
+.subblock-list li {
+  opacity: 0;
+  margin: 3px 0;
+  line-height: 1.2;
 }
 
-details summary {
-  font-weight: bold;
+.subblock-desc li {
+  margin: 5px 0;
+}
+
+/* CONTACTO EN HORIZONTAL */
+.contacto-list.horizontal {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.contacto-list.horizontal li {
+  margin: 5px 10px;
   font-size: 1.1em;
-  outline: none;
 }
 
-details[open] { background: linear-gradient(120deg, #d9e4f5, #f0f4ff); }
+.contacto-list.horizontal li a {
+  color: #0f0;
+  text-decoration: none;
+}
 
-details p, details ul { margin-top: 10px; }
-details p { margin: 3px 0; line-height: 1.2; }
-details ul, details li { padding-left: 20px; margin: 3px 0; line-height: 1.2; list-style-position: inside; }
-
-/* CONTACTO */
-section.contacto a { color: #1a73e8; text-decoration: none; }
-section.contacto a:hover { text-decoration: underline; }
+.contacto-list.horizontal li a:hover {
+  text-decoration: underline;
+}
 
 /* FOOTER */
 footer {
-  position: relative;
+  margin-top: 50px;
   padding: 20px;
-  background-color: #000;
-  color: white;
+  background: #000;
+  color: #0f0;
   text-align: center;
-  overflow: hidden;
+  position: relative;
 }
 
 footer canvas {
   position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   z-index: 0;
 }
 
-footer p { position: relative; z-index: 1; }
-
 /* MEDIA QUERIES */
 @media (max-width: 768px) {
-  header { flex-direction: column; height: auto; padding: 20px; }
-  header .header-left, header .header-right { width: auto; margin: 10px 0; }
-  header img { width: 120px; height: 120px; }
-  header .header-text { text-align: center; }
-  section.sobre-mi .texto { white-space: normal; font-size: 1em; max-width: 90%; }
+  header {
+    flex-direction: column;
+    height: auto;
+    padding: 20px;
+  }
+
+  header .header-left,
+  header .header-right {
+    width: auto;
+    margin: 10px 0;
+  }
+
+  header img {
+    width: 120px;
+    height: 120px;
+  }
+
+  header .header-text {
+    text-align: center;
+  }
+
+  .contacto-list.horizontal {
+    flex-direction: column;
+  }
+
+  .sobre-mi-list li {
+    white-space: normal;
+  }
 }

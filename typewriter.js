@@ -1,27 +1,44 @@
-// Máquina de escribir para <p> y <li>
-class TypeWriter {
-  constructor(element, speed = 40) {
-    this.element = element;
-    this.text = element.textContent;
-    this.element.textContent = '';
-    this.speed = speed;
-    this.index = 0;
-    this.type();
-  }
-
-  type() {
-    if (this.index < this.text.length) {
-      this.element.textContent += this.text.charAt(this.index);
-      this.index++;
-      setTimeout(() => this.type(), this.speed);
+function typeWriter(el, delay = 40) {
+  const text = el.innerHTML;
+  el.innerHTML = '';
+  let i = 0;
+  function write() {
+    if (i < text.length) {
+      el.innerHTML += text.charAt(i);
+      i++;
+      setTimeout(write, delay);
     }
   }
+  write();
 }
 
-// Aplica efecto a párrafos y a <li> de cada details y bloques
-document.addEventListener("DOMContentLoaded", () => {
-  // Sobre mí
-  document.querySelectorAll('.sobre-mi .texto p').forEach(el => new TypeWriter(el, 30));
-  // Bloques y contacto
-  document.querySelectorAll('section.bloques p, section.bloques li, section.contacto p').forEach(el => new TypeWriter(el, 20));
+function applyTypewriter(selector) {
+  const elements = document.querySelectorAll(selector);
+  elements.forEach(el => {
+    let children = Array.from(el.children);
+    let index = 0;
+    function typeNext() {
+      if (index < children.length) {
+        typeWriter(children[index], 40);
+        index++;
+        setTimeout(typeNext, children[index-1].textContent.length * 40 + 300);
+      }
+    }
+    typeNext();
+  });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  applyTypewriter('.sobre-mi-list');
+  applyTypewriter('.subblock-desc');
+  applyTypewriter('.contacto-list');
+  
+  // Fade-in para subblocks
+  const fadeElements = document.querySelectorAll('.subblock-list li');
+  fadeElements.forEach((el, i) => {
+    setTimeout(() => {
+      el.style.opacity = 1;
+      el.style.transition = 'opacity 0.6s';
+    }, i * 100);
+  });
 });
