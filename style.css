@@ -26,13 +26,22 @@ header {
   position: relative;
 }
 
-/* Contenedores de imagenes con espacio central */
+/* Contenedores de imágenes con desplazamiento */
 header .header-left,
 header .header-right {
   width: 180px; 
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
+}
+
+header .header-left {
+  left: 10cm;  /* mueve la imagen izquierda hacia el centro */
+}
+
+header .header-right {
+  right: 10cm; /* mueve la imagen derecha hacia el centro */
 }
 
 header img {
@@ -41,6 +50,7 @@ header img {
   border-radius: 50%;
   object-fit: cover;
 }
+
 
 /* Texto centrado */
 header .header-text {
