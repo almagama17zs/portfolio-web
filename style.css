@@ -18,22 +18,29 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: linear-gradient(135deg, #1565c0, #1e88e5);
-  color: white;
   padding: 0 60px;
   height: 180px;
   border-radius: 0;
   position: relative;
+  overflow: hidden;
+  background-color: #111;
+  color: white;
 }
 
-/* Contenedores de imágenes con desplazamiento */
+#binary-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+}
+
 header .header-left,
-header .header-right {
-  width: 180px; 
-  display: flex;
-  justify-content: center;
-  align-items: center;
+header .header-right,
+header .header-text {
   position: relative;
+  z-index: 1;
 }
 
 header .header-left {
@@ -51,7 +58,6 @@ header img {
   object-fit: cover;
 }
 
-/* Texto centrado */
 header .header-text {
   text-align: center;
   max-width: 800px;
@@ -81,7 +87,6 @@ section.contacto {
   text-align: center;
 }
 
-/* Títulos */
 section.bloques h2,
 section.sobre-mi h2,
 section.contacto h2 {
@@ -90,7 +95,6 @@ section.contacto h2 {
   text-align: center;
 }
 
-/* PÁRRAFOS GENERALES */
 section.bloques p,
 section.contacto p {
   display: inline-block;
@@ -110,23 +114,21 @@ section.sobre-mi .texto {
   display: inline-block;
   text-align: left;
   text-align-last: left;
-  max-width: 88%;       /* más ancho para evitar salto de línea */
+  max-width: 88%;
   margin: 0 auto;
   line-height: 1.2;
-  font-size: 1.05em;       /* un poco más pequeño */
+  font-size: 1.05em;
   position: relative;
-  left: -10px;          /* desplazamiento mayor hacia la izquierda */
+  left: -20px; /* más a la izquierda para evitar salto de línea */
 }
 
-/* Alineación precisa de los guiones */
 section.sobre-mi .texto p {
   text-indent: -0.6em;
   padding-left: 0.6em;
   margin: 5px 0;
-  white-space: nowrap;  /* evita que el texto baje a segunda línea */
 }
 
-/* DETALLES EXPANDIBLES */
+/* DETALLES */
 details {
   margin: 15px 0;
   padding: 10px 15px;
@@ -178,10 +180,21 @@ section.contacto a:hover {
 footer {
   margin-top: 50px;
   padding: 20px;
-  background: linear-gradient(135deg, #1565c0, #1e88e5);
+  background-color: #111;
   color: white;
   text-align: center;
   border-radius: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+#footer-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
 }
 
 /* MEDIA QUERIES */
@@ -214,6 +227,6 @@ footer {
   }
 
   section.sobre-mi .texto p {
-    white-space: normal; /* permite volver a varias líneas en móviles */
+    white-space: normal;
   }
 }

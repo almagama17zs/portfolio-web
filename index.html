@@ -9,6 +9,7 @@
 <body>
   <!-- CABECERA -->
   <header>
+    <canvas id="binary-bg"></canvas>
     <div class="header-left">
       <img src="https://raw.githubusercontent.com/almagama17zs/portfolio-web/main/foto.jpg" alt="Foto izquierda">
     </div>
@@ -26,16 +27,16 @@
     <section class="sobre-mi">
       <h2>Sobre mí</h2>
       <div class="texto">
-        <li>Profesional multidisciplinar con formación en sonido, imagen y las telecomunicaciones.</li>
-        <li>Creatividad y tecnología: desde producción audiovisual, programación y análisis de datos.</li>
-        <li>Apasionado por la innovación, la IA y la creación de soluciones basadas en evidencia.</li> 
+        <p>• Profesional multidisciplinar con formación en sonido, imagen y telecomunicaciones.</p>
+        <p>• Creatividad y tecnología: producción audiovisual, programación y análisis de datos.</p>
+        <p>• Apasionado por la innovación, la IA y creación de soluciones basadas en evidencia.</p> 
       </div>
     </section>
 
     <!-- HABILIDADES -->
     <section class="bloques">
       <h2>Habilidades técnicas</h2>
-       <details>
+      <details>
         <summary>💻 Programación</summary>
         <ul>
           <li>Unity</li>
@@ -46,7 +47,6 @@
           <li>Python</li>
           <li>Jupyter</li>
           <li>Power Bi</li>
-          <li>SQL</li>
           <li>Spark/PySpark</li>
           <li>Grafana</li>
           <li>Microsoft Azure</li>
@@ -56,7 +56,6 @@
         <p>- Creación de dashboards e informes.</p> 
         <p>- Desarrollo de aplicaciones y programas.</p>
       </details>
-
       <details>
         <summary>🌐 Informática y Web</summary>
         <ul>
@@ -73,7 +72,6 @@
         <p>- Diseño y gestión de sitios web y tiendas online.</p>
         <p>- Administración de redes sociales y campañas digitales.</p>
       </details>
-
       <details>
         <summary>🎧 Audio y Música</summary>
         <ul>
@@ -87,7 +85,6 @@
         <p>- Más de 40 artistas grabados y mezclados en estudio propio de grabación.</p>
         <p>- Cerca de 30 discos editados para artistas.</p>
       </details>
-
       <details>
         <summary>🎥 Vídeo e Imagen</summary>
         <ul>
@@ -110,14 +107,12 @@
     <!-- EXPERIENCIA -->
     <section class="bloques">
       <h2>Experiencia profesional</h2>
-
       <details>
         <summary>📈 Análisis de Datos y Tecnología</summary>
         <p>- Colaboración con Fundación Progreso y Salud en proyectos de análisis clínico.</p>
         <p>- Extracción, limpieza y normalización de grandes datasets con Python y Jupyter.</p>
         <p>- Ingeniería de características, EDA y visualización interactiva para detección de patrones.</p>
       </details>
-
       <details>
         <summary>🎬 Producción Audiovisual</summary>
         <ul>
@@ -134,7 +129,6 @@
         <p>- Trabajos para grandes empresas como El Corte Inglés, Prosegur, Puerto de Indias, BYG, Brenntag.</p>
         <p>- Entrevistas a figuras destacadas como Niña Pastori, Maria Antonieta Collins, Ana Llopis, Salustiano Garcia, entre otros.</p>
       </details>
-
       <details>
         <summary>📸 Fotografía y Producción Multimedia</summary>
         <ul>
@@ -152,7 +146,6 @@
     <!-- FORMACIÓN -->
     <section class="bloques">
       <h2>Formación</h2>
-
       <details>
         <summary>🎓 Formación Académica</summary>
         <ul>
@@ -163,7 +156,6 @@
           <li>Técnico Superior en Sonido para Audiovisuales y Espectáculos – AXATI (29/06/2017)</li>
         </ul>
       </details>
-
       <details>
         <summary>🧠 Formación Complementaria</summary>
         <ul>
@@ -197,7 +189,10 @@
   </main>
 
   <footer>
+    <canvas id="footer-bg"></canvas>
     <p>© 2025 Alejandro Emilio Martín García — Portafolio profesional</p>
   </footer>
+
+  <script src="binary-bg.js"></script>
 </body>
 </html>
