@@ -1,4 +1,4 @@
-/* Reset básico */
+v/* Reset básico */
 * {
   margin: 0;
   padding: 0;
@@ -17,25 +17,27 @@ body {
 header {
   display: flex;
   align-items: center;
-  justify-content: center;
-  background: linear-gradient(135deg, #0d47a1, #1565c0);
+  justify-content: flex-start; /* Foto más a la izquierda */
+  background: linear-gradient(135deg, #0b3d91, #1565c0);
   color: white;
   padding: 30px 20px;
+  gap: 30px;
 }
 
 header img {
-  width: 150px;
-  height: 150px;
+  width: 160px;
+  height: 160px;
   border-radius: 50%;
   object-fit: cover;
-  object-position: top; /* Ajuste para que se vea más cabeza */
-  margin-right: 20px;
+  object-position: 0% 10%; /* Muestra más cabeza */
+  margin-left: 40px; /* Empuja un poco la imagen desde el borde */
   flex-shrink: 0;
 }
 
 header .header-text {
   text-align: left;
-  max-width: 800px;
+  max-width: 700px;
+  margin: 0 auto;
 }
 
 header h1 {
@@ -51,7 +53,7 @@ header h2 {
 /* BLOQUES */
 section.bloques {
   margin: 40px auto;
-  padding: 20px;
+  padding: 20px 40px;
   max-width: 900px;
   background: linear-gradient(135deg, #ffffff, #e6f0ff);
   border-radius: 15px;
@@ -67,7 +69,7 @@ section.bloques h2 {
 /* Detalles expandibles */
 details {
   margin: 15px 0;
-  padding: 10px 15px;
+  padding: 15px 25px; /* Más espacio interior */
   text-align: left;
   background: linear-gradient(120deg, #f5f5f5, #d9d9d9);
   border-radius: 10px;
@@ -88,15 +90,15 @@ details p, details ul {
   margin-top: 10px;
 }
 
-/* Ajuste del margen de las listas */
-.bloques ul,
-.bloques li {
-  margin-left: 3rem;
-  padding-left: 0.5rem;
+/*  Ajuste del margen de las listas dentro de los bloques */
+.bloques ul {
+  margin-left: 3rem;  /* Aumenta la separación de los bullets */
+  padding-left: 1rem;
+  list-style-position: outside;
 }
 
-.bloques ul {
-  list-style-position: outside;
+.bloques li {
+  margin-bottom: 5px;
 }
 
 /* SOBRE MÍ */
@@ -112,7 +114,7 @@ section.sobre-mi {
 /* CONTACTO */
 section.contacto {
   margin: 40px auto;
-  padding: 20px;
+  padding: 20px 40px;
   max-width: 900px;
   background: linear-gradient(135deg, #fefefe, #d9f7ff);
   border-radius: 15px;
@@ -132,7 +134,7 @@ section.contacto a:hover {
 footer {
   margin-top: 50px;
   padding: 20px;
-  background: linear-gradient(135deg, #0d47a1, #1565c0);
+  background: linear-gradient(135deg, #0b3d91, #1565c0);
   color: white;
   text-align: center;
   border-top-left-radius: 15px;
@@ -143,12 +145,19 @@ footer {
 @media (max-width: 768px) {
   header {
     flex-direction: column;
+    justify-content: center;
   }
+
   header img {
-    margin-right: 0;
-    margin-bottom: 15px;
+    margin: 0 0 15px 0;
+    object-position: center top;
   }
+
   header .header-text {
     text-align: center;
+  }
+
+  section.bloques, section.contacto {
+    padding: 20px;
   }
 }
