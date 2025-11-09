@@ -32,28 +32,21 @@ header canvas {
   z-index: 1;
 }
 
-/* Centramos header-content con imágenes cerca del título */
-.header-content {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
-  z-index: 2;
-  position: relative;
-}
-
-header .header-left,
-header .header-right {
+.header-left,
+.header-right {
   width: 140px;
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 2;
+  position: relative;
 }
 
-header .header-text {
+.header-text {
   text-align: center;
   max-width: 800px;
-  margin: 0 auto;
+  margin: 0 20px;
+  z-index: 2;
 }
 
 header img {
@@ -77,7 +70,7 @@ header h2 {
   margin: 40px auto;
   padding: 20px;
   max-width: 900px;
-  background-color: #000; /* recuadro negro */
+  background-color: #000;
   color: #fff;
   border-radius: 15px;
   box-shadow: 0px 0px 15px rgba(0, 255, 0, 0.5);
@@ -126,7 +119,7 @@ h2 {
   padding: 10px;
 }
 
-/* LI fade effect (subbloques y sobre mi) */
+/* LI fade effect */
 .fade li {
   opacity: 0;
   transform: translateY(10px);
@@ -143,8 +136,6 @@ h2 {
 .fade li:nth-child(8) { animation-delay: 1.6s; }
 .fade li:nth-child(9) { animation-delay: 1.8s; }
 .fade li:nth-child(10){ animation-delay: 2s; }
-.fade li:nth-child(11){ animation-delay: 2.2s; }
-.fade li:nth-child(12){ animation-delay: 2.4s; }
 
 @keyframes fadeInUp {
   to {
@@ -184,6 +175,9 @@ h2 {
   position: relative;
   padding-left: 20px;
   margin-bottom: 10px;
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeInUp 0.5s forwards;
 }
 
 .sobre-mi-list li::before {
@@ -193,12 +187,9 @@ h2 {
   color: #0f0;
 }
 
-/* Subblock lists fade effect */
-.subblock-list li {
-  position: relative;
-  padding-left: 20px;
-  margin-bottom: 5px;
-}
+.sobre-mi-list li:nth-child(1) { animation-delay: 0.2s; }
+.sobre-mi-list li:nth-child(2) { animation-delay: 0.6s; }
+.sobre-mi-list li:nth-child(3) { animation-delay: 1s; }
 
 /* Contacto horizontal */
 .contacto-list.horizontal {
