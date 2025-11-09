@@ -91,7 +91,7 @@ section.bloques p, section.sobre-mi p, section.contacto p {
   text-align: justify;       /* justificado dentro del bloque */
   text-align-last: center;   /* última línea centrada */
   max-width: 80%;            /* controla el ancho del párrafo */
-  line-height: 1.4;          /* interlineado cómodo */
+  line-height: 1;          /* interlineado cómodo */
   margin: 10px 0;            /* separación entre párrafos */
 }
 
