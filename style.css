@@ -113,9 +113,9 @@ section.sobre-mi .texto {
   max-width: 88%;       /* más ancho para evitar salto de línea */
   margin: 0 auto;
   line-height: 1.2;
-  font-size: 1em;       /* un poco más pequeño */
+  font-size: 1.05em;       /* un poco más pequeño */
   position: relative;
-  left: -70px;          /* desplazamiento mayor hacia la izquierda */
+  left: -50px;          /* desplazamiento mayor hacia la izquierda */
 }
 
 /* Alineación precisa de los guiones */
