@@ -6,20 +6,12 @@ body {
   line-height: 1.6;
 }
 
-/* CABECERA CON DEGRADADO ANIMADO */
-@keyframes fondo {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
+/* CABECERA */
 header {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(90deg, #0a1f44, #4b0082, #0a1f44);
-  background-size: 200% 200%;
-  animation: fondo 10s ease infinite;
+  background: linear-gradient(135deg, #0a1f44, #4b0082);
   color: white;
   padding: 2rem;
   gap: 2rem;
@@ -32,7 +24,7 @@ header img {
   border-radius: 50%;
   object-fit: cover;
   object-position: top;
-  border: 5px solid #00bfa6; /* Verde azulado */
+  border: 5px solid #00bfa6; /* verde azulado */
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
 }
 
@@ -54,7 +46,7 @@ header img {
   color: #a8d0e6;
 }
 
-/* SECCIONES CON DEGRADADO SUAVE */
+/* SECCIONES */
 main {
   max-width: 1000px;
   margin: 2rem auto;
@@ -119,11 +111,19 @@ ul li {
 }
 
 /* CONTACTO */
+.contacto {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+}
+
 .contacto p, .contacto a {
   text-align: center;
-  display: block;
+  margin: 0;
   color: #0a1f44;
   text-decoration: none;
+  padding: 0.2rem 0;
 }
 
 .contacto a:hover {
