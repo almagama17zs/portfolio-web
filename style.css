@@ -37,11 +37,11 @@ header .header-right {
 }
 
 header .header-left {
-  left: 10cm;  /* mueve la imagen izquierda hacia el centro */
+  left: 10cm;
 }
 
 header .header-right {
-  right: 10cm; /* mueve la imagen derecha hacia el centro */
+  right: 10cm;
 }
 
 header img {
@@ -110,20 +110,20 @@ section.sobre-mi .texto {
   display: inline-block;
   text-align: left;
   text-align-last: left;
-  max-width: 75%;
+  max-width: 88%;       /* más ancho para evitar salto de línea */
   margin: 0 auto;
   line-height: 1.2;
-  font-size: 1.05em;
+  font-size: 1em;       /* un poco más pequeño */
   position: relative;
-  left: -40px; /* mueve el bloque un poco más a la izquierda para evitar saltos */
+  left: -70px;          /* desplazamiento mayor hacia la izquierda */
 }
 
-/* alinear los guiones exactamente */
+/* Alineación precisa de los guiones */
 section.sobre-mi .texto p {
   text-indent: -0.6em;
   padding-left: 0.6em;
   margin: 5px 0;
-  white-space: normal;
+  white-space: nowrap;  /* evita que el texto baje a segunda línea */
 }
 
 /* DETALLES EXPANDIBLES */
@@ -208,6 +208,12 @@ footer {
   }
 
   section.sobre-mi .texto {
-    left: 0; /* vuelve a centrar en pantallas pequeñas */
+    left: 0;
+    max-width: 90%;
+    font-size: 1em;
+  }
+
+  section.sobre-mi .texto p {
+    white-space: normal; /* permite volver a varias líneas en móviles */
   }
 }
