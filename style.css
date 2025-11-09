@@ -11,7 +11,23 @@ body {
   color: #333;
   line-height: 1.6;
   text-align: center;
-  overflow-x: hidden;
+}
+
+/* Canvas binario */
+#binary-header, #binary-footer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Header y Footer contenido */
+header, footer {
+  position: relative;
+  z-index: 1;
 }
 
 /* CABECERA */
@@ -23,14 +39,11 @@ header {
   color: white;
   padding: 0 60px;
   height: 180px;
-  border-radius: 0;
-  position: relative;
 }
 
-/* Contenedores de imágenes con desplazamiento */
 header .header-left,
 header .header-right {
-  width: 180px; 
+  width: 180px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -47,20 +60,12 @@ header img {
   object-fit: cover;
 }
 
-/* Texto centrado */
-header .header-text {
-  text-align: center;
-  max-width: 800px;
-  margin: 0 auto;
-}
-
+header .header-text { text-align: center; max-width: 800px; margin: 0 auto; }
 header h1 { font-size: 2em; margin-bottom: 5px; }
 header h2 { font-size: 1.2em; font-weight: normal; }
 
 /* SECCIONES GENERALES */
-section.bloques,
-section.sobre-mi,
-section.contacto {
+section.bloques, section.sobre-mi, section.contacto {
   margin: 40px auto;
   padding: 20px;
   max-width: 900px;
@@ -70,30 +75,26 @@ section.contacto {
   text-align: center;
 }
 
-section.bloques h2,
-section.sobre-mi h2,
-section.contacto h2 {
+section.bloques h2, section.sobre-mi h2, section.contacto h2 {
   margin-bottom: 15px;
   font-size: 1.8em;
   text-align: center;
 }
 
-/* PÁRRAFOS GENERALES */
-section.bloques p,
-section.contacto p {
+/* Párrafos generales */
+section.bloques p, section.contacto p {
   display: inline-block;
   text-align: justify;
   text-align-last: center;
   max-width: 80%;
-  line-height: 1.3;
+  line-height: 1.4;
   margin: 10px 0;
 }
 
-/* BLOQUE "SOBRE MÍ" */
+/* Sobre mí */
 section.sobre-mi .texto {
   display: inline-block;
   text-align: left;
-  text-align-last: left;
   max-width: 88%;
   margin: 0 auto;
   line-height: 1.2;
@@ -102,14 +103,31 @@ section.sobre-mi .texto {
   left: -10px;
 }
 
-section.sobre-mi .texto p {
-  text-indent: -0.6em;
-  padding-left: 0.6em;
-  margin: 5px 0;
-  white-space: nowrap;
+/* Tipografía máquina de escribir */
+.typing-text {
+  display: inline-block;
+  text-align: left;
+  max-width: 90%;
+  font-size: 1.05em;
+  line-height: 1.3em;
+  overflow: hidden;
+  white-space: pre-wrap;
+  border-right: 2px solid rgba(0,255,0,0.7);
 }
 
-/* Detalles expandibles */
+/* Listas animadas */
+.fade-list li {
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: all 0.5s ease;
+}
+
+details[open] .fade-list li {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Detalles */
 details {
   margin: 15px 0;
   padding: 10px 15px;
@@ -129,19 +147,20 @@ details[open] {
   background: linear-gradient(120deg, #d9e4f5, #f0f4ff);
 }
 
-details p, details ul { margin-top: 10px; }
-details p { margin: 3px 0; line-height: 1.2; }
-details ul, details li { padding-left: 20px; margin: 3px 0; line-height: 1.2; list-style-position: inside; }
-
-/* EFECTO FADE-IN PARA <LI> */
-.fade-in-list li {
-  opacity: 0;
-  transform: translateY(15px);
+details p, details ul {
+  margin-top: 10px;
 }
 
-@keyframes fadeInUp {
-  0% { opacity: 0; transform: translateY(15px); }
-  100% { opacity: 1; transform: translateY(0); }
+details p {
+  margin: 3px 0;
+  line-height: 1.2;
+}
+
+details ul, details li {
+  padding-left: 20px;
+  margin: 3px 0;
+  line-height: 1.2;
+  list-style-position: inside;
 }
 
 /* CONTACTO */
@@ -149,7 +168,10 @@ section.contacto a {
   color: #1a73e8;
   text-decoration: none;
 }
-section.contacto a:hover { text-decoration: underline; }
+
+section.contacto a:hover {
+  text-decoration: underline;
+}
 
 /* FOOTER */
 footer {
@@ -158,16 +180,27 @@ footer {
   background: linear-gradient(135deg, #1565c0, #1e88e5);
   color: white;
   text-align: center;
-  border-radius: 0;
 }
 
 /* MEDIA QUERIES */
 @media (max-width: 768px) {
-  header { flex-direction: column; height: auto; padding: 20px; }
+  header {
+    flex-direction: column;
+    height: auto;
+    padding: 20px;
+  }
+
   header .header-left,
-  header .header-right { width: auto; margin: 10px 0; }
-  header img { width: 120px; height: 120px; }
+  header .header-right {
+    width: auto;
+    margin: 10px 0;
+  }
+
+  header img {
+    width: 120px;
+    height: 120px;
+  }
+
   header .header-text { text-align: center; }
   section.sobre-mi .texto { left: 0; max-width: 90%; font-size: 1em; }
-  section.sobre-mi .texto p { white-space: normal; }
 }
