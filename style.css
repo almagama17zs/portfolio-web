@@ -96,15 +96,23 @@ details p, details ul {
   margin-top: 10px;
 }
 
-/* ✅ Ajuste de listas generales */
+/* Ajuste uniforme para todas las listas dentro de bloques */
 .bloques ul {
-  margin-left: 1.8rem; /* menos desplazamiento para equilibrar */
-  padding-left: 1rem;
-  list-style-position: outside;
+  list-style-position: inside;     /* los puntos se alinean con el texto */
+  padding-left: 0.8rem;            /* mismo margen en todos los contextos */
+  margin-left: 0;                  /* eliminamos desplazamiento desigual */
+  text-align: left;                /* mantiene texto alineado */
 }
 
 .bloques li {
-  margin-bottom: 5px;
+  margin-bottom: 6px;
+}
+
+/* Aseguramos que <p> que contienen listas no alteren el margen */
+.bloques p ul,
+.bloques p li {
+  margin-left: 0 !important;
+  padding-left: 0.8rem !important;
 }
 
 /* SOBRE MÍ */
