@@ -21,14 +21,15 @@ header {
   background: linear-gradient(135deg, #1565c0, #1e88e5);
   color: white;
   padding: 0 60px;
-  height: 180px; /* altura ajustada */
-  border-radius: 0; /* rectángulo */
+  height: 180px;
+  border-radius: 0;
   position: relative;
 }
 
+/* Contenedores de imagenes con espacio central */
 header .header-left,
 header .header-right {
-  width: 200px; /* espacio reservado para centrar la imagen */
+  width: 180px; 
   display: flex;
   justify-content: center;
   align-items: center;
@@ -41,15 +42,7 @@ header img {
   object-fit: cover;
 }
 
-/* Ajuste: fotos centradas perfectamente */
-header .header-left img {
-  margin: 0 auto;
-}
-
-header .header-right img {
-  margin: 0 auto;
-}
-
+/* Texto centrado */
 header .header-text {
   text-align: center;
   max-width: 800px;
@@ -67,17 +60,17 @@ header h2 {
 }
 
 /* BLOQUES */
-section.bloques {
+section.bloques, section.sobre-mi, section.contacto {
   margin: 40px auto;
   padding: 20px;
   max-width: 900px;
   background: linear-gradient(135deg, #ffffff, #e0f7fa);
-  border-radius: 8px; 
+  border-radius: 8px;
   box-shadow: 0px 5px 15px rgba(0,0,0,0.1);
   text-align: center;
 }
 
-section.bloques h2 {
+section.bloques h2, section.sobre-mi h2, section.contacto h2 {
   margin-bottom: 15px;
   font-size: 1.8em;
 }
@@ -87,7 +80,7 @@ details {
   margin: 15px 0;
   padding: 10px 15px;
   background: linear-gradient(120deg, #f5f5f5, #d9d9d9);
-  border-radius: 8px; 
+  border-radius: 8px;
   cursor: pointer;
   text-align: left;
 }
@@ -118,28 +111,7 @@ details ul, details li {
   list-style-position: inside;
 }
 
-/* SOBRE MÍ */
-section.sobre-mi {
-  margin: 40px auto;
-  padding: 20px;
-  max-width: 900px;
-  background: linear-gradient(135deg, #ffffff, #e0f7fa);
-  border-radius: 8px;
-  box-shadow: 0px 5px 15px rgba(0,0,0,0.1);
-  text-align: center;
-}
-
 /* CONTACTO */
-section.contacto {
-  margin: 40px auto;
-  padding: 20px;
-  max-width: 900px;
-  background: linear-gradient(135deg, #ffffff, #e0f7fa);
-  border-radius: 8px;
-  box-shadow: 0px 5px 15px rgba(0,0,0,0.1);
-  text-align: center;
-}
-
 section.contacto a {
   color: #1a73e8;
   text-decoration: none;
@@ -156,7 +128,7 @@ footer {
   background: linear-gradient(135deg, #1565c0, #1e88e5);
   color: white;
   text-align: center;
-  border-radius: 0; /* rectángulo */
+  border-radius: 0;
 }
 
 /* MEDIA QUERIES */
