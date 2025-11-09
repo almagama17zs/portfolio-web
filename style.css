@@ -1,4 +1,4 @@
-v/* Reset básico */
+/* Reset básico */
 * {
   margin: 0;
   padding: 0;
@@ -17,11 +17,17 @@ body {
 header {
   display: flex;
   align-items: center;
-  justify-content: flex-start; /* Foto más a la izquierda */
+  justify-content: flex-start;
   background: linear-gradient(135deg, #0b3d91, #1565c0);
   color: white;
   padding: 30px 20px;
   gap: 30px;
+  width: 100vw;              /* ✅ ocupa todo el ancho */
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
 }
 
 header img {
@@ -29,8 +35,8 @@ header img {
   height: 160px;
   border-radius: 50%;
   object-fit: cover;
-  object-position: 0% 10%; /* Muestra más cabeza */
-  margin-left: 40px; /* Empuja un poco la imagen desde el borde */
+  object-position: 20% 10%; /* ✅ mueve un poco a la derecha */
+  margin-left: 20px;        /* ✅ menos pegada al borde */
   flex-shrink: 0;
 }
 
@@ -69,7 +75,7 @@ section.bloques h2 {
 /* Detalles expandibles */
 details {
   margin: 15px 0;
-  padding: 15px 25px; /* Más espacio interior */
+  padding: 15px 25px;
   text-align: left;
   background: linear-gradient(120deg, #f5f5f5, #d9d9d9);
   border-radius: 10px;
@@ -90,9 +96,9 @@ details p, details ul {
   margin-top: 10px;
 }
 
-/*  Ajuste del margen de las listas dentro de los bloques */
+/* ✅ Ajuste de listas generales */
 .bloques ul {
-  margin-left: 3rem;  /* Aumenta la separación de los bullets */
+  margin-left: 1.8rem; /* menos desplazamiento para equilibrar */
   padding-left: 1rem;
   list-style-position: outside;
 }
@@ -139,6 +145,12 @@ footer {
   text-align: center;
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;
+  width: 100vw;              /* ✅ ocupa todo el ancho */
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
 }
 
 /* MEDIA QUERIES */
@@ -159,5 +171,9 @@ footer {
 
   section.bloques, section.contacto {
     padding: 20px;
+  }
+
+  .bloques ul {
+    margin-left: 1.2rem; /* menos margen en móviles */
   }
 }
