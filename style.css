@@ -17,13 +17,21 @@ body {
 header {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   background: linear-gradient(135deg, #1565c0, #1e88e5);
   color: white;
-  padding: 15px 0;
-  height: 160px; /* altura reducida */
+  padding: 20px 40px;
+  height: 160px; /* altura ajustada */
+  border-radius: 8px; /* esquinas muy suaves */
   position: relative;
-  border-radius: 0; /* esquinas rectas */
+}
+
+header .header-left,
+header .header-right {
+  width: 150px; /* ancho fijo para los huecos de las fotos */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 header img {
@@ -31,23 +39,9 @@ header img {
   height: 150px;
   border-radius: 50%;
   object-fit: cover;
-  flex-shrink: 0;
 }
 
-header img.left {
-  position: absolute;
-  left: 25%; /* centrada en el hueco izquierdo */
-  top: 50%;
-  transform: translate(-50%, -50%);
-}
-
-header img.right {
-  position: absolute;
-  right: 25%; /* centrada en el hueco derecho */
-  top: 50%;
-  transform: translate(50%, -50%);
-}
-
+/* Centrado del texto del header */
 header .header-text {
   text-align: center;
   max-width: 800px;
@@ -70,15 +64,14 @@ section.bloques {
   padding: 20px;
   max-width: 900px;
   background: linear-gradient(135deg, #ffffff, #e6f0ff);
-  border-radius: 15px;
+  border-radius: 8px; /* esquinas muy suaves */
   box-shadow: 0px 5px 15px rgba(0,0,0,0.1);
-  text-align: left;
+  text-align: center; /* todo centrado */
 }
 
 section.bloques h2 {
   margin-bottom: 15px;
   font-size: 1.8em;
-  text-align: center;
 }
 
 /* Detalles expandibles */
@@ -86,7 +79,7 @@ details {
   margin: 15px 0;
   padding: 10px 15px;
   background: linear-gradient(120deg, #f5f5f5, #d9d9d9);
-  border-radius: 10px;
+  border-radius: 8px; /* esquinas muy suaves */
   cursor: pointer;
   text-align: left;
 }
@@ -116,7 +109,7 @@ details ul, details li {
   padding-left: 20px; /* distancia del borde del bloque */
   margin: 3px 0;
   line-height: 1.2;
-  list-style-position: inside; /* puntos dentro del padding */
+  list-style-position: inside;
 }
 
 /* SOBRE MÍ */
@@ -125,18 +118,9 @@ section.sobre-mi {
   padding: 20px;
   max-width: 900px;
   background: linear-gradient(135deg, #ffffff, #e0f7fa);
-  border-radius: 15px;
+  border-radius: 8px; /* esquinas muy suaves */
   box-shadow: 0px 5px 15px rgba(0,0,0,0.1);
-  text-align: center; /* centramos contenido */
-}
-
-section.sobre-mi h2 {
-  margin-bottom: 15px;
-}
-
-section.sobre-mi p {
-  margin: 10px 0;
-  line-height: 1.4;
+  text-align: center; /* centrado */
 }
 
 /* CONTACTO */
@@ -145,18 +129,9 @@ section.contacto {
   padding: 20px;
   max-width: 900px;
   background: linear-gradient(135deg, #fefefe, #d9f7ff);
-  border-radius: 15px;
+  border-radius: 8px; /* esquinas muy suaves */
   box-shadow: 0px 5px 15px rgba(0,0,0,0.1);
-  text-align: center; /* centramos contenido */
-}
-
-section.contacto h2 {
-  margin-bottom: 15px;
-}
-
-section.contacto p {
-  margin: 8px 0;
-  line-height: 1.4;
+  text-align: center; /* centrado */
 }
 
 section.contacto a {
@@ -171,11 +146,11 @@ section.contacto a:hover {
 /* FOOTER */
 footer {
   margin-top: 50px;
-  padding: 20px 0;
+  padding: 20px;
   background: linear-gradient(135deg, #1565c0, #1e88e5);
   color: white;
   text-align: center;
-  border-radius: 0; /* esquinas rectas */
+  border-radius: 8px; /* esquinas muy suaves */
 }
 
 /* MEDIA QUERIES */
@@ -185,11 +160,18 @@ footer {
     height: auto;
     padding: 20px;
   }
-  header img.left, header img.right {
-    position: static;
-    transform: none;
+
+  header .header-left,
+  header .header-right {
+    width: auto;
     margin: 10px 0;
   }
+
+  header img {
+    width: 120px;
+    height: 120px;
+  }
+
   header .header-text {
     text-align: center;
   }
