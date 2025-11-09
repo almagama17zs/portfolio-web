@@ -18,7 +18,7 @@ header {
   position: relative;
   display: flex;
   align-items: center;
-  justify-content: center; /* centramos contenido */
+  justify-content: center;
   height: 180px;
   overflow: hidden;
 }
@@ -159,11 +159,21 @@ h2 {
   overflow: hidden;
   border-right: 0.15em solid #0f0;
   white-space: nowrap;
+  animation: typing 3s steps(40, end) forwards, blink 0.75s step-end infinite;
+}
+
+@keyframes typing {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+@keyframes blink {
+  50% { border-color: transparent; }
 }
 
 /* SOBRE MI lista */
 .sobre-mi-list {
-  list-style: none; /* quitamos puntos por defecto */
+  list-style: none;
   padding-left: 0;
   text-align: left;
   max-width: 800px;
@@ -172,23 +182,23 @@ h2 {
 
 .sobre-mi-list li {
   position: relative;
-  padding-left: 20px; /* espacio para el marcador */
+  padding-left: 20px;
   margin-bottom: 10px;
-  opacity: 0;
-  transform: translateY(10px);
-  animation: fadeInUp 0.5s forwards;
 }
 
 .sobre-mi-list li::before {
-  content: "•";       /* marcador de la lista */
+  content: "•";
   position: absolute;
-  left: 0;            /* cerca de la primera palabra */
-  color: #0f0;        /* verde binario */
+  left: 0;
+  color: #0f0;
 }
 
-.sobre-mi-list li:nth-child(1) { animation-delay: 0.2s; }
-.sobre-mi-list li:nth-child(2) { animation-delay: 0.6s; }
-.sobre-mi-list li:nth-child(3) { animation-delay: 1s; }
+/* Subblock lists fade effect */
+.subblock-list li {
+  position: relative;
+  padding-left: 20px;
+  margin-bottom: 5px;
+}
 
 /* Contacto horizontal */
 .contacto-list.horizontal {

@@ -37,3 +37,4 @@ class BinaryBackground {
 
 new BinaryBackground("binary-header", 1.5);
 new BinaryBackground("binary-footer", 1.5);
+

@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const fadeLis = content.querySelectorAll(".fade li");
         fadeLis.forEach((li, i) => {
           li.style.opacity = 0;
-          li.style.transform = "translateY(10px)";
+          li.style.transform = 'translateY(10px)';
           li.style.animation = `fadeInUp 0.5s forwards`;
           li.style.animationDelay = `${0.2 * (i+1)}s`;
         });
