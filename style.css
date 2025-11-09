@@ -18,29 +18,20 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  color: white;
   padding: 0 60px;
   height: 180px;
-  border-radius: 0;
   position: relative;
   overflow: hidden;
-  background-color: #111;
-  color: white;
-}
-
-#binary-bg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 0;
-  width: 100%;
-  height: 100%;
 }
 
 header .header-left,
-header .header-right,
-header .header-text {
+header .header-right {
+  width: 180px; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: relative;
-  z-index: 1;
 }
 
 header .header-left {
@@ -62,19 +53,25 @@ header .header-text {
   text-align: center;
   max-width: 800px;
   margin: 0 auto;
+  position: relative;
+  z-index: 1;
 }
 
-header h1 {
-  font-size: 2em;
-  margin-bottom: 5px;
+header h1 { font-size: 2em; margin-bottom: 5px; }
+header h2 { font-size: 1.2em; font-weight: normal; }
+
+/* Canvas animado header/footer */
+header canvas#binary-header,
+footer canvas#binary-footer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
 }
 
-header h2 {
-  font-size: 1.2em;
-  font-weight: normal;
-}
-
-/* SECCIONES GENERALES */
+/* SECCIONES */
 section.bloques,
 section.sobre-mi,
 section.contacto {
@@ -95,21 +92,18 @@ section.contacto h2 {
   text-align: center;
 }
 
+/* Párrafos en bloques */
 section.bloques p,
-section.contacto p {
+details p {
   display: inline-block;
   text-align: justify;
-  text-align-last: center;
-  max-width: 80%;
-  line-height: 1.4;
-  margin: 10px 0;
+  text-align-last: left;
+  max-width: 85%;
+  line-height: 1.3;
+  margin: 6px 0;
 }
 
-/* BLOQUE "SOBRE MÍ" */
-section.sobre-mi {
-  text-align: center;
-}
-
+/* SOBRE MÍ */
 section.sobre-mi .texto {
   display: inline-block;
   text-align: left;
@@ -119,13 +113,14 @@ section.sobre-mi .texto {
   line-height: 1.2;
   font-size: 1.05em;
   position: relative;
-  left: -20px; /* más a la izquierda para evitar salto de línea */
+  left: -10px;
 }
 
 section.sobre-mi .texto p {
   text-indent: -0.6em;
   padding-left: 0.6em;
   margin: 5px 0;
+  white-space: nowrap;
 }
 
 /* DETALLES */
@@ -148,23 +143,7 @@ details[open] {
   background: linear-gradient(120deg, #d9e4f5, #f0f4ff);
 }
 
-details p,
-details ul {
-  margin-top: 10px;
-}
-
-details p {
-  margin: 3px 0;
-  line-height: 1.2;
-}
-
-details ul,
-details li {
-  padding-left: 20px;
-  margin: 3px 0;
-  line-height: 1.2;
-  list-style-position: inside;
-}
+details ul, details li { padding-left: 20px; margin: 3px 0; line-height: 1.2; list-style-position: inside; }
 
 /* CONTACTO */
 section.contacto a {
@@ -180,53 +159,18 @@ section.contacto a:hover {
 footer {
   margin-top: 50px;
   padding: 20px;
-  background-color: #111;
   color: white;
   text-align: center;
-  border-radius: 0;
   position: relative;
   overflow: hidden;
 }
 
-#footer-bg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 0;
-  width: 100%;
-  height: 100%;
-}
-
 /* MEDIA QUERIES */
 @media (max-width: 768px) {
-  header {
-    flex-direction: column;
-    height: auto;
-    padding: 20px;
-  }
-
-  header .header-left,
-  header .header-right {
-    width: auto;
-    margin: 10px 0;
-  }
-
-  header img {
-    width: 120px;
-    height: 120px;
-  }
-
-  header .header-text {
-    text-align: center;
-  }
-
-  section.sobre-mi .texto {
-    left: 0;
-    max-width: 90%;
-    font-size: 1em;
-  }
-
-  section.sobre-mi .texto p {
-    white-space: normal;
-  }
+  header { flex-direction: column; height: auto; padding: 20px; }
+  header .header-left, header .header-right { width: auto; margin: 10px 0; }
+  header img { width: 120px; height: 120px; }
+  header .header-text { text-align: center; }
+  section.sobre-mi .texto { left: 0; max-width: 90%; font-size: 1em; }
+  section.sobre-mi .texto p { white-space: normal; }
 }
