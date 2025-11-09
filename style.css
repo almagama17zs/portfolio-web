@@ -20,34 +20,34 @@ header {
   justify-content: space-between;
   background: linear-gradient(135deg, #1565c0, #1e88e5);
   color: white;
-  padding: 20px 60px;
-  height: 140px;
+  padding: 0 60px;
+  height: 180px; /* altura ajustada */
   border-radius: 0; /* rectángulo */
   position: relative;
 }
 
 header .header-left,
 header .header-right {
-  width: 150px;
+  width: 200px; /* espacio reservado para centrar la imagen */
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 header img {
-  width: 150px;
-  height: 150px;
+  width: 140px;
+  height: 140px;
   border-radius: 50%;
   object-fit: cover;
 }
 
-/* Ajuste: fotos más centradas en los huecos */
+/* Ajuste: fotos centradas perfectamente */
 header .header-left img {
-  transform: translateX(10%);
+  margin: 0 auto;
 }
 
 header .header-right img {
-  transform: translateX(-10%);
+  margin: 0 auto;
 }
 
 header .header-text {
@@ -176,7 +176,6 @@ footer {
   header img {
     width: 120px;
     height: 120px;
-    transform: none;
   }
 
   header .header-text {
