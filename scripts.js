@@ -65,27 +65,6 @@ function typeWriterElement(el, delay = 28) {
 
 // -------------------- SUBBLOQUES --------------------
 document.addEventListener("DOMContentLoaded", () => {
-  // Guardar textos originales para typewriter
-  document.querySelectorAll('.typewriter p').forEach(p => {
-    p.dataset.original = p.innerText.trim();
-    p.innerText = '';
-  });
-
-  // Animar sobre-mi
-  document.querySelectorAll('.sobre-mi-list li').forEach((li, i) => {
-    li.style.opacity = 0;
-    li.style.transform = 'translateY(10px)';
-    li.style.animation = `fadeInUp 0.5s forwards`;
-    li.style.animationDelay = `${0.2 * (i + 1)}s`;
-  });
-
-  // Animar contacto
-  document.querySelectorAll('.contacto-list.fade li').forEach((li, i) => {
-    li.style.opacity = 0;
-    li.style.transform = 'translateY(10px)';
-    li.style.animation = `fadeInUp 0.5s forwards`;
-    li.style.animationDelay = `${0.2 * (i + 1)}s`;
-  });
 
   const headers = document.querySelectorAll('.subblock-header');
 
@@ -114,15 +93,33 @@ document.addEventListener("DOMContentLoaded", () => {
           li.style.animationDelay = `${0.18 * (idx + 1)}s`;
         });
 
-        // Animar typewriter
+        // Typewriter p con delay según cantidad de li
         const paragraphs = subblock.querySelectorAll('.typewriter p');
         const delayOffset = lis.length * 200 + 400;
         paragraphs.forEach((p, idx) => {
+          p.dataset.original = p.innerText;
+          p.innerText = '';
           setTimeout(() => typeWriterElement(p, 28), delayOffset + idx * 550);
         });
       } else {
         subblock.querySelectorAll('.typewriter p').forEach(p => p.innerText = '');
       }
     });
+  });
+
+  // Animación inicial sobre-mi
+  document.querySelectorAll('.sobre-mi-list li').forEach((li, i) => {
+    li.style.opacity = 0;
+    li.style.transform = 'translateY(10px)';
+    li.style.animation = `fadeInUp 0.5s forwards`;
+    li.style.animationDelay = `${0.2 * (i + 1)}s`;
+  });
+
+  // Animación inicial contacto
+  document.querySelectorAll('.contacto-list.horizontal li').forEach((li, i) => {
+    li.style.opacity = 0;
+    li.style.transform = 'translateY(10px)';
+    li.style.animation = `fadeInUp 0.5s forwards`;
+    li.style.animationDelay = `${0.2 * (i + 1)}s`;
   });
 });

@@ -127,7 +127,6 @@ header h2 {
   overflow: hidden;
   opacity: 0;
   transition: max-height 0.5s ease, opacity 0.5s ease, padding 0.5s ease;
-  text-align: center;
   padding: 0 20px;
 }
 
@@ -155,14 +154,20 @@ header h2 {
 
 .subblock-list li,
 .sobre-mi-list li {
-  display: block; /* necesario para animación y expansión de bloques */
+  display: block;
   margin: 5px 0;
   font-size: 1em;
 }
 
-/* Eliminar puntos en contacto */
-.contacto-list li::before {
-  content: none;
+/* CONTACTO - eliminar puntos */
+.contacto-list {
+  list-style: none;
+  padding-left: 0;
+  margin: 10px 0;
+}
+
+.contacto-list li {
+  display: inline-block;
 }
 
 /* ANIMACIONES fadeInUp */
