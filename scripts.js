@@ -1,16 +1,19 @@
 document.addEventListener("DOMContentLoaded", () => {
+  // Binary header/footer
+  const canvasHeader = document.getElementById("binary-header");
+  const canvasFooter = document.getElementById("binary-footer");
+  if (canvasHeader) console.log("✅ Binary header cargado");
+  if (canvasFooter) console.log("✅ Binary footer cargado");
+
+  // Subbloques
   const headers = document.querySelectorAll(".subblock-header");
+  console.log("🔍 Subbloques detectados:", headers.length);
 
   headers.forEach(header => {
     header.addEventListener("click", () => {
-      // Buscamos el content dentro del mismo subblock
-      const content = header.parentElement.querySelector(".subblock-content");
-
+      const content = header.nextElementSibling;
       if (!content) return;
-
-      // Toggle simple
       content.style.display = content.style.display === "block" ? "none" : "block";
     });
   });
 });
-
