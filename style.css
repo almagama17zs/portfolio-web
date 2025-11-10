@@ -155,7 +155,7 @@ header h2 {
 
 .subblock-list li,
 .sobre-mi-list li {
-  display: block; /* corregido para que expandan los bloques */
+  display: block; /* necesario para animación y expansión de bloques */
   margin: 5px 0;
   font-size: 1em;
 }
