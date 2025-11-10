@@ -13,7 +13,6 @@ class BinaryBackground {
   }
 
   resize() {
-    // ajustar dimensiones al tamaño real del elemento
     const dpr = window.devicePixelRatio || 1;
     this.canvas.width = Math.max(1, Math.floor(this.canvas.offsetWidth * dpr));
     this.canvas.height = Math.max(1, Math.floor(this.canvas.offsetHeight * dpr));
@@ -30,7 +29,6 @@ class BinaryBackground {
 
   update() {
     const ctx = this.ctx;
-    // fondo levemente transparente para efecto "rastro"
     ctx.fillStyle = "rgba(0,0,0,0.22)";
     ctx.fillRect(0, 0, this.canvas.offsetWidth, this.canvas.offsetHeight);
 
@@ -40,9 +38,7 @@ class BinaryBackground {
       const char = Math.random() > 0.5 ? "0" : "1";
       ctx.fillText(char, i * 18, y);
       this.columns[i] += this.speed + Math.random() * 1.2;
-      if (this.columns[i] > this.canvas.offsetHeight) {
-        this.columns[i] = 0;
-      }
+      if (this.columns[i] > this.canvas.offsetHeight) this.columns[i] = 0;
     });
 
     requestAnimationFrame(() => this.update());
@@ -54,7 +50,7 @@ new BinaryBackground("binary-header", 1.1);
 new BinaryBackground("binary-footer", 1.1);
 
 // -------------------- TYPEWRITER --------------------
-function typeWriterElement(el, delay = 30) {
+function typeWriterElement(el, delay = 28) {
   const original = el.dataset.original || el.innerText;
   el.dataset.original = original;
   el.innerText = '';
@@ -64,25 +60,21 @@ function typeWriterElement(el, delay = 30) {
       el.innerText += original.charAt(i);
       i++;
       setTimeout(step, delay);
-    } else {
-      // al terminar, quitar cursor (si quieres mantener, comentar)
-      // el.style.borderRight = 'none';
     }
   }
   step();
 }
 
-// -------------------- SUBBLOQUES (toggle robusto) --------------------
+// -------------------- SUBBLOQUES --------------------
 document.addEventListener("DOMContentLoaded", () => {
-  // preparar typewriter: guardar texto original y vaciar (para ejecutarlo cuando se abra)
+  // preparar typewriter: guardar texto original y vaciar
   document.querySelectorAll('.typewriter p').forEach(p => {
     p.dataset.original = p.innerText.trim();
     p.innerText = '';
   });
 
-  // preparar fade: las li ya tienen animaciones CSS, pero las mantenemos ocultas
+  // preparar fade inicial para li
   document.querySelectorAll('.fade li').forEach(li => {
-    // dejar en estado inicial para que la animación se dispare cuando el elemento esté visible
     li.style.opacity = 0;
     li.style.transform = 'translateY(10px)';
   });
@@ -95,23 +87,18 @@ document.addEventListener("DOMContentLoaded", () => {
       const subblock = header.parentElement;
       const parentBlock = subblock.closest('.block');
 
-      // cerrar otros subblocks del mismo bloque (si deseas permitir multiselección, comenta este bloque)
+      // cerrar otros subblocks del mismo bloque
       parentBlock.querySelectorAll('.subblock').forEach(sb => {
         if (sb !== subblock) {
           sb.classList.remove('active');
-          // reset visual (limpiar p typewriter para que se vuelva a escribir al reabrir)
-          sb.querySelectorAll('.typewriter p').forEach(p => {
-            p.innerText = '';
-          });
+          sb.querySelectorAll('.typewriter p').forEach(p => p.innerText = '');
         }
       });
 
-      // toggle del subblock clicado
       const isActive = subblock.classList.toggle('active');
 
-      // al abrir, disparar animaciones: fade li y typewriter p
       if (isActive) {
-        // animar las li dentro de subblock-list
+        // primero animar li
         const lis = subblock.querySelectorAll('.subblock-list li');
         lis.forEach((li, idx) => {
           li.style.opacity = 0;
@@ -120,21 +107,19 @@ document.addEventListener("DOMContentLoaded", () => {
           li.style.animationDelay = `${0.18 * (idx + 1)}s`;
         });
 
-        // typewriter para cada <p> (con retardo entre ellas)
+        // después animar los párrafos (typewriter) con retardo según cantidad de li
         const paragraphs = subblock.querySelectorAll('.typewriter p');
+        const delayOffset = lis.length * 200 + 400;
         paragraphs.forEach((p, idx) => {
-          setTimeout(() => {
-            typeWriterElement(p, 28);
-          }, idx * 550);
+          setTimeout(() => typeWriterElement(p, 28), delayOffset + idx * 550);
         });
       } else {
-        // si se cierra, limpiar p para que se pueda reescribir la próxima vez
         subblock.querySelectorAll('.typewriter p').forEach(p => p.innerText = '');
       }
     });
   });
 
-  // efecto inicial para sobre-mi (aparece en secuencia)
+  // efecto inicial sobre-mi
   const sobreLis = document.querySelectorAll('.sobre-mi-list li');
   sobreLis.forEach((li, i) => {
     li.style.opacity = 0;
@@ -143,7 +128,7 @@ document.addEventListener("DOMContentLoaded", () => {
     li.style.animationDelay = `${0.2 * (i + 1)}s`;
   });
 
-  // mostrar fade inicial para la lista de contacto (si tenía fade)
+  // efecto fade inicial para lista de contacto
   const contactLis = document.querySelectorAll('.contacto-list.fade li');
   contactLis.forEach((li, i) => {
     li.style.opacity = 0;
