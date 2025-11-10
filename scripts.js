@@ -66,13 +66,11 @@ function typeWriterElement(el, delay = 28) {
 
 // -------------------- SUBBLOQUES --------------------
 document.addEventListener("DOMContentLoaded", () => {
-  // Guardar el texto original de los párrafos para typewriter
   document.querySelectorAll('.typewriter p').forEach(p => {
     p.dataset.original = p.innerText.trim();
     p.innerText = '';
   });
 
-  // Inicializar fade para li
   document.querySelectorAll('.subblock-list li, .sobre-mi-list li').forEach(li => {
     li.style.opacity = 0;
     li.style.transform = 'translateY(10px)';
@@ -85,7 +83,6 @@ document.addEventListener("DOMContentLoaded", () => {
       const subblock = header.parentElement;
       const parentBlock = subblock.closest('.block');
 
-      // Cerrar otros subblocks
       parentBlock.querySelectorAll('.subblock').forEach(sb => {
         if (sb !== subblock) {
           sb.classList.remove('active');
@@ -96,7 +93,6 @@ document.addEventListener("DOMContentLoaded", () => {
       const isActive = subblock.classList.toggle('active');
 
       if (isActive) {
-        // Primero animar las li (puntos verdes)
         const lis = subblock.querySelectorAll('.subblock-list li');
         lis.forEach((li, idx) => {
           li.style.opacity = 0;
@@ -105,31 +101,25 @@ document.addEventListener("DOMContentLoaded", () => {
           li.style.animationDelay = `${0.18 * (idx + 1)}s`;
         });
 
-        // Después typewriter de los párrafos, con retardo según número de li
         const paragraphs = subblock.querySelectorAll('.typewriter p');
         const delayOffset = lis.length * 200 + 400;
         paragraphs.forEach((p, idx) => {
           setTimeout(() => typeWriterElement(p, 28), delayOffset + idx * 550);
         });
       } else {
-        // Si se cierra, limpiar typewriter
         subblock.querySelectorAll('.typewriter p').forEach(p => p.innerText = '');
       }
     });
   });
 
-  // Animación inicial sobre-mi
-  const sobreLis = document.querySelectorAll('.sobre-mi-list li');
-  sobreLis.forEach((li, i) => {
+  document.querySelectorAll('.sobre-mi-list li').forEach((li, i) => {
     li.style.opacity = 0;
     li.style.transform = 'translateY(10px)';
     li.style.animation = `fadeInUp 0.5s forwards`;
     li.style.animationDelay = `${0.2 * (i + 1)}s`;
   });
 
-  // Animación inicial de contacto
-  const contactLis = document.querySelectorAll('.contacto-list.fade li');
-  contactLis.forEach((li, i) => {
+  document.querySelectorAll('.contacto-list.fade li').forEach((li, i) => {
     li.style.opacity = 0;
     li.style.transform = 'translateY(10px)';
     li.style.animation = `fadeInUp 0.5s forwards`;

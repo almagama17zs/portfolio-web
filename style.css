@@ -70,12 +70,13 @@ header h2 {
   margin: 40px auto;
   padding: 20px;
   max-width: 900px;
-  background-color: rgba(0,0,0,0.0);
+  background-color: #000;
   color: #fff;
   border-radius: 15px;
-  border: 2px solid #0F0;
   position: relative;
   overflow: hidden;
+  border: 2px solid #0F0;
+  box-shadow: 0 0 10px #0F0, 0 0 20px #0F0, 0 0 30px #0F0;
 }
 
 .block::before {
@@ -86,88 +87,96 @@ header h2 {
   width: calc(100% + 4px);
   height: calc(100% + 4px);
   border: 2px solid #0F0;
-  animation: glow 2s infinite alternate;
   border-radius: 15px;
+  animation: glow 2s infinite alternate;
 }
 
 @keyframes glow {
   from { box-shadow: 0 0 5px #0F0; }
-  to { box-shadow: 0 0 20px #0F0; }
+  to { box-shadow: 0 0 25px #0F0; }
 }
 
 /* SUBBLOQUES */
 .subblock {
-  border: 2px solid #0F0;
-  border-radius: 15px;
   margin: 20px 0;
+  border-radius: 15px;
+  background: rgba(0,0,0,0.1);
+  border: 2px solid #0F0;
   overflow: hidden;
   transition: all 0.4s ease;
-  background: rgba(0,0,0,0.15);
+  text-align: center;
 }
 
 .subblock-header {
   padding: 15px 20px;
-  cursor: pointer;
   font-weight: bold;
   font-size: 1.2em;
+  cursor: pointer;
   color: #fff;
   text-align: center;
+  border-bottom: 2px solid #0F0;
   transition: background 0.3s ease;
-  border-bottom: 1px solid #0F0;
 }
 
 .subblock-header:hover {
-  background: rgba(0, 255, 0, 0.15);
+  background: rgba(0,255,153,0.1);
 }
 
-/* Subbloques toggleados por JS */
 .subblock-content {
-  display: none;
-  padding: 15px 20px;
+  max-height: 0;
   overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.5s ease, opacity 0.5s ease;
 }
 
-/* Mostrar contenido cuando subbloque activo */
+/* Activar subblock */
 .subblock.active .subblock-content {
-  display: block;
+  max-height: 1000px;
+  opacity: 1;
 }
 
-/* LISTAS centradas con puntos verdes */
-.subblock-list, .sobre-mi-list {
+/* LISTAS CON PUNTOS VERDES */
+.subblock-list,
+.sobre-mi-list {
   list-style: none;
   padding-left: 0;
-  text-align: center;
   margin: 10px 0;
+  text-align: center;
 }
 
-.subblock-list li, .sobre-mi-list li {
-  display: inline-block;
-  margin: 5px 10px;
-  color: #fff;
-  opacity: 0;
-  transform: translateY(10px);
-}
-
-/* Puntos verdes antes de cada li */
-.subblock-list li::before, .sobre-mi-list li::before {
+.subblock-list li::before,
+.sobre-mi-list li::before {
   content: "•";
   color: #0F0;
-  margin-right: 6px;
-  display: inline-block;
+  margin-right: 10px;
 }
 
-/* Animaciones */
+.subblock-list li,
+.sobre-mi-list li {
+  display: inline-block;
+  margin: 5px 0;
+  font-size: 1em;
+}
+
+/* Animaciones fadeInUp */
 @keyframes fadeInUp {
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* Typewriter */
+/* LI fade effect */
+.fade li {
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeInUp 0.5s forwards;
+}
+
+/* TYPEWRITER */
 .typewriter p {
   display: block;
   overflow: hidden;
   border-right: 0.15em solid #0F0;
-  white-space: pre-wrap; /* respetar espacios y saltos */
+  white-space: pre-wrap;
 }
 
 /* CONTACTO */
@@ -178,19 +187,14 @@ header h2 {
   flex-wrap: wrap;
 }
 
-.contacto-list.horizontal li {
-  display: inline-block;
-}
-
 .contacto-list a {
   color: #0F0;
   text-decoration: none;
-  transition: color 0.3s ease;
+  font-weight: bold;
 }
 
 .contacto-list a:hover {
-  color: #0F0;
-  text-decoration: underline;
+  color: #0FFF66;
 }
 
 /* FOOTER */
@@ -213,23 +217,15 @@ footer canvas {
 footer p {
   position: relative;
   z-index: 2;
-  color: #fff;
 }
 
 /* MEDIA QUERIES */
-@media (max-width: 768px) {
+@media (max-width:768px){
   header {
     flex-direction: column;
-    height: auto;
-    padding: 20px;
+    height:auto;
+    padding:20px;
   }
-
-  header img {
-    width: 120px;
-    height: 120px;
-  }
-
-  .contacto-list.horizontal {
-    flex-direction: column;
-  }
+  header img { width:120px; height:120px; }
+  .contacto-list.horizontal { flex-direction: column; }
 }
