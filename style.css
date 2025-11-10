@@ -7,7 +7,7 @@
 }
 
 body {
-  background-color: #1c1c1c; /* fondo oscuro */
+  background-color: #1c1c1c;
   color: #fff;
   line-height: 1.6;
   text-align: center;
@@ -95,16 +95,12 @@ header h2 {
   to { box-shadow: 0 0 20px #0f0; }
 }
 
-h2 {
-  margin-bottom: 15px;
-}
-
-/* ---------- SUBBLOQUES (CORREGIDO) ---------- */
+/* SUBBLOQUES */
 .subblock {
   border: 2px solid #00ff99;
   border-radius: 15px;
   margin: 20px 0;
-  overflow: visible;
+  overflow: hidden;
   transition: all 0.4s ease;
   background: rgba(255, 255, 255, 0.02);
 }
@@ -248,11 +244,6 @@ footer p {
     flex-direction: column;
     height: auto;
     padding: 20px;
-  }
-
-  .header-content {
-    flex-direction: column;
-    gap: 10px;
   }
 
   header img {
