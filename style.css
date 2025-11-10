@@ -65,136 +65,143 @@ header h2 {
   font-weight: normal;
 }
 
-/* BLOQUES PRINCIPALES */
+/* BLOQUES */
 .block {
   margin: 40px auto;
   padding: 20px;
   max-width: 900px;
-  background-color: #000;
+  background-color: rgba(0,0,0,0.0); /* sin fondo extra */
   color: #fff;
   border-radius: 15px;
-  border: 2px solid #00ff99;
+  border: 2px solid #00ff99; /* verde hacker */
   position: relative;
   overflow: hidden;
-  box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
 }
 
-/* SUBBLOQUES */
+.block::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  border: 2px solid #00ff99;
+  animation: glow 2s infinite alternate;
+  border-radius: 15px;
+}
+
+@keyframes glow {
+  from { box-shadow: 0 0 5px #00ff99; }
+  to { box-shadow: 0 0 20px #00ff99; }
+}
+
+/* ---------- SUBBLOQUES ---------- */
 .subblock {
   border: 2px solid #00ff99;
   border-radius: 15px;
   margin: 20px 0;
   overflow: hidden;
   transition: all 0.4s ease;
-  background: rgba(0,0,0,0.18);
+  background: rgba(0,0,0,0.0); /* sin fondo extra */
 }
 
 .subblock-header {
   padding: 15px 20px;
+  background: rgba(0, 255, 153, 0.1);
   cursor: pointer;
-  font-weight: 700;
-  font-size: 1.05em;
-  color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  transition: background 0.3s ease, transform 0.3s ease;
+  font-weight: bold;
+  font-size: 1.2em;
+  color: #fff; /* títulos en blanco */
+  text-align: center; /* centrado */
+  transition: background 0.3s ease;
+  border-bottom: 1px solid #00ff99;
 }
 
 .subblock-header:hover {
   background: rgba(0, 255, 153, 0.25);
-  transform: translateY(-2px);
 }
 
-/* Contenido subbloques */
 .subblock-content {
   display: none;
-  opacity: 0;
   padding: 15px 20px;
-  border-top: 1px solid #00ff99;
-  background: rgba(0, 0, 0, 0.12);
-  transition: opacity 0.4s ease, max-height 0.4s ease;
-  max-height: 0;
+  border-top: none;
   overflow: hidden;
 }
 
 .subblock.active .subblock-content {
   display: block;
-  opacity: 1;
-  max-height: 1000px;
 }
 
-/* LISTAS SUBBLOQUES */
+/* LISTAS dentro de subbloques centradas con puntos verdes */
 .subblock-list {
   list-style: none;
   padding-left: 0;
-  text-align: left;
-  margin-bottom: 10px;
+  text-align: center;
+  margin: 10px 0;
 }
 
 .subblock-list li {
   position: relative;
-  display: flex;
-  align-items: center;
-  gap: 8px;
+  display: inline-block;
+  margin: 5px 10px;
   padding-left: 0;
-  margin-bottom: 8px;
+  color: #fff;
   opacity: 0;
   transform: translateY(10px);
-  color: #fff;
 }
 
+/* Puntos verdes centrados antes de cada li */
 .subblock-list li::before {
   content: "•";
-  color: #0f0;
-  font-weight: bold;
+  color: #00ff99;
+  margin-right: 6px;
   display: inline-block;
-  width: 1em;
-  text-align: center;
 }
 
-/* Animación LI */
+/* Animaciones */
 @keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-/* TYPEWRITER DESCRIPCIONES */
+/* Typewriter effect */
 .typewriter p {
   display: block;
-  overflow-wrap: break-word;
-  white-space: pre-wrap;
-  border-right: 0.12em solid #0f0;
-  margin-bottom: 6px;
-  color: #fff;
-  font-size: 0.95em;
-  opacity: 0; /* se mostrará después de li */
+  overflow: hidden;
+  border-right: 0.15em solid #0f0;
+  white-space: pre-wrap; /* respeta espacios y saltos de línea */
 }
 
 /* SOBRE MI */
 .sobre-mi-list {
   list-style: none;
   padding-left: 0;
-  text-align: left;
+  text-align: center;
   max-width: 800px;
   margin: 0 auto;
 }
 
 .sobre-mi-list li {
   position: relative;
-  padding-left: 20px;
-  margin-bottom: 10px;
+  display: inline-block;
+  margin: 5px 10px;
+  padding-left: 0;
+  color: #fff;
   opacity: 0;
   transform: translateY(10px);
-  animation: fadeInUp 0.5s forwards;
 }
 
 .sobre-mi-list li::before {
   content: "•";
-  position: absolute;
-  left: 0;
-  color: #0f0;
+  color: #00ff99;
+  margin-right: 6px;
+  display: inline-block;
 }
 
 /* CONTACTO */
@@ -226,7 +233,6 @@ footer {
   padding: 20px;
   text-align: center;
   overflow: hidden;
-  border-radius: 15px;
 }
 
 footer canvas {
