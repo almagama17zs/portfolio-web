@@ -1,7 +1,8 @@
-// --- EFECTO DE FONDO BINARIO ---
+// ====== EFECTO BINARIO HEADER Y FOOTER ======
 class BinaryBackground {
   constructor(canvasId, speed = 2) {
     this.canvas = document.getElementById(canvasId);
+    if (!this.canvas) return;
     this.ctx = this.canvas.getContext("2d");
     this.speed = speed;
     this.columns = [];
@@ -36,50 +37,55 @@ class BinaryBackground {
   }
 }
 
-new BinaryBackground("binary-header", 1.5);
-new BinaryBackground("binary-footer", 1.5);
-
-// --- EFECTO TYPEWRITER ---
-function typeWriter(element, delay = 50) {
-  const text = element.innerText;
-  element.innerText = '';
-  let i = 0;
-  function typing() {
-    if (i < text.length) {
-      element.innerText += text.charAt(i);
-      i++;
-      setTimeout(typing, delay);
-    }
-  }
-  typing();
-}
-
-// Aplicar efecto inicial
 document.addEventListener("DOMContentLoaded", () => {
-  document.querySelectorAll('.typewriter p').forEach(p => {
+  new BinaryBackground("binary-header", 1.5);
+  new BinaryBackground("binary-footer", 1.5);
+
+  console.log("✅ Binary background cargado");
+
+  // ====== EFECTO TYPEWRITER ======
+  function typeWriter(element, delay = 40) {
+    const text = element.innerText;
+    element.innerText = "";
+    let i = 0;
+    function typing() {
+      if (i < text.length) {
+        element.innerText += text.charAt(i);
+        i++;
+        setTimeout(typing, delay);
+      }
+    }
+    typing();
+  }
+
+  document.querySelectorAll(".typewriter p").forEach(p => {
     typeWriter(p);
   });
 
-  // --- SUBBLOQUES (abrir/cerrar) ---
+  // ====== EFECTO SUBBLOQUES ======
   const subblockHeaders = document.querySelectorAll(".subblock-header");
+  console.log("🔍 Subbloques detectados:", subblockHeaders.length);
 
   subblockHeaders.forEach(header => {
     header.addEventListener("click", () => {
+      console.log("🟢 Click en:", header.innerText);
       const content = header.nextElementSibling;
 
-      // Alternar apertura
+      // Cerrar otros subbloques del mismo bloque
+      const parent = header.closest(".block");
+      parent.querySelectorAll(".subblock-content").forEach(c => {
+        if (c !== content) c.style.display = "none";
+      });
+
+      // Abrir o cerrar este
       if (content.style.display === "block") {
         content.style.display = "none";
+        console.log("🔴 Cerrado");
       } else {
-        // Cerrar otros subbloques del mismo bloque
-        const parentBlock = header.closest(".block");
-        const allContents = parentBlock.querySelectorAll(".subblock-content");
-        allContents.forEach(c => (c.style.display = "none"));
-
-        // Abrir este subbloque
         content.style.display = "block";
+        console.log("🟢 Abierto");
 
-        // Animar listas <li>
+        // Animar <li> con fade secuencial
         const fadeLis = content.querySelectorAll(".fade li");
         fadeLis.forEach((li, i) => {
           li.style.opacity = 0;
@@ -88,7 +94,7 @@ document.addEventListener("DOMContentLoaded", () => {
           li.style.animationDelay = `${0.2 * (i + 1)}s`;
         });
 
-        // Efecto máquina de escribir en <p>
+        // Activar typewriter en párrafos dentro
         const paragraphs = content.querySelectorAll(".typewriter p");
         paragraphs.forEach((p, index) => {
           setTimeout(() => {
