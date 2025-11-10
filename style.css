@@ -70,10 +70,10 @@ header h2 {
   margin: 40px auto;
   padding: 20px;
   max-width: 900px;
-  background-color: rgba(0,0,0,0.0); /* sin fondo extra */
+  background-color: rgba(0,0,0,0.0);
   color: #fff;
   border-radius: 15px;
-  border: 2px solid #00ff99; /* verde hacker */
+  border: 2px solid #00ff99;
   position: relative;
   overflow: hidden;
 }
@@ -95,24 +95,23 @@ header h2 {
   to { box-shadow: 0 0 20px #00ff99; }
 }
 
-/* ---------- SUBBLOQUES ---------- */
+/* SUBBLOQUES */
 .subblock {
   border: 2px solid #00ff99;
   border-radius: 15px;
   margin: 20px 0;
   overflow: hidden;
   transition: all 0.4s ease;
-  background: rgba(0,0,0,0.0); /* sin fondo extra */
+  background: rgba(0,0,0,0.15); /* fondo leve para visibilidad */
 }
 
 .subblock-header {
   padding: 15px 20px;
-  background: rgba(0, 255, 153, 0.1);
   cursor: pointer;
   font-weight: bold;
   font-size: 1.2em;
-  color: #fff; /* títulos en blanco */
-  text-align: center; /* centrado */
+  color: #fff;
+  text-align: center;
   transition: background 0.3s ease;
   border-bottom: 1px solid #00ff99;
 }
@@ -121,10 +120,10 @@ header h2 {
   background: rgba(0, 255, 153, 0.25);
 }
 
+/* Subbloques toggleados por JS */
 .subblock-content {
   display: none;
   padding: 15px 20px;
-  border-top: none;
   overflow: hidden;
 }
 
@@ -132,76 +131,42 @@ header h2 {
   display: block;
 }
 
-/* LISTAS dentro de subbloques centradas con puntos verdes */
-.subblock-list {
+/* LISTAS centradas con puntos verdes */
+.subblock-list, .sobre-mi-list {
   list-style: none;
   padding-left: 0;
   text-align: center;
   margin: 10px 0;
 }
 
-.subblock-list li {
-  position: relative;
+.subblock-list li, .sobre-mi-list li {
   display: inline-block;
   margin: 5px 10px;
-  padding-left: 0;
   color: #fff;
   opacity: 0;
   transform: translateY(10px);
 }
 
-/* Puntos verdes centrados antes de cada li */
-.subblock-list li::before {
+/* Puntos verdes antes de cada li */
+.subblock-list li::before, .sobre-mi-list li::before {
   content: "•";
   color: #00ff99;
   margin-right: 6px;
   display: inline-block;
 }
 
-/* Animaciones */
+/* ANIMACIONES */
 @keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-/* Typewriter effect */
+/* Typewriter */
 .typewriter p {
   display: block;
   overflow: hidden;
   border-right: 0.15em solid #0f0;
-  white-space: pre-wrap; /* respeta espacios y saltos de línea */
-}
-
-/* SOBRE MI */
-.sobre-mi-list {
-  list-style: none;
-  padding-left: 0;
-  text-align: center;
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.sobre-mi-list li {
-  position: relative;
-  display: inline-block;
-  margin: 5px 10px;
-  padding-left: 0;
-  color: #fff;
-  opacity: 0;
-  transform: translateY(10px);
-}
-
-.sobre-mi-list li::before {
-  content: "•";
-  color: #00ff99;
-  margin-right: 6px;
-  display: inline-block;
+  white-space: pre-wrap; /* respetar espacios y saltos */
 }
 
 /* CONTACTO */
