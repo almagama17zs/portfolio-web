@@ -9,7 +9,6 @@ class BinaryBackground {
     this.resize();
     window.addEventListener("resize", () => this.resize());
     requestAnimationFrame(() => this.update());
-    console.log(`✅ Binary ${canvasId.replace('binary-', '')} cargado`);
   }
 
   resize() {
@@ -32,7 +31,7 @@ class BinaryBackground {
     ctx.fillStyle = "rgba(0,0,0,0.22)";
     ctx.fillRect(0, 0, this.canvas.offsetWidth, this.canvas.offsetHeight);
 
-    ctx.fillStyle = "#0F0";
+    ctx.fillStyle = "#00ff99";
     ctx.font = "16px monospace";
     this.columns.forEach((y, i) => {
       const char = Math.random() > 0.5 ? "0" : "1";
@@ -83,6 +82,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const subblock = header.parentElement;
       const parentBlock = subblock.closest('.block');
 
+      // Cerrar otros subbloques
       parentBlock.querySelectorAll('.subblock').forEach(sb => {
         if (sb !== subblock) {
           sb.classList.remove('active');
@@ -93,6 +93,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const isActive = subblock.classList.toggle('active');
 
       if (isActive) {
+        // Animar li
         const lis = subblock.querySelectorAll('.subblock-list li');
         lis.forEach((li, idx) => {
           li.style.opacity = 0;
@@ -101,6 +102,7 @@ document.addEventListener("DOMContentLoaded", () => {
           li.style.animationDelay = `${0.18 * (idx + 1)}s`;
         });
 
+        // Typewriter p con delay según cantidad de li
         const paragraphs = subblock.querySelectorAll('.typewriter p');
         const delayOffset = lis.length * 200 + 400;
         paragraphs.forEach((p, idx) => {
@@ -112,6 +114,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+  // Animación inicial sobre-mi
   document.querySelectorAll('.sobre-mi-list li').forEach((li, i) => {
     li.style.opacity = 0;
     li.style.transform = 'translateY(10px)';
@@ -119,6 +122,7 @@ document.addEventListener("DOMContentLoaded", () => {
     li.style.animationDelay = `${0.2 * (i + 1)}s`;
   });
 
+  // Animación inicial contacto
   document.querySelectorAll('.contacto-list.fade li').forEach((li, i) => {
     li.style.opacity = 0;
     li.style.transform = 'translateY(10px)';

@@ -75,8 +75,8 @@ header h2 {
   border-radius: 15px;
   position: relative;
   overflow: hidden;
-  border: 2px solid #0F0;
-  box-shadow: 0 0 10px #0F0, 0 0 20px #0F0, 0 0 30px #0F0;
+  border: 2px solid #00ff99;
+  box-shadow: 0 0 8px #00ff99, 0 0 15px #00ff99, 0 0 20px #00ff99;
 }
 
 .block::before {
@@ -86,14 +86,14 @@ header h2 {
   left: -2px;
   width: calc(100% + 4px);
   height: calc(100% + 4px);
-  border: 2px solid #0F0;
+  border: 2px solid #00ff99;
   border-radius: 15px;
   animation: glow 2s infinite alternate;
 }
 
 @keyframes glow {
-  from { box-shadow: 0 0 5px #0F0; }
-  to { box-shadow: 0 0 25px #0F0; }
+  from { box-shadow: 0 0 3px #00ff99; }
+  to { box-shadow: 0 0 10px #00ff99; }
 }
 
 /* SUBBLOQUES */
@@ -101,7 +101,7 @@ header h2 {
   margin: 20px 0;
   border-radius: 15px;
   background: rgba(0,0,0,0.1);
-  border: 2px solid #0F0;
+  border: 2px solid #00ff99;
   overflow: hidden;
   transition: all 0.4s ease;
   text-align: center;
@@ -114,7 +114,7 @@ header h2 {
   cursor: pointer;
   color: #fff;
   text-align: center;
-  border-bottom: 2px solid #0F0;
+  border-bottom: 2px solid #00ff99;
   transition: background 0.3s ease;
 }
 
@@ -126,16 +126,18 @@ header h2 {
   max-height: 0;
   overflow: hidden;
   opacity: 0;
-  transition: max-height 0.5s ease, opacity 0.5s ease;
+  transition: max-height 0.5s ease, opacity 0.5s ease, padding 0.5s ease;
+  text-align: center;
+  padding: 0 20px;
 }
 
-/* Activar subblock */
 .subblock.active .subblock-content {
-  max-height: 1000px;
+  max-height: 2000px;
   opacity: 1;
+  padding: 15px 20px;
 }
 
-/* LISTAS CON PUNTOS VERDES */
+/* LISTAS */
 .subblock-list,
 .sobre-mi-list {
   list-style: none;
@@ -147,36 +149,30 @@ header h2 {
 .subblock-list li::before,
 .sobre-mi-list li::before {
   content: "•";
-  color: #0F0;
-  margin-right: 10px;
+  color: #00ff99;
+  margin-right: 8px;
 }
 
 .subblock-list li,
 .sobre-mi-list li {
   display: inline-block;
-  margin: 5px 0;
+  margin: 5px 10px;
   font-size: 1em;
 }
 
-/* Animaciones fadeInUp */
+/* ANIMACIONES fadeInUp */
 @keyframes fadeInUp {
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
-}
-
-/* LI fade effect */
-.fade li {
-  opacity: 0;
-  transform: translateY(10px);
-  animation: fadeInUp 0.5s forwards;
 }
 
 /* TYPEWRITER */
 .typewriter p {
   display: block;
   overflow: hidden;
-  border-right: 0.15em solid #0F0;
+  border-right: 0.15em solid #00ff99;
   white-space: pre-wrap;
+  margin: 5px 0;
 }
 
 /* CONTACTO */
@@ -188,7 +184,7 @@ header h2 {
 }
 
 .contacto-list a {
-  color: #0F0;
+  color: #00ff99;
   text-decoration: none;
   font-weight: bold;
 }
