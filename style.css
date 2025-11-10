@@ -18,12 +18,11 @@ header {
   position: relative;
   display: flex;
   align-items: center;
-  justify-content: center; /* centra el header-text con las fotos */
+  justify-content: center;
   height: 180px;
   overflow: hidden;
 }
 
-/* canvas binario ocupa todo el header */
 header canvas {
   position: absolute;
   top: 0;
@@ -33,23 +32,21 @@ header canvas {
   z-index: 1;
 }
 
-/* imágenes y texto encima del canvas */
 .header-left,
 .header-right {
   width: 140px;
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 3;
+  z-index: 2;
   position: relative;
-  flex-shrink: 0;
 }
 
 .header-text {
   text-align: center;
   max-width: 800px;
   margin: 0 20px;
-  z-index: 3;
+  z-index: 2;
 }
 
 header img {
@@ -57,136 +54,132 @@ header img {
   height: 140px;
   border-radius: 50%;
   object-fit: cover;
-  box-shadow: 0 4px 14px rgba(0,0,0,0.5);
 }
 
 header h1 {
   font-size: 2em;
-  margin-bottom: 4px;
 }
 
 header h2 {
-  font-size: 1.05em;
-  font-weight: 400;
-  opacity: 0.95;
+  font-size: 1.2em;
+  font-weight: normal;
 }
 
-/* BLOQUES principales */
+/* BLOQUES PRINCIPALES */
 .block {
   margin: 40px auto;
   padding: 20px;
   max-width: 900px;
-  background-color: #000; /* caja negra */
+  background-color: #000;
   color: #fff;
   border-radius: 15px;
-  box-shadow: 0 6px 18px rgba(0,255,0,0.06);
+  border: 2px solid #00ff99; /* verde hacker */
   position: relative;
-  overflow: visible;
-  border: 2px solid #0f0;
+  overflow: hidden;
+  box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
 }
 
-/* contorno brillante */
 .block::before {
-  content: '';
-  position: absolute;
-  top: -2px;
-  left: -2px;
-  width: calc(100% + 4px);
-  height: calc(100% + 4px);
-  border: 2px solid rgba(0,255,153,0.15);
-  pointer-events: none;
-  z-index: 0;
+  display: none;
 }
 
-/* títulos */
-.block h2 {
-  position: relative;
-  z-index: 2;
-  margin-bottom: 12px;
-}
-
-/* ---------- SUBBLOQUES ---------- */
+/* SUBBLOQUES */
 .subblock {
-  border: 2px solid #00ff99;
+  border: 2px solid #00ff99; /* verde hacker */
   border-radius: 15px;
   margin: 20px 0;
   overflow: hidden;
-  transition: all 0.38s ease;
-  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-  z-index: 1;
+  transition: all 0.4s ease;
+  background: rgba(0,0,0,0.18);
 }
 
 .subblock-header {
   padding: 15px 20px;
-  background: rgba(0, 0, 0, 0.18);
   cursor: pointer;
   font-weight: 700;
   font-size: 1.05em;
-  color: #00ff99;
+  color: #fff; /* título en blanco */
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
+  text-align: center;
+  transition: background 0.3s ease;
+  gap: 10px;
 }
 
 .subblock-header:hover {
-  background: rgba(0, 255, 153, 0.04);
+  background: rgba(0, 255, 153, 0.25);
 }
 
-/* contenido oculto por defecto: transición con max-height para animación suave */
+/* Contenido subbloques */
 .subblock-content {
-  max-height: 0;
+  display: none;
   opacity: 0;
-  overflow: hidden;
-  transition: max-height 0.42s ease, opacity 0.42s ease, padding 0.25s ease;
-  padding: 0 20px;
-  border-top: 1px solid rgba(0,255,153,0.12);
-  background: rgba(0, 0, 0, 0.22);
-}
-
-/* al activarse (.active) muestra el contenido */
-.subblock.active .subblock-content {
-  max-height: 1200px; /* suficientemente grande */
-  opacity: 1;
   padding: 15px 20px;
+  border-top: 1px solid #00ff99;
+  background: rgba(0, 0, 0, 0.12);
+  transition: opacity 0.4s ease, max-height 0.4s ease;
+  max-height: 0;
+  overflow: hidden;
 }
 
-/* lista dentro de subbloque (fade effect) */
-.subblock-list {
-  list-style: none;
-  padding-left: 0;
-  margin-bottom: 12px;
+.subblock.active .subblock-content {
+  display: block;
+  opacity: 1;
+  max-height: 1000px;
+}
+
+/* LISTAS SUBBLOQUES */
+.subblock-list li {
+  position: relative;
+  padding-left: 20px;
+  margin-bottom: 8px;
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeInUp 0.5s forwards;
+  color: #fff;
+}
+
+.subblock-list li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: #0f0; /* verde hacker */
+}
+
+/* ANIMACIÓN LI */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .fade li {
   opacity: 0;
   transform: translateY(10px);
-  animation: fadeInUp 0.55s forwards;
+  animation: fadeInUp 0.5s forwards;
 }
 
-.fade li:nth-child(1) { animation-delay: 0.18s; }
-.fade li:nth-child(2) { animation-delay: 0.36s; }
-.fade li:nth-child(3) { animation-delay: 0.54s; }
-.fade li:nth-child(4) { animation-delay: 0.72s; }
-.fade li:nth-child(5) { animation-delay: 0.9s; }
-.fade li:nth-child(6) { animation-delay: 1.08s; }
-.fade li:nth-child(7) { animation-delay: 1.26s; }
-.fade li:nth-child(8) { animation-delay: 1.44s; }
-.fade li:nth-child(9) { animation-delay: 1.62s; }
-.fade li:nth-child(10){ animation-delay: 1.8s; }
-.fade li:nth-child(11){ animation-delay: 1.98s; }
-.fade li:nth-child(12){ animation-delay: 2.16s; }
+.fade li:nth-child(1) { animation-delay: 0.2s; }
+.fade li:nth-child(2) { animation-delay: 0.4s; }
+.fade li:nth-child(3) { animation-delay: 0.6s; }
+.fade li:nth-child(4) { animation-delay: 0.8s; }
+.fade li:nth-child(5) { animation-delay: 1s; }
+.fade li:nth-child(6) { animation-delay: 1.2s; }
+.fade li:nth-child(7) { animation-delay: 1.4s; }
+.fade li:nth-child(8) { animation-delay: 1.6s; }
+.fade li:nth-child(9) { animation-delay: 1.8s; }
+.fade li:nth-child(10){ animation-delay: 2s; }
 
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(10px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-/* Typewriter effect para <p> (se ejecuta desde JS) */
+/* TYPEWRITER DESCRIPCIONES */
 .typewriter p {
   display: block;
   overflow: hidden;
   border-right: 0.12em solid #0f0;
-  white-space: nowrap;
+  white-space: normal;
+  word-wrap: break-word;
+  margin-bottom: 6px;
+  color: #fff;
+  font-size: 0.95em;
 }
 
 /* SOBRE MI */
@@ -214,26 +207,24 @@ header h2 {
   color: #0f0;
 }
 
-/* Contacto horizontal */
+/* CONTACTO */
 .contacto-list.horizontal {
   display: flex;
   justify-content: center;
   gap: 20px;
   flex-wrap: wrap;
-  list-style: none;
-  padding-left: 0;
 }
 
 .contacto-list.horizontal li {
   display: inline-block;
 }
 
-/* Enlaces en verde hacker */
 .contacto-list a {
   color: #00ff99;
   text-decoration: none;
-  font-weight: 600;
+  transition: color 0.3s ease;
 }
+
 .contacto-list a:hover {
   color: #0f0;
   text-decoration: underline;
@@ -245,7 +236,7 @@ footer {
   padding: 20px;
   text-align: center;
   overflow: hidden;
-  margin-bottom: 0;
+  border-radius: 15px;
 }
 
 footer canvas {
@@ -259,22 +250,16 @@ footer canvas {
 
 footer p {
   position: relative;
-  z-index: 3;
-  margin: 0;
+  z-index: 2;
+  color: #fff;
 }
 
-/* RESPONSIVE */
+/* MEDIA QUERIES */
 @media (max-width: 768px) {
   header {
     flex-direction: column;
     height: auto;
-    padding: 20px 10px;
-  }
-
-  .header-left,
-  .header-right {
-    width: 120px;
-    margin: 6px 0;
+    padding: 20px;
   }
 
   header img {
@@ -282,17 +267,7 @@ footer p {
     height: 120px;
   }
 
-  .header-text {
-    margin: 10px 0;
-  }
-
   .contacto-list.horizontal {
     flex-direction: column;
-    gap: 10px;
-  }
-
-  .subblock-header {
-    font-size: 1em;
-    padding: 12px 16px;
   }
 }
