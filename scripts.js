@@ -70,11 +70,6 @@ document.addEventListener("DOMContentLoaded", () => {
     p.innerText = '';
   });
 
-  document.querySelectorAll('.subblock-list li, .sobre-mi-list li').forEach(li => {
-    li.style.opacity = 0;
-    li.style.transform = 'translateY(10px)';
-  });
-
   const headers = document.querySelectorAll('.subblock-header');
 
   headers.forEach(header => {
@@ -102,7 +97,7 @@ document.addEventListener("DOMContentLoaded", () => {
           li.style.animationDelay = `${0.18 * (idx + 1)}s`;
         });
 
-        // Typewriter p con delay según cantidad de li
+        // Animar typewriter con delay
         const paragraphs = subblock.querySelectorAll('.typewriter p');
         const delayOffset = lis.length * 200 + 400;
         paragraphs.forEach((p, idx) => {

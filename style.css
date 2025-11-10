@@ -76,7 +76,7 @@ header h2 {
   position: relative;
   overflow: hidden;
   border: 2px solid #00ff99;
-  box-shadow: 0 0 8px #00ff99, 0 0 15px #00ff99, 0 0 20px #00ff99;
+  box-shadow: 0 0 6px #00ff99, 0 0 12px #00ff99, 0 0 18px #00ff99;
 }
 
 .block::before {
@@ -92,8 +92,8 @@ header h2 {
 }
 
 @keyframes glow {
-  from { box-shadow: 0 0 3px #00ff99; }
-  to { box-shadow: 0 0 10px #00ff99; }
+  from { box-shadow: 0 0 2px #00ff99; }
+  to { box-shadow: 0 0 8px #00ff99; }
 }
 
 /* SUBBLOQUES */
@@ -126,7 +126,7 @@ header h2 {
   max-height: 0;
   overflow: hidden;
   opacity: 0;
-  transition: max-height 0.5s ease, opacity 0.5s ease, padding 0.5s ease;
+  transition: max-height 0.6s ease, opacity 0.6s ease, padding 0.5s ease;
   text-align: center;
   padding: 0 20px;
 }
