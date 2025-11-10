@@ -73,7 +73,7 @@ header h2 {
   background-color: rgba(0,0,0,0.0);
   color: #fff;
   border-radius: 15px;
-  border: 2px solid #00ff99;
+  border: 2px solid #0F0;
   position: relative;
   overflow: hidden;
 }
@@ -85,24 +85,24 @@ header h2 {
   left: -2px;
   width: calc(100% + 4px);
   height: calc(100% + 4px);
-  border: 2px solid #00ff99;
+  border: 2px solid #0F0;
   animation: glow 2s infinite alternate;
   border-radius: 15px;
 }
 
 @keyframes glow {
-  from { box-shadow: 0 0 5px #00ff99; }
-  to { box-shadow: 0 0 20px #00ff99; }
+  from { box-shadow: 0 0 5px #0F0; }
+  to { box-shadow: 0 0 20px #0F0; }
 }
 
 /* SUBBLOQUES */
 .subblock {
-  border: 2px solid #00ff99;
+  border: 2px solid #0F0;
   border-radius: 15px;
   margin: 20px 0;
   overflow: hidden;
   transition: all 0.4s ease;
-  background: rgba(0,0,0,0.15); /* fondo leve para visibilidad */
+  background: rgba(0,0,0,0.15);
 }
 
 .subblock-header {
@@ -113,11 +113,11 @@ header h2 {
   color: #fff;
   text-align: center;
   transition: background 0.3s ease;
-  border-bottom: 1px solid #00ff99;
+  border-bottom: 1px solid #0F0;
 }
 
 .subblock-header:hover {
-  background: rgba(0, 255, 153, 0.25);
+  background: rgba(0, 255, 0, 0.15);
 }
 
 /* Subbloques toggleados por JS */
@@ -127,6 +127,7 @@ header h2 {
   overflow: hidden;
 }
 
+/* Mostrar contenido cuando subbloque activo */
 .subblock.active .subblock-content {
   display: block;
 }
@@ -150,12 +151,12 @@ header h2 {
 /* Puntos verdes antes de cada li */
 .subblock-list li::before, .sobre-mi-list li::before {
   content: "•";
-  color: #00ff99;
+  color: #0F0;
   margin-right: 6px;
   display: inline-block;
 }
 
-/* ANIMACIONES */
+/* Animaciones */
 @keyframes fadeInUp {
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
@@ -165,7 +166,7 @@ header h2 {
 .typewriter p {
   display: block;
   overflow: hidden;
-  border-right: 0.15em solid #0f0;
+  border-right: 0.15em solid #0F0;
   white-space: pre-wrap; /* respetar espacios y saltos */
 }
 
@@ -182,13 +183,13 @@ header h2 {
 }
 
 .contacto-list a {
-  color: #00ff99;
+  color: #0F0;
   text-decoration: none;
   transition: color 0.3s ease;
 }
 
 .contacto-list a:hover {
-  color: #0f0;
+  color: #0F0;
   text-decoration: underline;
 }
 

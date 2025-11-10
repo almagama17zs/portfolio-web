@@ -45,7 +45,6 @@ class BinaryBackground {
   }
 }
 
-// iniciar canvases si existen
 new BinaryBackground("binary-header", 1.1);
 new BinaryBackground("binary-footer", 1.1);
 
@@ -67,27 +66,26 @@ function typeWriterElement(el, delay = 28) {
 
 // -------------------- SUBBLOQUES --------------------
 document.addEventListener("DOMContentLoaded", () => {
-  // preparar typewriter: guardar texto original y vaciar
+  // Guardar el texto original de los párrafos para typewriter
   document.querySelectorAll('.typewriter p').forEach(p => {
     p.dataset.original = p.innerText.trim();
     p.innerText = '';
   });
 
-  // preparar fade inicial para li
-  document.querySelectorAll('.fade li').forEach(li => {
+  // Inicializar fade para li
+  document.querySelectorAll('.subblock-list li, .sobre-mi-list li').forEach(li => {
     li.style.opacity = 0;
     li.style.transform = 'translateY(10px)';
   });
 
   const headers = document.querySelectorAll('.subblock-header');
-  console.log(`🔍 Subbloques detectados: ${headers.length}`);
 
   headers.forEach(header => {
     header.addEventListener('click', () => {
       const subblock = header.parentElement;
       const parentBlock = subblock.closest('.block');
 
-      // cerrar otros subblocks del mismo bloque
+      // Cerrar otros subblocks
       parentBlock.querySelectorAll('.subblock').forEach(sb => {
         if (sb !== subblock) {
           sb.classList.remove('active');
@@ -98,7 +96,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const isActive = subblock.classList.toggle('active');
 
       if (isActive) {
-        // primero animar li
+        // Primero animar las li (puntos verdes)
         const lis = subblock.querySelectorAll('.subblock-list li');
         lis.forEach((li, idx) => {
           li.style.opacity = 0;
@@ -107,19 +105,20 @@ document.addEventListener("DOMContentLoaded", () => {
           li.style.animationDelay = `${0.18 * (idx + 1)}s`;
         });
 
-        // después animar los párrafos (typewriter) con retardo según cantidad de li
+        // Después typewriter de los párrafos, con retardo según número de li
         const paragraphs = subblock.querySelectorAll('.typewriter p');
         const delayOffset = lis.length * 200 + 400;
         paragraphs.forEach((p, idx) => {
           setTimeout(() => typeWriterElement(p, 28), delayOffset + idx * 550);
         });
       } else {
+        // Si se cierra, limpiar typewriter
         subblock.querySelectorAll('.typewriter p').forEach(p => p.innerText = '');
       }
     });
   });
 
-  // efecto inicial sobre-mi
+  // Animación inicial sobre-mi
   const sobreLis = document.querySelectorAll('.sobre-mi-list li');
   sobreLis.forEach((li, i) => {
     li.style.opacity = 0;
@@ -128,7 +127,7 @@ document.addEventListener("DOMContentLoaded", () => {
     li.style.animationDelay = `${0.2 * (i + 1)}s`;
   });
 
-  // efecto fade inicial para lista de contacto
+  // Animación inicial de contacto
   const contactLis = document.querySelectorAll('.contacto-list.fade li');
   contactLis.forEach((li, i) => {
     li.style.opacity = 0;
