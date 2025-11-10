@@ -42,13 +42,13 @@ new BinaryBackground("binary-header", 1.5);
 new BinaryBackground("binary-footer", 1.5);
 
 // -------------------- TYPEWRITER --------------------
-function typeWriter(element, delay = 50) {
-  const text = element.innerText;
-  element.innerText = '';
+function typeWriter(element, delay = 30) {
+  const text = element.textContent;
+  element.textContent = "";
   let i = 0;
   function typing() {
     if (i < text.length) {
-      element.innerText += text.charAt(i);
+      element.textContent += text.charAt(i);
       i++;
       setTimeout(typing, delay);
     }
@@ -58,49 +58,27 @@ function typeWriter(element, delay = 50) {
 
 // -------------------- SUBBLOQUE TOGGLE --------------------
 document.addEventListener("DOMContentLoaded", () => {
-  const subblocks = document.querySelectorAll(".subblock-header");
+  const subblocks = document.querySelectorAll(".subblock");
   console.log(`🔍 Subbloques detectados: ${subblocks.length}`);
 
-  subblocks.forEach(header => {
+  subblocks.forEach(block => {
+    const header = block.querySelector(".subblock-header");
     header.addEventListener("click", () => {
-      const content = header.nextElementSibling;
-      if (!content) return;
+      const isActive = block.classList.contains("active");
 
-      // obtener display real aunque venga del CSS
-      const style = window.getComputedStyle(content);
-      const isHidden = style.display === "none";
+      // Cerrar todos los subbloques del mismo nivel
+      document.querySelectorAll(".subblock.active").forEach(b => b.classList.remove("active"));
 
-      // cerrar todos los subbloques del mismo bloque (opcional)
-      const parentBlock = header.closest(".block");
-      const allContents = parentBlock.querySelectorAll(".subblock-content");
-      allContents.forEach(c => c.style.display = "none");
+      // Si no estaba activo, abrirlo
+      if (!isActive) block.classList.add("active");
 
-      // abrir/cerrar este subbloque
-      content.style.display = isHidden ? "block" : "none";
-
-      // animación fade para <li>
-      const fadeLis = content.querySelectorAll("li");
-      fadeLis.forEach((li, i) => {
-        li.style.opacity = 0;
-        li.style.transform = "translateY(10px)";
-        li.style.animation = `fadeInUp 0.5s forwards`;
-        li.style.animationDelay = `${0.2 * (i + 1)}s`;
-      });
-
-      // typewriter para cada <p>
-      const paragraphs = content.querySelectorAll(".typewriter p");
-      paragraphs.forEach((p, idx) => {
-        setTimeout(() => typeWriter(p), idx * 600);
-      });
+      // Typewriter animación
+      if (!isActive) {
+        const paragraphs = block.querySelectorAll(".typewriter p");
+        paragraphs.forEach((p, i) => setTimeout(() => typeWriter(p), i * 500));
+      }
     });
   });
 
-  // efecto fade para "sobre-mi" inicial
-  const sobreLis = document.querySelectorAll(".sobre-mi-list li");
-  sobreLis.forEach((li, i) => {
-    li.style.opacity = 0;
-    li.style.transform = "translateY(10px)";
-    li.style.animation = `fadeInUp 0.5s forwards`;
-    li.style.animationDelay = `${0.2 * (i + 1)}s`;
-  });
+  console.log("✅ Script de subbloques activo");
 });

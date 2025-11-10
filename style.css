@@ -95,7 +95,7 @@ header h2 {
   to { box-shadow: 0 0 20px #0f0; }
 }
 
-/* SUBBLOQUES */
+/* ---------- SUBBLOQUES (FUNCIONALES) ---------- */
 .subblock {
   border: 2px solid #00ff99;
   border-radius: 15px;
@@ -120,14 +120,24 @@ header h2 {
 }
 
 .subblock-content {
-  display: none; /* se controla desde JS */
+  display: none;
+  opacity: 0;
   padding: 15px 20px;
   border-top: 1px solid #00ff99;
   background: rgba(0, 0, 0, 0.25);
-  animation: fadeIn 0.4s ease;
+  transition: opacity 0.4s ease, max-height 0.4s ease;
+  max-height: 0;
+  overflow: hidden;
 }
 
-/* Animaciones de aparición */
+/* 👇 CLAVE: muestra el contenido al activar el subbloque */
+.subblock.active .subblock-content {
+  display: block;
+  opacity: 1;
+  max-height: 1000px;
+}
+
+/* ---------- ANIMACIONES ---------- */
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -157,7 +167,7 @@ header h2 {
 .fade li:nth-child(9) { animation-delay: 1.8s; }
 .fade li:nth-child(10){ animation-delay: 2s; }
 
-/* Typewriter effect for <p> */
+/* Typewriter effect */
 .typewriter p {
   display: block;
   overflow: hidden;
@@ -175,7 +185,7 @@ header h2 {
   50% { border-color: transparent; }
 }
 
-/* SOBRE MI lista */
+/* SOBRE MI */
 .sobre-mi-list {
   list-style: none;
   padding-left: 0;
@@ -204,7 +214,7 @@ header h2 {
 .sobre-mi-list li:nth-child(2) { animation-delay: 0.6s; }
 .sobre-mi-list li:nth-child(3) { animation-delay: 1s; }
 
-/* Contacto horizontal */
+/* ---------- CONTACTO ---------- */
 .contacto-list.horizontal {
   display: flex;
   justify-content: center;
@@ -216,7 +226,19 @@ header h2 {
   display: inline-block;
 }
 
-/* Footer */
+/* Enlaces en verde hacker 💚 */
+.contacto-list a {
+  color: #00ff99;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.contacto-list a:hover {
+  color: #0f0;
+  text-decoration: underline;
+}
+
+/* FOOTER */
 footer {
   position: relative;
   padding: 20px;
