@@ -65,31 +65,27 @@ function typeWriterElement(el, delay = 28) {
 
 // -------------------- SUBBLOQUES --------------------
 document.addEventListener("DOMContentLoaded", () => {
+  // Guardar texto original de typewriter
   document.querySelectorAll('.typewriter p').forEach(p => {
     p.dataset.original = p.innerText.trim();
     p.innerText = '';
   });
 
+  // Función para abrir/cerrar subbloques
   const headers = document.querySelectorAll('.subblock-header');
-
   headers.forEach(header => {
     header.addEventListener('click', () => {
       const subblock = header.parentElement;
-      const parentBlock = subblock.closest('.block');
 
-      // Cerrar otros subbloques
-      parentBlock.querySelectorAll('.subblock').forEach(sb => {
-        if (sb !== subblock) {
-          sb.classList.remove('active');
-          sb.querySelectorAll('.typewriter p').forEach(p => p.innerText = '');
-        }
-      });
+      // Alternar clase active
+      subblock.classList.toggle('active');
 
-      const isActive = subblock.classList.toggle('active');
+      const isActive = subblock.classList.contains('active');
+      const lis = subblock.querySelectorAll('.subblock-list li');
+      const paragraphs = subblock.querySelectorAll('.typewriter p');
 
       if (isActive) {
         // Animar li
-        const lis = subblock.querySelectorAll('.subblock-list li');
         lis.forEach((li, idx) => {
           li.style.opacity = 0;
           li.style.transform = 'translateY(10px)';
@@ -97,19 +93,24 @@ document.addEventListener("DOMContentLoaded", () => {
           li.style.animationDelay = `${0.18 * (idx + 1)}s`;
         });
 
-        // Animar typewriter con delay
-        const paragraphs = subblock.querySelectorAll('.typewriter p');
+        // Animar typewriter después de las li
         const delayOffset = lis.length * 200 + 400;
         paragraphs.forEach((p, idx) => {
           setTimeout(() => typeWriterElement(p, 28), delayOffset + idx * 550);
         });
       } else {
-        subblock.querySelectorAll('.typewriter p').forEach(p => p.innerText = '');
+        // Cerrar subbloque: ocultar li y reset typewriter
+        lis.forEach(li => {
+          li.style.opacity = 0;
+          li.style.transform = 'translateY(10px)';
+          li.style.animation = '';
+        });
+        paragraphs.forEach(p => p.innerText = '');
       }
     });
   });
 
-  // Animación inicial sobre-mi
+  // Animación inicial de "Sobre mí"
   document.querySelectorAll('.sobre-mi-list li').forEach((li, i) => {
     li.style.opacity = 0;
     li.style.transform = 'translateY(10px)';
@@ -117,7 +118,7 @@ document.addEventListener("DOMContentLoaded", () => {
     li.style.animationDelay = `${0.2 * (i + 1)}s`;
   });
 
-  // Animación inicial contacto
+  // Animación inicial de "Contacto"
   document.querySelectorAll('.contacto-list.fade li').forEach((li, i) => {
     li.style.opacity = 0;
     li.style.transform = 'translateY(10px)';
