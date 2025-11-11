@@ -1,64 +1,63 @@
 body {
-  background: #0a0a0a;
-  color: #eee;
-  font-family: "Poppins", sans-serif;
-  padding: 40px;
+  background-color: #0d0d0d;
+  color: #fff;
+  font-family: Arial, sans-serif;
+  padding: 50px;
+  text-align: center;
 }
 
 .block {
   max-width: 600px;
-  margin: auto;
+  margin: 0 auto;
+  text-align: left;
 }
 
 .subblock {
-  border: 1px solid #00ff99;
-  border-radius: 8px;
-  margin-bottom: 15px;
+  border: 2px solid #00ff99;
+  border-radius: 10px;
+  margin-bottom: 20px;
   overflow: hidden;
+  background: #000;
   transition: border-color 0.3s ease;
 }
 
 .subblock-header {
+  background: rgba(0, 255, 153, 0.15);
   padding: 15px 20px;
-  background: rgba(0, 255, 153, 0.1);
-  color: #00ff99;
   cursor: pointer;
-  font-weight: 600;
-  user-select: none;
+  color: #00ff99;
+  font-weight: bold;
 }
 
 .subblock-header:hover {
-  background: rgba(0, 255, 153, 0.2);
+  background: rgba(0, 255, 153, 0.25);
 }
 
 .subblock-content {
   height: 0;
   opacity: 0;
   overflow: hidden;
-  transition: height 0.45s ease, opacity 0.45s ease;
+  transition: height 0.45s ease, opacity 0.3s ease;
   padding: 0 20px;
 }
 
 .subblock.active .subblock-content {
   opacity: 1;
-  padding: 15px 20px;
+}
+
+.subblock-list {
+  list-style: none;
+  margin: 15px 0;
+  padding: 0;
 }
 
 .subblock-list li {
+  margin: 8px 0;
   opacity: 0;
   transform: translateY(10px);
-  list-style: none;
-  margin-bottom: 6px;
-  transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
 @keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
