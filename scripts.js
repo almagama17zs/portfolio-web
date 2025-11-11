@@ -73,81 +73,66 @@ document.addEventListener("DOMContentLoaded", () => {
         header.addEventListener('click', () => {
             const subblock = header.parentElement;
             const parentBlock = subblock.closest('.block');
-            const content = subblock.querySelector('.subblock-content');
 
             // Cerrar otros subbloques
             parentBlock.querySelectorAll('.subblock').forEach(sb => {
                 if (sb !== subblock) {
                     sb.classList.remove('active');
-                    const sbContent = sb.querySelector('.subblock-content');
-                    if (sbContent) {
-                        sbContent.style.maxHeight = '0';
-                        sbContent.style.opacity = '0';
-                    }
-
-                    sb.querySelectorAll('.subblock-list li').forEach(li => {
-                        li.style.opacity = 0;
-                        li.style.transform = 'translateY(10px)';
-                        li.style.animation = '';
-                    });
-
-                    sb.querySelectorAll('.typewriter p').forEach(p => {
-                        p.innerText = p.dataset.original || p.innerText;
-                    });
+                    const content = sb.querySelector('.subblock-content');
+                    if (content) content.style.maxHeight = null;
                 }
             });
 
+            // Alternar estado actual
+            const content = subblock.querySelector('.subblock-content');
             const isActive = subblock.classList.toggle('active');
 
-            if (isActive && content) {
-                // Abrir el bloque
-                content.style.maxHeight = content.scrollHeight + 'px';
-                content.style.opacity = '1';
+            if (isActive) {
+                content.style.maxHeight = content.scrollHeight + "px";
 
-                // Mostrar los li con animación
-                subblock.querySelectorAll('.subblock-list li').forEach((li, idx) => {
+                // Animar los <li>
+                const items = subblock.querySelectorAll('.subblock-list li');
+                items.forEach((li, idx) => {
                     li.style.opacity = 0;
                     li.style.transform = 'translateY(10px)';
-                    li.style.animation = `fadeInUp 0.5s forwards`;
-                    li.style.animationDelay = `${0.18 * (idx + 1)}s`;
+                    li.style.animation = `fadeInUp 0.4s forwards ${0.15 * (idx + 1)}s`;
                 });
 
-                // Activar efecto máquina de escribir
+                // Efecto máquina de escribir
                 subblock.querySelectorAll('.typewriter p').forEach(p => {
                     typeWriterElement(p, 28);
                 });
-
-            } else if (content) {
-                // Cerrar el bloque
-                content.style.maxHeight = '0';
-                content.style.opacity = '0';
-
-                subblock.querySelectorAll('.subblock-list li').forEach(li => {
-                    li.style.opacity = 0;
-                    li.style.transform = 'translateY(10px)';
-                    li.style.animation = '';
-                });
-
-                subblock.querySelectorAll('.typewriter p').forEach(p => {
-                    p.innerText = p.dataset.original || p.innerText;
-                });
+            } else {
+                content.style.maxHeight = null;
             }
         });
     });
 
-    // Animación inicial sobre-mi
-    document.querySelectorAll('.sobre-mi-list li').forEach((li, i) => {
+    // Animaciones iniciales
+    document.querySelectorAll('.sobre-mi-list li, .contacto-list.horizontal li').forEach((li, i) => {
         li.style.opacity = 0;
         li.style.transform = 'translateY(10px)';
-        li.style.animation = `fadeInUp 0.5s forwards`;
-        li.style.animationDelay = `${0.2 * (i + 1)}s`;
-    });
-
-    // Animación inicial contacto
-    document.querySelectorAll('.contacto-list.horizontal li').forEach((li, i) => {
-        li.style.opacity = 0;
-        li.style.transform = 'translateY(10px)';
-        li.style.animation = `fadeInUp 0.5s forwards`;
-        li.style.animationDelay = `${0.2 * (i + 1)}s`;
+        li.style.animation = `fadeInUp 0.5s forwards ${0.2 * (i + 1)}s`;
     });
 });
+
+// -------------------- ANIMACIONES CSS (si no existen) --------------------
+const style = document.createElement('style');
+style.textContent = `
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.subblock-content {
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.6s ease-out;
+}
+.subblock.active .subblock-content {
+    overflow: visible;
+}
+.subblock-list li {
+    opacity: 0;
+}
+`;
+document.head.appendChild(style);
