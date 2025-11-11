@@ -1,246 +1,40 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portafolio de Alejandro Emilio Martín García</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Subbloques demo</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-
-  <!-- CABECERA -->
-  <header>
-    <canvas id="binary-header" aria-hidden="true"></canvas>
-
-    <div class="header-left">
-      <img src="https://raw.githubusercontent.com/almagama17zs/portfolio-web/main/foto.jpg" alt="Foto izquierda">
+  <div class="block">
+    <div class="subblock">
+      <div class="subblock-header">📁 Experiencia</div>
+      <div class="subblock-content">
+        <ul class="subblock-list">
+          <li>Proyecto 1</li>
+          <li>Proyecto 2</li>
+        </ul>
+        <div class="typewriter">
+          <p>Esta es una descripción con efecto typewriter.</p>
+        </div>
+      </div>
     </div>
 
-    <div class="header-text">
-      <h1>Alejandro Emilio Martín García</h1>
-      <h2>Experto en audiovisuales y informática con enfoque en análisis de datos</h2>
+    <div class="subblock">
+      <div class="subblock-header">🎓 Educación</div>
+      <div class="subblock-content">
+        <ul class="subblock-list">
+          <li>Curso A</li>
+          <li>Curso B</li>
+        </ul>
+        <div class="typewriter">
+          <p>Texto de ejemplo para animar cuando se abre este bloque.</p>
+        </div>
+      </div>
     </div>
+  </div>
 
-    <div class="header-right">
-      <img src="https://raw.githubusercontent.com/almagama17zs/portfolio-web/main/foto.jpg" alt="Foto derecha">
-    </div>
-  </header>
-
-  <main>
-    <!-- SOBRE MÍ -->
-    <section class="block sobre-mi">
-      <h2>Sobre mí</h2>
-      <ul class="sobre-mi-list fade">
-        <li>Profesional multidisciplinar con formación en sonido, imagen y telecomunicaciones.</li>
-        <li>Creatividad y tecnología: desde producción audiovisual, programación y análisis de datos.</li>
-        <li>Apasionado por la innovación, la IA y la creación de soluciones basadas en evidencia.</li>
-      </ul>
-    </section>
-
-    <!-- HABILIDADES -->
-    <section class="block">
-      <h2>Habilidades técnicas</h2>
-
-      <div class="subblock">
-        <div class="subblock-header">💻 Programación</div>
-        <div class="subblock-content">
-          <ul class="subblock-list fade">
-            <li>Unity</li>
-            <li>Visual Studio Code</li>
-            <li>HTML/CSS/JS</li>
-            <li>Java</li>
-            <li>SQL</li>
-            <li>Python</li>
-            <li>Jupyter</li>
-            <li>Power Bi</li>
-            <li>Spark/PySpark</li>
-            <li>Grafana</li>
-            <li>Microsoft Azure</li>
-            <li>Git/GitHub</li>
-          </ul>
-          <div class="typewriter">
-            <p>Automatización de procesos, limpieza y visualización de datasets.</p>
-            <p>Creación de dashboards e informes.</p>
-            <p>Desarrollo de aplicaciones y programas.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="subblock">
-        <div class="subblock-header">🌐 Informática y Web</div>
-        <div class="subblock-content">
-          <ul class="subblock-list fade">
-            <li>Sistemas Operativos (Windows, Linux, macOS)</li>
-            <li>Paquete Office</li>
-            <li>Redes sociales</li>
-            <li>Canvas</li>
-            <li>Chat GPT / Leonardo.ai / Sora</li>
-            <li>Ads Google / Facebook Business Manager</li>
-            <li>Wordpress / Woocommerce</li>
-            <li>Cisco Packet Tracer</li>
-          </ul>
-          <div class="typewriter">
-            <p>Mantenimiento y optimización de sistemas informáticos.</p>
-            <p>Diseño y gestión de sitios web y tiendas online.</p>
-            <p>Administración de redes sociales y campañas digitales.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="subblock">
-        <div class="subblock-header">🎧 Audio y Música</div>
-        <div class="subblock-content">
-          <ul class="subblock-list fade">
-            <li>Cubase</li>
-            <li>Pro Tools</li>
-            <li>Fruity Loops</li>
-            <li>Sonar</li>
-            <li>Audacity</li>
-            <li>Zara Radio</li>
-          </ul>
-          <div class="typewriter">
-            <p>Más de 40 artistas grabados y mezclados en estudio propio.</p>
-            <p>Cerca de 30 discos editados para artistas.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="subblock">
-        <div class="subblock-header">🎥 Vídeo e Imagen</div>
-        <div class="subblock-content">
-          <ul class="subblock-list fade">
-            <li>Premiere</li>
-            <li>Final Cut</li>
-            <li>Da Vinci</li>
-            <li>After Effects</li>
-            <li>CapCut</li>
-            <li>Blender</li>
-            <li>Photoshop</li>
-            <li>Lightroom</li>
-            <li>Toonly</li>
-            <li>VideoScribe</li>
-            <li>Movie Maker</li>
-          </ul>
-          <div class="typewriter">
-            <p>Creación de videoclips, spots, contenido para redes, eventos, bodas y proyectos corporativos.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- EXPERIENCIA PROFESIONAL -->
-    <section class="block">
-      <h2>Experiencia profesional</h2>
-
-      <div class="subblock">
-        <div class="subblock-header">📈 Análisis de Datos y Tecnología</div>
-        <div class="subblock-content">
-          <div class="typewriter">
-            <p>Colaboración con Fundación Progreso y Salud en proyectos de análisis clínico.</p>
-            <p>Extracción, limpieza y normalización de grandes datasets con Python y Jupyter.</p>
-            <p>Ingeniería de características, EDA y visualización interactiva para detección de patrones.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="subblock">
-        <div class="subblock-header">🎬 Producción Audiovisual</div>
-        <div class="subblock-content">
-          <ul class="subblock-list fade">
-            <li>EsRadio</li>
-            <li>Onda Cero</li>
-            <li>7TV</li>
-            <li>Luc17Records</li>
-            <li>Dental Data</li>
-            <li>Dictea & The Bold Choice</li>
-            <li>Woc Films</li>
-          </ul>
-          <div class="typewriter">
-            <p>Creación de branding, cabeceras, vídeos corporativos y videoclips.</p>
-            <p>Producción audiovisual para marcas como TOUS, Álvaro Moreno, Silbon o Carmen Fitz.</p>
-            <p>Trabajos para grandes empresas como El Corte Inglés, Prosegur, Puerto de Indias, BYG, Brenntag.</p>
-            <p>Entrevistas a figuras destacadas como Niña Pastori, Maria Antonieta Collins, Ana Llopis, Salustiano Garcia, entre otros.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="subblock">
-        <div class="subblock-header">📸 Fotografía y Producción Multimedia</div>
-        <div class="subblock-content">
-          <ul class="subblock-list fade">
-            <li>Lantana Restaurante y Gastrocopas</li>
-            <li>Mesón El Recreo</li>
-            <li>Abad Tyres</li>
-            <li>Neumáticos Elite Coría del Río, Mairena del Aljarafe y Sevilla</li>
-            <li>BBC (bodas, bautizos y comuniones)</li>
-            <li>Premios SIMA, Premios Digitales, Premios FEST, SICAB</li>
-          </ul>
-          <div class="typewriter">
-            <p>Creación de contenido visual y animado, diseño web y gestión de redes sociales corporativas.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- FORMACIÓN -->
-    <section class="block">
-      <h2>Formación</h2>
-
-      <div class="subblock">
-        <div class="subblock-header">🎓 Formación Académica</div>
-        <div class="subblock-content">
-          <ul class="subblock-list fade">
-            <li>Especialista en Big Data – CEDECO (09/07/2025)</li>
-            <li>Certificado de profesionalidad: Montaje y postproducción de vídeo – CESUR (03/07/2024)</li>
-            <li>Grado en Comunicación Audiovisual, 3D y FX – EUSA (25/05/2023)</li>
-            <li>Técnico Superior en Sistemas de Telecomunicaciones e Informáticos – AXATI (29/06/2017)</li>
-            <li>Técnico Superior en Sonido para Audiovisuales y Espectáculos – AXATI (29/06/2017)</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="subblock">
-        <div class="subblock-header">🧠 Formación Complementaria</div>
-        <div class="subblock-content">
-          <ul class="subblock-list fade">
-            <li>Competencias digitales intermedias – Formación Dixital (29/10/2025)</li>
-            <li>Ciberseguridad avanzada en entornos OT – APRENDEA (06/08/2025)</li>
-            <li>Prompting responsable: maximiza la IA en tu negocio – Santander Open Academy (04/11/2025)</li>
-            <li>Curso de Power BI – Santander Open Academy (08/11/2025)</li>
-            <li>Curso de Python – Santander Open Academy (01/11/2025)</li>
-            <li>Programación VR y AR en entornos 5G – Vodafone (20/11/2024)</li>
-            <li>Aplicación del modelo de resiliencia – FTFE (10/01/2024)</li>
-            <li>Posicionamiento web y marketing digital en buscadores – FTFE (21/12/2023)</li>
-            <li>Bases de datos de clientela: segmentación – FTFE (17/11/2023)</li>
-            <li>Organización de eventos y protocolos + A – FTFE (06/11/2023)</li>
-            <li>Data Science: conceptos básicos – Microsoft & LinkedIn (24/03/2023)</li>
-            <li>Gestión de proyecto, análisis empresarial y asistencia administrativa – Microsoft & LinkedIn (13/03/2023)</li>
-            <li>Gestión de datos y proyectos con Microsoft 365 – Microsoft & LinkedIn (07/03/2023)</li>
-            <li>Habilidades para el empleo – Telefónica (20/03/2021)</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- CONTACTO -->
-    <section class="block contacto">
-      <h2>Contacto</h2>
-      <ul class="contacto-list horizontal fade">
-        <li>📞 <a href="tel:672125940">672125940</a></li>
-        <li>📧 <a href="mailto:aemartingarcia93@gmail.com">Gmail</a></li>
-        <li>🔗 <a href="https://www.linkedin.com/in/aemartingarcia93/" target="_blank" rel="noopener">LinkedIn</a></li>
-        <li>💻 <a href="https://github.com/almagama17zs" target="_blank" rel="noopener">GitHub</a></li>
-        <li>📷 <a href="https://www.instagram.com/aemgvisual.mp4/" target="_blank" rel="noopener">Instagram</a></li>
-      </ul>
-    </section>
-
-  </main>
-
-  <footer>
-    <canvas id="binary-footer" aria-hidden="true"></canvas>
-    <p>© 2025 Alejandro Emilio Martín García — Portafolio profesional</p>
-  </footer>
-
-  <script defer src="scripts.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
