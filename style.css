@@ -1,4 +1,4 @@
-/* Reset básico */
+/* -------------------- RESET BÁSICO -------------------- */
 * {
   margin: 0;
   padding: 0;
@@ -13,7 +13,7 @@ body {
   text-align: center;
 }
 
-/* CABECERA */
+/* -------------------- CABECERA -------------------- */
 header {
   position: relative;
   display: flex;
@@ -30,7 +30,7 @@ header canvas {
   width: 100%;
   height: 100%;
   z-index: 1;
-  pointer-events: none; /* importante: permite clicar sobre elementos encima */
+  pointer-events: none;
 }
 
 .header-left, .header-right {
@@ -59,7 +59,7 @@ header img {
 header h1 { font-size: 2em; }
 header h2 { font-size: 1.2em; font-weight: normal; }
 
-/* BLOQUES */
+/* -------------------- BLOQUES -------------------- */
 .block {
   margin: 40px auto;
   padding: 20px;
@@ -90,7 +90,7 @@ header h2 { font-size: 1.2em; font-weight: normal; }
   to { box-shadow: 0 0 10px #00ff99; }
 }
 
-/* SUBBLOQUES */
+/* -------------------- SUBBLOQUES -------------------- */
 .subblock {
   margin: 20px 0;
   border-radius: 15px;
@@ -127,11 +127,10 @@ header h2 { font-size: 1.2em; font-weight: normal; }
   opacity: 1;
   padding: 15px 20px;
   overflow: visible;
-  /* indicador visual al abrir */
   border-left: 3px solid #00ff99;
 }
 
-/* LISTAS */
+/* -------------------- LISTAS -------------------- */
 .subblock-list, .sobre-mi-list {
   list-style: none;
   padding-left: 0;
@@ -154,20 +153,13 @@ header h2 { font-size: 1.2em; font-weight: normal; }
   transition: opacity 0.45s ease, transform 0.45s ease;
 }
 
-/* clase que añade visibilidad a los <li> (JS la añade) */
 .subblock-list.visible li,
 .sobre-mi-list.visible li {
   opacity: 1;
   transform: translateY(0);
 }
 
-/* Animación de aparición (por si se usa) */
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* TYPEWRITER */
+/* -------------------- TYPEWRITER -------------------- */
 .typewriter p {
   display: block;
   overflow: hidden;
@@ -176,7 +168,7 @@ header h2 { font-size: 1.2em; font-weight: normal; }
   margin: 5px 0;
 }
 
-/* CONTACTO */
+/* -------------------- CONTACTO -------------------- */
 .contacto-list.horizontal {
   display: flex;
   justify-content: center;
@@ -192,6 +184,7 @@ header h2 { font-size: 1.2em; font-weight: normal; }
 
 .contacto-list a:hover { color: #0FFF66; }
 
+/* -------------------- FOOTER -------------------- */
 footer {
   position: relative;
   padding: 20px;
@@ -211,7 +204,7 @@ footer canvas {
 
 footer p { position: relative; z-index: 2; }
 
-/* MEDIA QUERIES */
+/* -------------------- MEDIA QUERIES -------------------- */
 @media (max-width:768px){
   header { flex-direction: column; height:auto; padding:20px; }
   header img { width:120px; height:120px; }
