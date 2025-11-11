@@ -1,62 +1,3 @@
-// -------------------- BINARY BACKGROUND --------------------
-class BinaryBackground {
-    constructor(canvasId, speed = 2) {
-        this.canvas = document.getElementById(canvasId);
-        if (!this.canvas) return console.warn(`Canvas ${canvasId} no encontrado`);
-        this.ctx = this.canvas.getContext("2d");
-        this.speed = speed;
-        this.columns = [];
-        this.resize();
-        window.addEventListener("resize", () => this.resize());
-        requestAnimationFrame(() => this.update());
-    }
-    resize() {
-        const dpr = window.devicePixelRatio || 1;
-        this.canvas.width = Math.max(1, Math.floor(this.canvas.offsetWidth * dpr));
-        this.canvas.height = Math.max(1, Math.floor(this.canvas.offsetHeight * dpr));
-        this.canvas.style.width = `${this.canvas.offsetWidth}px`;
-        this.canvas.style.height = `${this.canvas.offsetHeight}px`;
-        this.ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-        const cols = Math.floor(this.canvas.offsetWidth / 18);
-        this.columns = [];
-        for (let i = 0; i < cols; i++) this.columns.push(Math.random() * this.canvas.offsetHeight);
-    }
-    update() {
-        const ctx = this.ctx;
-        ctx.fillStyle = "rgba(0,0,0,0.22)";
-        ctx.fillRect(0, 0, this.canvas.offsetWidth, this.canvas.offsetHeight);
-        ctx.fillStyle = "#00ff99";
-        ctx.font = "16px monospace";
-        this.columns.forEach((y, i) => {
-            const char = Math.random() > 0.5 ? "0" : "1";
-            ctx.fillText(char, i * 18, y);
-            this.columns[i] += this.speed + Math.random() * 1.2;
-            if (this.columns[i] > this.canvas.offsetHeight) this.columns[i] = 0;
-        });
-        requestAnimationFrame(() => this.update());
-    }
-}
-
-new BinaryBackground("binary-header", 1.1);
-new BinaryBackground("binary-footer", 1.1);
-
-// -------------------- TYPEWRITER --------------------
-function typeWriterElement(el, delay = 28) {
-    const text = el.dataset.original || el.innerText;
-    el.dataset.original = text;
-    el.innerText = '';
-    let i = 0;
-    function step() {
-        if (i < text.length) {
-            el.innerText += text.charAt(i);
-            i++;
-            setTimeout(step, delay);
-        }
-    }
-    step();
-}
-
-// -------------------- SUBBLOQUES --------------------
 document.addEventListener("DOMContentLoaded", () => {
     const headers = document.querySelectorAll('.subblock-header');
 
@@ -67,7 +8,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
             // Cerrar otros subbloques
             parentBlock.querySelectorAll('.subblock').forEach(sb => {
-                if (sb !== subblock) sb.classList.remove('active');
+                if (sb !== subblock) {
+                    sb.classList.remove('active');
+                    // Reiniciar li y typewriter
+                    sb.querySelectorAll('.subblock-list li').forEach(li => {
+                        li.style.opacity = 0;
+                        li.style.transform = 'translateY(10px)';
+                        li.style.animation = '';
+                    });
+                    sb.querySelectorAll('.typewriter p').forEach(p => {
+                        p.innerText = p.dataset.original || p.innerText;
+                    });
+                }
             });
 
             // Toggle del subbloque
@@ -83,8 +35,15 @@ document.addEventListener("DOMContentLoaded", () => {
                 });
 
                 // Typewriter de p
-                subblock.querySelectorAll('.typewriter p').forEach((p, idx) => {
+                subblock.querySelectorAll('.typewriter p').forEach((p) => {
                     typeWriterElement(p, 28);
+                });
+            } else {
+                // Opcional: reset li cuando se cierra
+                subblock.querySelectorAll('.subblock-list li').forEach(li => {
+                    li.style.opacity = 0;
+                    li.style.transform = 'translateY(10px)';
+                    li.style.animation = '';
                 });
             }
         });
