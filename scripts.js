@@ -67,8 +67,6 @@ function typeWriterElement(el, delay = 28) {
 
 // -------------------- SUBBLOQUES --------------------
 document.addEventListener("DOMContentLoaded", () => {
-
-    // Animación de subbloques
     const headers = document.querySelectorAll('.subblock-header');
 
     headers.forEach(header => {
@@ -80,39 +78,30 @@ document.addEventListener("DOMContentLoaded", () => {
             parentBlock.querySelectorAll('.subblock').forEach(sb => {
                 if (sb !== subblock) {
                     sb.classList.remove('active');
-
-                    // Reset li
                     sb.querySelectorAll('.subblock-list li').forEach(li => {
                         li.style.opacity = 0;
                         li.style.transform = 'translateY(10px)';
                         li.style.animation = '';
                     });
-
-                    // Reset typewriter p
                     sb.querySelectorAll('.typewriter p').forEach(p => {
                         p.innerText = p.dataset.original || p.innerText;
                     });
                 }
             });
 
-            // Toggle activo
             const isActive = subblock.classList.toggle('active');
 
             if (isActive) {
-                // Animar li
                 subblock.querySelectorAll('.subblock-list li').forEach((li, idx) => {
                     li.style.opacity = 0;
                     li.style.transform = 'translateY(10px)';
-                    li.style.animation = `fadeInUp 0.5s forwards`;
-                    li.style.animationDelay = `${0.18 * (idx + 1)}s`;
+                    li.style.animation = `fadeInUp 0.5s forwards ${0.18 * (idx + 1)}s`;
                 });
 
-                // Animar p typewriter
                 subblock.querySelectorAll('.typewriter p').forEach(p => {
                     typeWriterElement(p, 28);
                 });
             } else {
-                // Reset li y p al cerrar
                 subblock.querySelectorAll('.subblock-list li').forEach(li => {
                     li.style.opacity = 0;
                     li.style.transform = 'translateY(10px)';
@@ -129,16 +118,13 @@ document.addEventListener("DOMContentLoaded", () => {
     document.querySelectorAll('.sobre-mi-list li').forEach((li, i) => {
         li.style.opacity = 0;
         li.style.transform = 'translateY(10px)';
-        li.style.animation = `fadeInUp 0.5s forwards`;
-        li.style.animationDelay = `${0.2 * (i + 1)}s`;
+        li.style.animation = `fadeInUp 0.5s forwards ${0.2 * (i + 1)}s`;
     });
 
     // Animación inicial contacto
     document.querySelectorAll('.contacto-list.horizontal li').forEach((li, i) => {
         li.style.opacity = 0;
         li.style.transform = 'translateY(10px)';
-        li.style.animation = `fadeInUp 0.5s forwards`;
-        li.style.animationDelay = `${0.2 * (i + 1)}s`;
+        li.style.animation = `fadeInUp 0.5s forwards ${0.2 * (i + 1)}s`;
     });
-
 });

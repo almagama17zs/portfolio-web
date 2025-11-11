@@ -72,6 +72,23 @@ header h2 { font-size: 1.2em; font-weight: normal; }
   box-shadow: 0 0 8px #00ff99, 0 0 15px #00ff99, 0 0 20px #00ff99;
 }
 
+.block::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  border: 2px solid #00ff99;
+  border-radius: 15px;
+  animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+  from { box-shadow: 0 0 3px #00ff99; }
+  to { box-shadow: 0 0 10px #00ff99; }
+}
+
 /* SUBBLOQUES */
 .subblock {
   margin: 20px 0;
@@ -139,6 +156,12 @@ header h2 { font-size: 1.2em; font-weight: normal; }
   margin: 5px 0;
 }
 
+/* ANIMACIONES */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 /* CONTACTO */
 .contacto-list.horizontal {
   display: flex;
@@ -156,7 +179,12 @@ header h2 { font-size: 1.2em; font-weight: normal; }
 .contacto-list a:hover { color: #0FFF66; }
 
 /* FOOTER */
-footer { position: relative; padding: 20px; text-align: center; overflow: hidden; }
+footer {
+  position: relative;
+  padding: 20px;
+  text-align: center;
+  overflow: hidden;
+}
 
 footer canvas {
   position: absolute;
