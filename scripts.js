@@ -102,23 +102,23 @@ document.addEventListener("DOMContentLoaded", () => {
       if (isOpen) {
         if (content) {
           content.style.opacity = "1";
-          content.style.padding = "15px 20px";
+          content.style.padding = "15px 20px 25px 20px"; // padding-bottom extra
           content.style.overflow = "hidden";
 
-          // Calculamos la altura real y le sumamos un pequeño margen extra para que no se corte la última línea
-          const totalHeight = content.scrollHeight + 10; 
+          const totalHeight = content.scrollHeight + 15; // margen extra para no cortar última línea
           content.style.maxHeight = "0px";
           requestAnimationFrame(() => {
             content.style.transition = "max-height 0.6s ease, opacity 0.6s ease, padding 0.4s ease";
             content.style.maxHeight = totalHeight + "px";
           });
 
-          // Después de la transición, ponemos overflow visible
           setTimeout(() => {
             content.style.overflow = "visible";
           }, 650);
         }
 
+        // Animación de LI
+        let liDuration = 0;
         if (list) {
           list.classList.add("visible");
           list.querySelectorAll("li").forEach((li, i) => {
@@ -128,12 +128,14 @@ document.addEventListener("DOMContentLoaded", () => {
               li.style.opacity = 1;
               li.style.transform = "translateY(0)";
             }, 120 * i + 120);
+            liDuration = 120 * i + 200; // duración aproximada de la animación
           });
         }
 
+        // Animación de P, empezando después de que LI haya terminado
         paragraphs.forEach((p, idx) => {
           p.innerText = '';
-          setTimeout(() => typeWriterElement(p, 28), 150 + idx * 200);
+          setTimeout(() => typeWriterElement(p, 28), liDuration + idx * 200);
         });
 
       } else {
