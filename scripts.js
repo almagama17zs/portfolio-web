@@ -48,7 +48,13 @@ function typeWriterElement(el,delay=28){
   el.dataset.original=original;
   el.innerText='';
   let i=0;
-  function step(){ if(i<original.length){ el.innerText+=original.charAt(i); i++; setTimeout(step,delay); } }
+  function step(){ 
+    if(i<original.length){ 
+      el.innerText+=original.charAt(i); 
+      i++; 
+      setTimeout(step,delay); 
+    } 
+  }
   step();
 }
 
@@ -71,7 +77,11 @@ document.addEventListener("DOMContentLoaded",()=>{
           other.classList.remove('active');
           const oc=other.querySelector('.subblock-content');
           const ol=other.querySelector('.subblock-list');
-          if(oc){ oc.style.maxHeight='0'; oc.style.opacity='0'; oc.style.padding='0 20px'; }
+          if(oc){ 
+            oc.style.maxHeight='0'; 
+            oc.style.opacity='0'; 
+            oc.style.padding='0 20px'; 
+          }
           if(ol) ol.classList.remove('visible');
           other.querySelectorAll('.typewriter p').forEach(p=>p.innerText=p.dataset.original||p.innerText);
         }
@@ -81,30 +91,48 @@ document.addEventListener("DOMContentLoaded",()=>{
       const isOpen=sb.classList.toggle('active');
       if(isOpen){
         if(content){
+          // inicializamos la animación
           content.style.maxHeight='0';
           content.style.opacity='0';
           content.style.padding='0 20px';
+          
+          // dar tiempo para que el bloque se renderice antes de calcular altura
           requestAnimationFrame(()=>{
             content.style.maxHeight=content.scrollHeight+'px';
             content.style.opacity='1';
             content.style.padding='15px 20px';
           });
+
+          // quitar max-height fijo tras animación para adaptarse a contenido dinámico
+          setTimeout(()=>{ content.style.maxHeight='none'; }, 700);
         }
+
         if(list){
+          // animación de lista y li
           setTimeout(()=>{
             list.classList.add('visible');
             list.querySelectorAll('li').forEach((li,i)=>{
-              li.style.opacity=0; li.style.transform='translateY(10px)';
-              setTimeout(()=>{ li.style.opacity=1; li.style.transform='translateY(0)'; },120*i+120);
+              li.style.opacity=0; 
+              li.style.transform='translateY(10px)';
+              setTimeout(()=>{
+                li.style.opacity=1; 
+                li.style.transform='translateY(0)'; 
+              },120*i);
             });
-          },120);
+          },150);
         }
+
+        // iniciar typewriter después de la lista visible
         sb.querySelectorAll('.typewriter p').forEach((p,idx)=>{
           p.innerText='';
-          setTimeout(()=>typeWriterElement(p,28),120+idx*200);
+          setTimeout(()=>typeWriterElement(p,28), 200 + idx*200);
         });
       } else {
-        if(content){ content.style.maxHeight='0'; content.style.opacity='0'; content.style.padding='0 20px'; }
+        if(content){ 
+          content.style.maxHeight='0'; 
+          content.style.opacity='0'; 
+          content.style.padding='0 20px'; 
+        }
         if(list) list.classList.remove('visible');
         sb.querySelectorAll('.typewriter p').forEach(p=>p.innerText=p.dataset.original||p.innerText);
       }
