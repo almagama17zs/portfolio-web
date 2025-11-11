@@ -6,6 +6,12 @@ body {
   text-align: center;
 }
 
+/* 🔹 Canvas de fondo no bloquea clics */
+header canvas,
+footer canvas {
+  pointer-events: none;
+}
+
 .block {
   max-width: 600px;
   margin: 0 auto;
@@ -34,15 +40,18 @@ body {
 }
 
 .subblock-content {
-  height: 0;
+  max-height: 0; /* 🔹 se ajusta para transición suave */
   opacity: 0;
   overflow: hidden;
-  transition: height 0.45s ease, opacity 0.3s ease;
+  transition: max-height 0.5s ease, opacity 0.4s ease, padding 0.4s ease;
   padding: 0 20px;
 }
 
 .subblock.active .subblock-content {
+  max-height: 2000px; /* 🔹 suficiente para mostrar todo el contenido */
   opacity: 1;
+  padding: 15px 20px;
+  overflow: visible;
 }
 
 .subblock-list {
