@@ -73,7 +73,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const subblock = header.parentElement;
       const parentBlock = subblock.closest('.block');
 
-      // Cerrar otros subbloques dentro del mismo bloque
+      // Cerrar otros subbloques del mismo bloque
       parentBlock.querySelectorAll('.subblock').forEach(sb => {
         if (sb !== subblock) {
           sb.classList.remove('active');
@@ -84,26 +84,22 @@ document.addEventListener("DOMContentLoaded", () => {
       const isActive = subblock.classList.toggle('active');
 
       if (isActive) {
-        const lis = subblock.querySelectorAll('.subblock-list li');
+        // 🔹 Asegurar visibilidad antes de animar
+        const content = subblock.querySelector('.subblock-content');
+        content.style.display = 'block'; // Garantiza que el navegador lo calcule
 
-        // Reiniciar animaciones previas
-        lis.forEach(li => {
+        // 🔹 Animar lista
+        const lis = subblock.querySelectorAll('.subblock-list li');
+        lis.forEach((li, idx) => {
           li.style.opacity = 0;
           li.style.transform = 'translateY(10px)';
-          li.style.animation = 'none';
+          li.style.animation = `fadeInUp 0.5s forwards`;
+          li.style.animationDelay = `${0.18 * (idx + 1)}s`;
         });
 
-        // Esperar un frame para permitir el repaint antes de iniciar animaciones
-        requestAnimationFrame(() => {
-          lis.forEach((li, idx) => {
-            li.style.animation = `fadeInUp 0.5s forwards`;
-            li.style.animationDelay = `${0.18 * (idx + 1)}s`;
-          });
-        });
-
-        // Lanzar efecto typewriter después de que el bloque se abra visualmente
+        // 🔹 Lanzar efecto typewriter
         const paragraphs = subblock.querySelectorAll('.typewriter p');
-        const delayOffset = lis.length * 200 + 600; // pequeña espera adicional
+        const delayOffset = lis.length * 200 + 400;
         paragraphs.forEach((p, idx) => {
           p.dataset.original = p.innerText;
           p.innerText = '';
