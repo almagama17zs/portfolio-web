@@ -43,98 +43,88 @@ new BinaryBackground("binary-header",1.1);
 new BinaryBackground("binary-footer",1.1);
 
 // -------------------- TYPEWRITER --------------------
-function typeWriterElement(el,delay=28){
-  const original=el.dataset.original||el.innerText;
-  el.dataset.original=original;
-  el.innerText='';
-  let i=0;
-  function step(){ 
-    if(i<original.length){ 
-      el.innerText+=original.charAt(i); 
-      i++; 
-      setTimeout(step,delay); 
-    } 
+function typeWriterElement(el, delay = 28) {
+  const original = el.dataset.original || el.innerText;
+  el.dataset.original = original;
+  el.innerText = '';
+  let i = 0;
+
+  function step() {
+    if (i < original.length) {
+      el.innerText += original.charAt(i);
+      i++;
+      setTimeout(step, delay);
+    }
   }
+
+  // Asegurarse de que el contenedor padre tiene altura suficiente
+  const parent = el.closest('.subblock-content');
+  if (parent) parent.style.maxHeight = parent.scrollHeight + 'px';
+
   step();
 }
 
 // -------------------- SUBBLOQUES --------------------
-document.addEventListener("DOMContentLoaded",()=>{
-  const subblocks=document.querySelectorAll('.subblock');
+document.addEventListener("DOMContentLoaded", () => {
+  const subblocks = document.querySelectorAll('.subblock');
 
-  // Inicializamos las listas visibles al cargar
-  document.querySelectorAll('.sobre-mi-list, .contacto-list').forEach(list=>list.classList.add('visible'));
+  document.querySelectorAll('.sobre-mi-list, .contacto-list').forEach(list => list.classList.add('visible'));
 
-  subblocks.forEach(sb=>{
-    const header=sb.querySelector('.subblock-header');
-    const content=sb.querySelector('.subblock-content');
-    const list=sb.querySelector('.subblock-list');
+  subblocks.forEach(sb => {
+    const header = sb.querySelector('.subblock-header');
+    const content = sb.querySelector('.subblock-content');
+    const list = sb.querySelector('.subblock-list');
+    const paragraphs = sb.querySelectorAll('.typewriter p');
 
-    header.addEventListener('click',()=>{
+    header.addEventListener('click', () => {
       // cerrar otros subbloques
-      subblocks.forEach(other=>{
-        if(other!==sb){
+      subblocks.forEach(other => {
+        if (other !== sb) {
           other.classList.remove('active');
-          const oc=other.querySelector('.subblock-content');
-          const ol=other.querySelector('.subblock-list');
-          if(oc){ 
-            oc.style.maxHeight='0'; 
-            oc.style.opacity='0'; 
-            oc.style.padding='0 20px'; 
-          }
-          if(ol) ol.classList.remove('visible');
-          other.querySelectorAll('.typewriter p').forEach(p=>p.innerText=p.dataset.original||p.innerText);
+          const oc = other.querySelector('.subblock-content');
+          const ol = other.querySelector('.subblock-list');
+          if (oc) { oc.style.maxHeight = '0'; oc.style.opacity = '0'; oc.style.padding = '0 20px'; }
+          if (ol) ol.classList.remove('visible');
+          other.querySelectorAll('.typewriter p').forEach(p => p.innerText = p.dataset.original || p.innerText);
         }
       });
 
-      // toggle actual
-      const isOpen=sb.classList.toggle('active');
-      if(isOpen){
-        if(content){
-          // inicializamos la animación
-          content.style.maxHeight='0';
-          content.style.opacity='0';
-          content.style.padding='0 20px';
-          
-          // dar tiempo para que el bloque se renderice antes de calcular altura
-          requestAnimationFrame(()=>{
-            content.style.maxHeight=content.scrollHeight+'px';
-            content.style.opacity='1';
-            content.style.padding='15px 20px';
+      // abrir o cerrar actual
+      const isOpen = sb.classList.toggle('active');
+
+      if (isOpen) {
+        if (content) {
+          content.style.maxHeight = '0';
+          content.style.opacity = '0';
+          content.style.padding = '0 20px';
+          requestAnimationFrame(() => {
+            content.style.maxHeight = content.scrollHeight + 'px';
+            content.style.opacity = '1';
+            content.style.padding = '15px 20px';
           });
-
-          // quitar max-height fijo tras animación para adaptarse a contenido dinámico
-          setTimeout(()=>{ content.style.maxHeight='none'; }, 700);
+          setTimeout(() => { content.style.maxHeight = 'none'; }, 700);
         }
 
-        if(list){
-          // animación de lista y li
-          setTimeout(()=>{
+        if (list) {
+          setTimeout(() => {
             list.classList.add('visible');
-            list.querySelectorAll('li').forEach((li,i)=>{
-              li.style.opacity=0; 
-              li.style.transform='translateY(10px)';
-              setTimeout(()=>{
-                li.style.opacity=1; 
-                li.style.transform='translateY(0)'; 
-              },120*i);
+            list.querySelectorAll('li').forEach((li, i) => {
+              li.style.opacity = 0; li.style.transform = 'translateY(10px)';
+              setTimeout(() => { li.style.opacity = 1; li.style.transform = 'translateY(0)'; }, 120 * i);
             });
-          },150);
+          }, 150);
         }
 
-        // iniciar typewriter después de la lista visible
-        sb.querySelectorAll('.typewriter p').forEach((p,idx)=>{
-          p.innerText='';
-          setTimeout(()=>typeWriterElement(p,28), 200 + idx*200);
+        // ejecutar typewriter **después de abrir el bloque y mostrar la lista**
+        paragraphs.forEach((p, idx) => {
+          p.innerText = '';
+          setTimeout(() => typeWriterElement(p, 28), 300 + idx * 200);
         });
+
       } else {
-        if(content){ 
-          content.style.maxHeight='0'; 
-          content.style.opacity='0'; 
-          content.style.padding='0 20px'; 
-        }
-        if(list) list.classList.remove('visible');
-        sb.querySelectorAll('.typewriter p').forEach(p=>p.innerText=p.dataset.original||p.innerText);
+        if (content) { content.style.maxHeight = '0'; content.style.opacity = '0'; content.style.padding = '0 20px'; }
+        if (list) list.classList.remove('visible');
+        paragraphs.forEach(p => p.innerText = p.dataset.original || p.innerText);
       }
     });
   });
