@@ -126,6 +126,7 @@ header h2 { font-size: 1.2em; font-weight: normal; }
   opacity: 1;
   padding: 15px 20px;
   overflow: visible;
+  border-left: 3px solid #00ff99;
 }
 
 /* LISTAS */
@@ -148,6 +149,14 @@ header h2 { font-size: 1.2em; font-weight: normal; }
   font-size: 1em;
   opacity: 0;
   transform: translateY(10px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+/* ✅ NUEVO: visibilidad de las listas */
+.subblock-list.visible li,
+.sobre-mi-list.visible li {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* Animación de aparición */

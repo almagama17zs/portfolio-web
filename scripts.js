@@ -1,138 +1,122 @@
-// -------------------- BINARY BACKGROUND --------------------
-class BinaryBackground {
-    constructor(canvasId, speed = 2) {
-        this.canvas = document.getElementById(canvasId);
-        if (!this.canvas) return console.warn(`Canvas ${canvasId} no encontrado`);
-        this.ctx = this.canvas.getContext("2d");
-        this.speed = speed;
-        this.columns = [];
-        this.resize();
-        window.addEventListener("resize", () => this.resize());
-        requestAnimationFrame(() => this.update());
-    }
+// === scripts.js ===
 
-    resize() {
-        const dpr = window.devicePixelRatio || 1;
-        this.canvas.width = Math.max(1, Math.floor(this.canvas.offsetWidth * dpr));
-        this.canvas.height = Math.max(1, Math.floor(this.canvas.offsetHeight * dpr));
-        this.canvas.style.width = `${this.canvas.offsetWidth}px`;
-        this.canvas.style.height = `${this.canvas.offsetHeight}px`;
-        this.ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+// Animación binaria del header y footer
+function binaryRain(canvasId) {
+  const canvas = document.getElementById(canvasId);
+  if (!canvas) return;
 
-        const cols = Math.floor(this.canvas.offsetWidth / 18);
-        this.columns = [];
-        for (let i = 0; i < cols; i++) {
-            this.columns.push(Math.random() * this.canvas.offsetHeight);
-        }
-    }
+  const ctx = canvas.getContext("2d");
+  const fontSize = 14;
+  let columns, drops;
 
-    update() {
-        const ctx = this.ctx;
-        ctx.fillStyle = "rgba(0,0,0,0.22)";
-        ctx.fillRect(0, 0, this.canvas.offsetWidth, this.canvas.offsetHeight);
-        ctx.fillStyle = "#00ff99";
-        ctx.font = "16px monospace";
+  function init() {
+    canvas.width = window.innerWidth;
+    canvas.height = 80;
+    columns = Math.floor(canvas.width / fontSize);
+    drops = Array(columns).fill(1);
+  }
 
-        this.columns.forEach((y, i) => {
-            const char = Math.random() > 0.5 ? "0" : "1";
-            ctx.fillText(char, i * 18, y);
-            this.columns[i] += this.speed + Math.random() * 1.2;
-            if (this.columns[i] > this.canvas.offsetHeight) this.columns[i] = 0;
-        });
+  function draw() {
+    ctx.fillStyle = "rgba(0, 0, 0, 0.1)";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-        requestAnimationFrame(() => this.update());
-    }
+    ctx.fillStyle = "#00ff88";
+    ctx.font = `${fontSize}px monospace`;
+
+    drops.forEach((y, i) => {
+      const text = Math.random() > 0.5 ? "1" : "0";
+      const x = i * fontSize;
+      ctx.fillText(text, x, y * fontSize);
+
+      if (y * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+      drops[i]++;
+    });
+  }
+
+  init();
+  setInterval(draw, 50);
+  window.addEventListener("resize", init);
 }
 
-// Inicializar canvas de fondo binario
-new BinaryBackground("binary-header", 1.1);
-new BinaryBackground("binary-footer", 1.1);
+binaryRain("binary-header");
+binaryRain("binary-footer");
 
-// -------------------- TYPEWRITER --------------------
-function typeWriterElement(el, delay = 28) {
-    const original = el.dataset.original || el.innerText;
-    el.dataset.original = original;
-    el.innerText = '';
-    let i = 0;
 
-    function step() {
-        if (i < original.length) {
-            el.innerText += original.charAt(i);
-            i++;
-            setTimeout(step, delay);
-        }
-    }
-    step();
-}
-
-// -------------------- SUBBLOQUES --------------------
+// === BLOQUES DESPLEGABLES ===
 document.addEventListener("DOMContentLoaded", () => {
-    const headers = document.querySelectorAll('.subblock-header');
+  const subblocks = document.querySelectorAll(".subblock");
 
-    headers.forEach(header => {
-        header.addEventListener('click', () => {
-            const subblock = header.parentElement;
-            const parentBlock = subblock.closest('.block');
+  subblocks.forEach((subblock) => {
+    const header = subblock.querySelector(".subblock-header");
+    const content = subblock.querySelector(".subblock-content");
 
-            // Cerrar otros subbloques
-            parentBlock.querySelectorAll('.subblock').forEach(sb => {
-                if (sb !== subblock) {
-                    sb.classList.remove('active');
-                    const content = sb.querySelector('.subblock-content');
-                    if (content) content.style.maxHeight = null;
-                }
-            });
+    // Oculta el contenido inicialmente
+    content.style.maxHeight = "0";
+    content.style.overflow = "hidden";
+    content.style.transition = "max-height 0.6s ease";
 
-            // Alternar estado actual
-            const content = subblock.querySelector('.subblock-content');
-            const isActive = subblock.classList.toggle('active');
+    header.addEventListener("click", () => {
+      const isOpen = subblock.classList.toggle("active");
 
-            if (isActive) {
-                content.style.maxHeight = content.scrollHeight + "px";
-
-                // Animar los <li>
-                const items = subblock.querySelectorAll('.subblock-list li');
-                items.forEach((li, idx) => {
-                    li.style.opacity = 0;
-                    li.style.transform = 'translateY(10px)';
-                    li.style.animation = `fadeInUp 0.4s forwards ${0.15 * (idx + 1)}s`;
-                });
-
-                // Efecto máquina de escribir
-                subblock.querySelectorAll('.typewriter p').forEach(p => {
-                    typeWriterElement(p, 28);
-                });
-            } else {
-                content.style.maxHeight = null;
-            }
-        });
+      if (isOpen) {
+        content.style.maxHeight = content.scrollHeight + "px";
+        content.style.overflow = "visible";
+      } else {
+        content.style.maxHeight = "0";
+        content.style.overflow = "hidden";
+      }
     });
-
-    // Animaciones iniciales
-    document.querySelectorAll('.sobre-mi-list li, .contacto-list.horizontal li').forEach((li, i) => {
-        li.style.opacity = 0;
-        li.style.transform = 'translateY(10px)';
-        li.style.animation = `fadeInUp 0.5s forwards ${0.2 * (i + 1)}s`;
-    });
+  });
 });
 
-// -------------------- ANIMACIONES CSS (si no existen) --------------------
-const style = document.createElement('style');
-style.textContent = `
-@keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+
+// === EFECTO MÁQUINA DE ESCRIBIR ===
+function typewriterEffect() {
+  const elements = document.querySelectorAll(".typewriter p");
+
+  elements.forEach((p) => {
+    const text = p.textContent;
+    p.textContent = "";
+    let i = 0;
+
+    function type() {
+      if (i < text.length) {
+        p.textContent += text.charAt(i);
+        i++;
+        setTimeout(type, 15); // velocidad de escritura
+      }
+    }
+
+    const subblock = p.closest(".subblock");
+    const observer = new MutationObserver(() => {
+      if (subblock.classList.contains("active") && p.textContent.length === 0) {
+        type();
+      }
+    });
+    observer.observe(subblock, { attributes: true });
+  });
 }
-.subblock-content {
-    overflow: hidden;
-    max-height: 0;
-    transition: max-height 0.6s ease-out;
+
+document.addEventListener("DOMContentLoaded", typewriterEffect);
+
+
+// === ANIMAR ENTRADA DE LOS <li> ===
+function animateLists() {
+  const lists = document.querySelectorAll(".subblock-list");
+
+  lists.forEach((ul) => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            ul.classList.add("visible");
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+    observer.observe(ul);
+  });
 }
-.subblock.active .subblock-content {
-    overflow: visible;
-}
-.subblock-list li {
-    opacity: 0;
-}
-`;
-document.head.appendChild(style);
+
+document.addEventListener("DOMContentLoaded", animateLists);
