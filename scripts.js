@@ -65,28 +65,26 @@ function typeWriterElement(el, delay = 28) {
 
 // -------------------- SUBBLOQUES --------------------
 document.addEventListener("DOMContentLoaded", () => {
-
   const headers = document.querySelectorAll('.subblock-header');
 
   headers.forEach(header => {
     header.addEventListener('click', () => {
       const subblock = header.parentElement;
       const parentBlock = subblock.closest('.block');
+      const content = subblock.querySelector('.subblock-content');
+      const isActive = subblock.classList.contains('active');
 
-      // Cerrar otros subbloques del mismo bloque
+      // 🔹 Cerrar todos los subbloques del mismo bloque
       parentBlock.querySelectorAll('.subblock').forEach(sb => {
-        if (sb !== subblock) {
-          sb.classList.remove('active');
-          sb.querySelectorAll('.typewriter p').forEach(p => p.innerText = '');
-        }
+        sb.classList.remove('active');
+        const c = sb.querySelector('.subblock-content');
+        c.style.height = '0';
       });
 
-      const isActive = subblock.classList.toggle('active');
-
-      if (isActive) {
-        // 🔹 Asegurar visibilidad antes de animar
-        const content = subblock.querySelector('.subblock-content');
-        content.style.display = 'block'; // Garantiza que el navegador lo calcule
+      // 🔹 Si no estaba activo, abrirlo
+      if (!isActive) {
+        subblock.classList.add('active');
+        content.style.height = content.scrollHeight + 'px';
 
         // 🔹 Animar lista
         const lis = subblock.querySelectorAll('.subblock-list li');
@@ -105,14 +103,11 @@ document.addEventListener("DOMContentLoaded", () => {
           p.innerText = '';
           setTimeout(() => typeWriterElement(p, 28), delayOffset + idx * 550);
         });
-
-      } else {
-        subblock.querySelectorAll('.typewriter p').forEach(p => p.innerText = '');
       }
     });
   });
 
-  // Animación inicial sobre-mi
+  // -------------------- ANIMACIÓN INICIAL SOBRE MÍ --------------------
   document.querySelectorAll('.sobre-mi-list li').forEach((li, i) => {
     li.style.opacity = 0;
     li.style.transform = 'translateY(10px)';
@@ -120,7 +115,7 @@ document.addEventListener("DOMContentLoaded", () => {
     li.style.animationDelay = `${0.2 * (i + 1)}s`;
   });
 
-  // Animación inicial contacto
+  // -------------------- ANIMACIÓN INICIAL CONTACTO --------------------
   document.querySelectorAll('.contacto-list.horizontal li').forEach((li, i) => {
     li.style.opacity = 0;
     li.style.transform = 'translateY(10px)';

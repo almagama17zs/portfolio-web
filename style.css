@@ -123,22 +123,18 @@ header h2 {
 }
 
 .subblock-content {
-  max-height: 0;
+  height: 0;
   opacity: 0;
   overflow: hidden;
   padding: 0 20px;
-  transition: max-height 0.6s ease, opacity 0.6s ease, padding 0.4s ease;
-  will-change: max-height, opacity;
+  transition: height 0.5s ease, opacity 0.5s ease, padding 0.4s ease;
 }
 
 .subblock.active .subblock-content {
-  max-height: 9999px; /* 🔹 más alto para permitir contenido largo */
   opacity: 1;
   padding: 15px 20px;
-  overflow: visible; /* 🔹 permite mostrar las animaciones internas */
+  overflow: visible;
 }
-
-
 
 /* LISTAS */
 .subblock-list,
