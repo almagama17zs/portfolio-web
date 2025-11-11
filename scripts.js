@@ -105,15 +105,15 @@ document.addEventListener("DOMContentLoaded", () => {
           content.style.padding = "15px 20px";
           content.style.overflow = "hidden";
 
-          // Calculamos la altura real y la aplicamos suavemente
-          const totalHeight = content.scrollHeight;
+          // Calculamos la altura real y le sumamos un pequeño margen extra para que no se corte la última línea
+          const totalHeight = content.scrollHeight + 10; 
           content.style.maxHeight = "0px";
           requestAnimationFrame(() => {
             content.style.transition = "max-height 0.6s ease, opacity 0.6s ease, padding 0.4s ease";
             content.style.maxHeight = totalHeight + "px";
           });
 
-          // Después de la transición, ponemos overflow visible para que no se corte nada
+          // Después de la transición, ponemos overflow visible
           setTimeout(() => {
             content.style.overflow = "visible";
           }, 650);
