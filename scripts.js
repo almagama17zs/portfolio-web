@@ -69,66 +69,42 @@ function typeWriterElement(el, delay = 28) {
 document.addEventListener("DOMContentLoaded", () => {
     const headers = document.querySelectorAll('.subblock-header');
 
-    // Preparar dataset.original para cada <p> de typewriter (si no tiene)
-    document.querySelectorAll('.typewriter p').forEach(p => {
-        if (!p.dataset.original) p.dataset.original = p.innerText.trim();
-        // dejamos el texto visible por defecto; al abrir se animará
-    });
-
     headers.forEach(header => {
         header.addEventListener('click', () => {
             const subblock = header.parentElement;
             const parentBlock = subblock.closest('.block');
+            const content = subblock.querySelector('.subblock-content');
 
-            // Cerrar otros subbloques del mismo bloque
+            // Cerrar otros subbloques
             parentBlock.querySelectorAll('.subblock').forEach(sb => {
                 if (sb !== subblock) {
                     sb.classList.remove('active');
-
-                    // Colapsar visualmente su contenido (mejor compatibilidad con transition)
-                    const otherContent = sb.querySelector('.subblock-content');
-                    if (otherContent) {
-                        otherContent.style.maxHeight = '0';
-                        otherContent.style.opacity = '0';
-                        otherContent.style.padding = '0 20px';
+                    const sbContent = sb.querySelector('.subblock-content');
+                    if (sbContent) {
+                        sbContent.style.maxHeight = '0';
+                        sbContent.style.opacity = '0';
                     }
 
-                    // Reset li (ocultos)
                     sb.querySelectorAll('.subblock-list li').forEach(li => {
                         li.style.opacity = 0;
                         li.style.transform = 'translateY(10px)';
                         li.style.animation = '';
-                        li.style.animationDelay = '';
                     });
 
-                    // Restaurar texto original en typewriter (para que pueda reanimarse más tarde)
                     sb.querySelectorAll('.typewriter p').forEach(p => {
                         p.innerText = p.dataset.original || p.innerText;
                     });
                 }
             });
 
-            // Toggle activo para el subblock clicado
             const isActive = subblock.classList.toggle('active');
-            const content = subblock.querySelector('.subblock-content');
 
-            if (isActive) {
-                // Expandir el contenido suavemente calculando su altura real
-                if (content) {
-                    // forzar render antes de medir
-                    content.style.opacity = '0';
-                    content.style.maxHeight = '0';
-                    content.style.padding = '0 20px';
-                    // small delay to ensure styles applied
-                    requestAnimationFrame(() => {
-                        const h = content.scrollHeight;
-                        content.style.maxHeight = h + 'px';
-                        content.style.opacity = '1';
-                        content.style.padding = '15px 20px';
-                    });
-                }
+            if (isActive && content) {
+                // Abrir el bloque
+                content.style.maxHeight = content.scrollHeight + 'px';
+                content.style.opacity = '1';
 
-                // Animar li con delay (usamos animation + animationDelay por separado para compatibilidad)
+                // Mostrar los li con animación
                 subblock.querySelectorAll('.subblock-list li').forEach((li, idx) => {
                     li.style.opacity = 0;
                     li.style.transform = 'translateY(10px)';
@@ -136,28 +112,22 @@ document.addEventListener("DOMContentLoaded", () => {
                     li.style.animationDelay = `${0.18 * (idx + 1)}s`;
                 });
 
-                // Lanzar typewriter en cada <p> (limpiamos primero para que se vea el efecto)
-                subblock.querySelectorAll('.typewriter p').forEach((p, idx) => {
-                    p.innerText = ''; // limpiar antes de escribir
-                    // pequeña pausa para que la expansión de contenido tenga tiempo
-                    setTimeout(() => typeWriterElement(p, 28), 120 + idx * 120);
+                // Activar efecto máquina de escribir
+                subblock.querySelectorAll('.typewriter p').forEach(p => {
+                    typeWriterElement(p, 28);
                 });
 
-            } else {
-                // Colapsar el contenido
-                if (content) {
-                    content.style.maxHeight = '0';
-                    content.style.opacity = '0';
-                    content.style.padding = '0 20px';
-                }
+            } else if (content) {
+                // Cerrar el bloque
+                content.style.maxHeight = '0';
+                content.style.opacity = '0';
 
-                // Reset animaciones de li y restaurar texto
                 subblock.querySelectorAll('.subblock-list li').forEach(li => {
                     li.style.opacity = 0;
                     li.style.transform = 'translateY(10px)';
                     li.style.animation = '';
-                    li.style.animationDelay = '';
                 });
+
                 subblock.querySelectorAll('.typewriter p').forEach(p => {
                     p.innerText = p.dataset.original || p.innerText;
                 });
@@ -165,7 +135,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // Animación inicial para la lista 'sobre-mi'
+    // Animación inicial sobre-mi
     document.querySelectorAll('.sobre-mi-list li').forEach((li, i) => {
         li.style.opacity = 0;
         li.style.transform = 'translateY(10px)';
@@ -173,7 +143,7 @@ document.addEventListener("DOMContentLoaded", () => {
         li.style.animationDelay = `${0.2 * (i + 1)}s`;
     });
 
-    // Animación inicial para contacto si existe
+    // Animación inicial contacto
     document.querySelectorAll('.contacto-list.horizontal li').forEach((li, i) => {
         li.style.opacity = 0;
         li.style.transform = 'translateY(10px)';
