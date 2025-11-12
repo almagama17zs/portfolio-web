@@ -64,7 +64,24 @@ function typeWriterElement(el, delay = 28) {
 // -------------------- ANIMACIÓN SOBRE MI --------------------
 document.addEventListener("DOMContentLoaded", () => {
   const subblocks = Array.from(document.querySelectorAll(".subblock"));
+  const soloLists = Array.from(document.querySelectorAll(".sobre-mi-list")); // listas independientes
 
+  // -------------------- Animar listas fuera de subbloques --------------------
+  soloLists.forEach(list => {
+    list.classList.add("visible");
+    const items = Array.from(list.querySelectorAll("li"));
+    items.forEach((li, i) => {
+      li.style.opacity = 0;
+      li.style.transform = "translateY(10px)";
+      li.style.transition = "opacity 0.45s ease, transform 0.45s ease";
+      setTimeout(() => {
+        li.style.opacity = 1;
+        li.style.transform = "translateY(0)";
+      }, 120 * i + 120);
+    });
+  });
+
+  // -------------------- Subbloques --------------------
   subblocks.forEach(sb => {
     const header = sb.querySelector(".subblock-header");
     const content = sb.querySelector(".subblock-content");
@@ -146,7 +163,8 @@ document.addEventListener("DOMContentLoaded", () => {
         });
       }
 
-      // Typewriter <p> **solo después de que terminen los li**
+      // Typewriter <p> uno a uno en orden
+      let delayAcc = liDuration + 150; // empieza después de los li
       paragraphs.forEach((p, idx) => {
         p.innerText = ""; // vaciamos antes de animar
         setTimeout(() => {
@@ -157,10 +175,13 @@ document.addEventListener("DOMContentLoaded", () => {
               p.innerText += original.charAt(i);
               i++;
               setTimeout(step, 28);
+            } else {
+              // cuando termina un <p>, sumar tiempo para el siguiente
+              delayAcc += original.length * 28 + 50;
             }
           };
           step();
-        }, liDuration + 150 + idx * 200); // empieza después de li
+        }, delayAcc);
       });
 
     });
