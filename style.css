@@ -95,27 +95,28 @@ header h2 { font-size:1.2em; font-weight:normal; color:#fff; }
   position:relative;
 }
 
+/* Header del subbloque */
 .subblock-header {
-  padding:15px 20px 15px 20px;
+  padding:15px 20px;
   font-weight:bold;
   font-size:1.2em;
   cursor:pointer;
   color:#fff;
   text-align:center;
-  position: relative; /* para ::after */
+  position:relative; /* para pseudo-elemento */
   background: rgba(0,0,0,0.1);
-  border-bottom: none; /* no duplicamos borde */
+  border-bottom:none; /* no duplicamos borde */
 }
 
-.subblock-header::after {
-  content:"";
+/* Línea separadora entre header y contenido */
+.subblock-separator {
   position:absolute;
+  top:100%; /* justo debajo del header */
   left:0;
-  bottom:0;
   width:100%;
   height:2px; /* grosor constante */
   background:#00ff99;
-  z-index:2; /* aseguramos que esté sobre el contenido */
+  z-index:2; /* siempre sobre contenido */
 }
 
 .subblock-header:hover,
@@ -123,7 +124,7 @@ header h2 { font-size:1.2em; font-weight:normal; color:#fff; }
   background: rgba(0,255,153,0.08);
 }
 
-/* Contenido */
+/* Contenido del subbloque */
 .subblock-content { 
   max-height:0; 
   overflow:hidden; 
@@ -131,13 +132,15 @@ header h2 { font-size:1.2em; font-weight:normal; color:#fff; }
   transition:max-height 0.6s ease, opacity 0.6s ease, padding 0.4s ease; 
   padding:0 20px; 
 }
+
 .subblock.active .subblock-content { 
   max-height:3000px; 
   opacity:1; 
-  padding:15px 20px 40px 20px;
+  padding:15px 20px 40px 20px; /* espacio abajo extra */
   overflow:visible;
   animation:slideDown 0.6s ease;
 }
+
 @keyframes slideDown { 
   from { transform:translateY(-5px); opacity:0.6; } 
   to { transform:translateY(0); opacity:1; } 
