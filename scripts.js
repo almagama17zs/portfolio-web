@@ -63,22 +63,6 @@ function typeWriterElement(el, delay = 28) {
 
 // -------------------- ANIMACIÓN SOBRE MI --------------------
 document.addEventListener("DOMContentLoaded", () => {
-  // Animar <li> de sobre-mi-list al cargar
-  const sobreMiList = document.querySelector(".sobre-mi-list");
-  if (sobreMiList) {
-    const items = Array.from(sobreMiList.querySelectorAll("li"));
-    items.forEach((li, i) => {
-      li.style.opacity = 0;
-      li.style.transform = "translateY(10px)";
-      li.style.transition = "opacity 0.45s ease, transform 0.45s ease";
-      setTimeout(() => {
-        li.style.opacity = 1;
-        li.style.transform = "translateY(0)";
-      }, 120 * i + 120);
-    });
-  }
-
-  // -------------------- SUBBLOQUES --------------------
   const subblocks = Array.from(document.querySelectorAll(".subblock"));
 
   subblocks.forEach(sb => {
@@ -87,10 +71,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const list = sb.querySelector(".subblock-list");
     const paragraphs = Array.from(sb.querySelectorAll(".typewriter p"));
 
-    // Guardar texto original y vaciar <p>
+    // Guardar texto original
     paragraphs.forEach(p => {
       if (!p.dataset.original) p.dataset.original = p.innerText.trim();
-      p.innerText = "";
     });
 
     if (!header) return;
@@ -117,7 +100,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
-      // Cerrar otros subbloques
+      // Cerrar otros abiertos
       subblocks.forEach(other => {
         if (other === sb) return;
         other.classList.remove("active");
@@ -138,27 +121,15 @@ document.addEventListener("DOMContentLoaded", () => {
         other.querySelectorAll(".typewriter p").forEach(p => p.innerText = p.dataset.original);
       });
 
-      // Abrir subbloque
+      // Abrir el subbloque actual
       sb.classList.add("active");
       if (content) {
-        content.style.display = "block";
-        content.style.overflow = "hidden";
-        content.style.opacity = "0";
-        content.style.padding = "0 20px";
-
-        requestAnimationFrame(() => {
-          const totalHeight = content.scrollHeight + 40; 
-          content.style.maxHeight = totalHeight + "px";
-          content.style.opacity = "1";
-          content.style.padding = "15px 20px 40px 20px";
-        });
-
-        setTimeout(() => {
-          if (sb.classList.contains("active")) content.style.overflow = "visible";
-        }, 700);
+        content.style.maxHeight = content.scrollHeight + 40 + "px";
+        content.style.opacity = "1";
+        content.style.padding = "15px 20px 40px 20px";
       }
 
-      // Animación li del subbloque
+      // Animación li
       let liDuration = 0;
       if (list) {
         list.classList.add("visible");
@@ -171,26 +142,25 @@ document.addEventListener("DOMContentLoaded", () => {
             li.style.opacity = 1;
             li.style.transform = "translateY(0)";
           }, 120 * i + 120);
-          liDuration = 120 * i + 200; 
+          liDuration = 120 * i + 200; // tiempo total que tarda en aparecer todos los li
         });
       }
 
-      // Animación <p> typewriter uno a uno después de li
-      const typeDelay = 28;
+      // Typewriter <p> **solo después de que terminen los li**
       paragraphs.forEach((p, idx) => {
+        p.innerText = ""; // vaciamos antes de animar
         setTimeout(() => {
           const original = p.dataset.original;
-          p.innerText = "";
           let i = 0;
           const step = () => {
             if (i < original.length) {
               p.innerText += original.charAt(i);
               i++;
-              setTimeout(step, typeDelay);
+              setTimeout(step, 28);
             }
           };
           step();
-        }, liDuration + 140 + idx * 800);
+        }, liDuration + 150 + idx * 200); // empieza después de li
       });
 
     });
