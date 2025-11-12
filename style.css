@@ -189,20 +189,25 @@ header h2 { font-size:1.2em; font-weight:normal; color:#fff; }
 
 /* -------------------- CONTACTO -------------------- */
 .contacto-list.horizontal { 
-  display:flex; 
-  justify-content:center; 
-  gap:20px; 
-  flex-wrap:wrap; 
-  list-style:none; 
+  display: flex; 
+  justify-content: center; 
+  gap: 20px; 
+  flex-wrap: wrap; 
+  list-style: none; 
+  margin-top: 25px; /* espacio entre el título y la lista */
 }
-.contacto-list.horizontal li { display:inline-block; }
+.contacto-list.horizontal li { 
+  display: inline-block; 
+}
 .contacto-list a { 
-  color:#00ff99; 
-  text-decoration:none; 
-  font-weight:bold; 
-  transition:color 0.3s ease; 
+  color: #00ff99; 
+  text-decoration: none; 
+  font-weight: bold; 
+  transition: color 0.3s ease; 
 }
-.contacto-list a:hover { color:#0FFF66; }
+.contacto-list a:hover { 
+  color: #0FFF66; 
+}
 
 /* -------------------- FOOTER -------------------- */
 footer { 
