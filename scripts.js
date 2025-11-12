@@ -84,35 +84,12 @@ document.addEventListener("DOMContentLoaded", () => {
     header.addEventListener("click", () => {
       const alreadyOpen = sb.classList.contains("active");
 
-      // Toggle: cerrar si ya abierto
-      if (alreadyOpen) {
-        sb.classList.remove("active");
-        if (content) {
-          content.style.transition = "max-height 0.6s ease, opacity 0.6s ease, padding 0.4s ease";
-          content.style.maxHeight = "0";
-          content.style.opacity = "0";
-          content.style.padding = "0 20px";
-          content.style.overflow = "hidden";
-        }
-        if (list) {
-          list.classList.remove("visible");
-          list.querySelectorAll("li").forEach(li => {
-            li.style.opacity = 0;
-            li.style.transform = "translateY(10px)";
-          });
-        }
-        paragraphs.forEach(p => p.innerText = p.dataset.original || p.innerText);
-        return;
-      }
-
-      // Cerrar otros abiertos
+      // Cerrar todos los subbloques
       subblocks.forEach(other => {
-        if (other === sb) return;
         other.classList.remove("active");
         const oc = other.querySelector(".subblock-content");
         const ol = other.querySelector(".subblock-list");
         if (oc) {
-          oc.style.transition = "max-height 0.6s ease, opacity 0.6s ease, padding 0.4s ease";
           oc.style.maxHeight = "0";
           oc.style.opacity = "0";
           oc.style.padding = "0 20px";
@@ -128,6 +105,9 @@ document.addEventListener("DOMContentLoaded", () => {
         other.querySelectorAll(".typewriter p").forEach(p => p.innerText = p.dataset.original || p.innerText);
       });
 
+      // Si ya estaba abierto, no hacer nada más
+      if (alreadyOpen) return;
+
       // Abrir este subbloque
       sb.classList.add("active");
 
@@ -138,16 +118,13 @@ document.addEventListener("DOMContentLoaded", () => {
         content.style.padding = "0 20px";
 
         requestAnimationFrame(() => {
-          const totalHeight = content.scrollHeight + 40; 
+          const totalHeight = content.scrollHeight + 40; // suficiente espacio para todo el contenido
           content.style.transition = "max-height 0.6s ease, opacity 0.6s ease, padding 0.4s ease";
           content.style.maxHeight = totalHeight + "px";
           content.style.opacity = "1";
-          content.style.padding = "15px 20px 40px 20px"; 
+          content.style.padding = "15px 20px 40px 20px";
+          content.style.overflow = "visible";
         });
-
-        setTimeout(() => {
-          if (sb.classList.contains("active")) content.style.overflow = "visible";
-        }, 700);
       }
 
       // Animación li

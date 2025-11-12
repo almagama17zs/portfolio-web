@@ -84,71 +84,89 @@ header h2 { font-size:1.2em; font-weight:normal; color:#fff; }
 
 /* -------------------- SUBBLOQUES -------------------- */
 .subblock {
-  margin: 20px 0;
-  border-radius: 15px;
-  background: rgba(0,0,0,0.1);
-  border: 2px solid #00ff99; /* borde uniforme 2px */
-  overflow: hidden;
-  transition: all 0.4s ease;
-  text-align: center;
-  box-sizing: border-box;
-  position: relative;
+  margin:20px 0;
+  border-radius:15px;
+  background:rgba(0,0,0,0.1);
+  border:2px solid #00ff99; /* borde uniforme 2px */
+  overflow:hidden;
+  transition:all 0.4s ease;
+  text-align:center;
+  box-sizing:border-box;
+  position:relative;
 }
 
-/* Header */
+/* Header del subbloque */
 .subblock-header {
-  padding: 15px 20px;
-  font-weight: bold;
-  font-size: 1.2em;
-  cursor: pointer;
-  color: #fff;
-  text-align: center;
-  position: relative; /* para ::after */
+  padding:15px 20px;
+  font-weight:bold;
+  font-size:1.2em;
+  cursor:pointer;
+  color:#fff;
+  text-align:center;
+  position: relative;
   background: rgba(0,0,0,0.1);
-  border-bottom: none; /* quitamos borde inferior duplicado */
+  border-bottom:none; /* quitamos borde para no duplicar */
 }
 
-/* Línea separadora siempre visible */
+/* Línea inferior visible siempre en header */
 .subblock-header::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  height: 2px; /* grosor constante */
-  background: #00ff99;
-  z-index: 10;
+  content:"";
+  position:absolute;
+  left:0;
+  bottom:0;
+  width:100%;
+  height:2px;
+  background:#00ff99;
+  z-index:2;
 }
 
-/* Hover o activo */
+/* Línea superior del contenido, solo visible al abrir */
+.subblock-content::before {
+  content:"";
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:2px;
+  background:#00ff99;
+  z-index:1;
+  opacity:0;
+  transition:opacity 0.3s ease;
+}
+
+/* Hover o activo header */
 .subblock-header:hover,
 .subblock.active .subblock-header {
   background: rgba(0,255,153,0.08);
 }
 
-/* Contenido */
+/* Contenido del subbloque */
 .subblock-content { 
-  max-height: 0; 
-  overflow: hidden; 
-  opacity: 0; 
-  transition: max-height 0.6s ease, opacity 0.6s ease, padding 0.4s ease; 
-  padding: 0 20px 0 20px; /* dejamos padding-top 0 para no cubrir la línea */
+  max-height:0; 
+  overflow:hidden; 
+  opacity:0; 
+  transition:max-height 0.6s ease, opacity 0.6s ease, padding 0.4s ease; 
+  padding:0 20px; 
+  position:relative; /* necesario para ::before */
 }
 
-/* Cuando está activo */
 .subblock.active .subblock-content { 
-  max-height: 3000px; 
-  opacity: 1; 
-  padding: 15px 20px 40px 20px; /* padding-top suficiente para que no tape la línea */
-  overflow: visible;
-  animation: slideDown 0.6s ease;
+  max-height:3000px; 
+  opacity:1; 
+  padding:15px 20px 40px 20px;
+  overflow:visible;
+  animation:slideDown 0.6s ease;
+}
+
+/* Mostrar línea superior del contenido cuando activo */
+.subblock.active .subblock-content::before {
+  opacity:1;
 }
 
 @keyframes slideDown { 
-  from { transform: translateY(-5px); opacity: 0.6; } 
-  to { transform: translateY(0); opacity: 1; } 
+  from { transform:translateY(-5px); opacity:0.6; } 
+  to { transform:translateY(0); opacity:1; } 
 }
-
 
 /* -------------------- LISTAS -------------------- */
 .subblock-list, .sobre-mi-list { 
