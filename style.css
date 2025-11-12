@@ -1,4 +1,4 @@
-/* -------------------- RESET Y BASE -------------------- */
+/* -------------------- RESET & BASE -------------------- */
 * { 
   margin:0; 
   padding:0; 
@@ -54,7 +54,7 @@ header img {
 header h1 { font-size:2em; color:#fff; }
 header h2 { font-size:1.2em; font-weight:normal; color:#fff; }
 
-/* -------------------- BLOQUES -------------------- */
+/* -------------------- BLOCKS -------------------- */
 .block { 
   margin:40px auto; 
   padding:20px; 
@@ -82,12 +82,12 @@ header h2 { font-size:1.2em; font-weight:normal; color:#fff; }
   to { box-shadow:0 0 10px #00ff99; } 
 }
 
-/* -------------------- SUBBLOQUES -------------------- */
+/* -------------------- SUBBLOCKS -------------------- */
 .subblock {
   margin: 20px 0;
   border-radius: 15px;
   background: rgba(0,0,0,0.1);
-  border: 2px solid #00ff99; /* borde uniforme 2px */
+  border: 2px solid #00ff99; /* uniform 2px border */
   overflow: hidden;
   transition: all 0.4s ease;
   text-align: center;
@@ -103,43 +103,43 @@ header h2 { font-size:1.2em; font-weight:normal; color:#fff; }
   cursor: pointer;
   color: #fff;
   text-align: center;
-  position: relative; /* para ::after */
+  position: relative; /* for ::after */
   background: rgba(0,0,0,0.1);
-  border-bottom: none; /* quitamos borde inferior duplicado */
+  border-bottom: none; /* remove duplicate bottom border */
 }
 
-/* Línea separadora siempre visible */
+/* Always visible separator line */
 .subblock-header::after {
   content: "";
   position: absolute;
   left: 0;
   bottom: 0;
   width: 100%;
-  height: 2px; /* grosor constante */
+  height: 2px; /* constant thickness */
   background: #00ff99;
   z-index: 10;
 }
 
-/* Hover o activo */
+/* Hover or active */
 .subblock-header:hover,
 .subblock.active .subblock-header {
   background: rgba(0,255,153,0.08);
 }
 
-/* Contenido */
+/* Content */
 .subblock-content { 
   max-height: 0; 
   overflow: hidden; 
   opacity: 0; 
   transition: max-height 0.6s ease, opacity 0.6s ease, padding 0.4s ease; 
-  padding: 0 20px 0 20px; /* dejamos padding-top 0 para no cubrir la línea */
+  padding: 0 20px 0 20px; /* leave top padding 0 to avoid covering the line */
 }
 
-/* Cuando está activo */
+/* When active */
 .subblock.active .subblock-content { 
   max-height: 3000px; 
   opacity: 1; 
-  padding: 15px 20px 40px 20px; /* padding-top suficiente para que no tape la línea */
+  padding: 15px 20px 40px 20px; /* top padding enough to not cover the line */
   overflow: visible;
   animation: slideDown 0.6s ease;
 }
@@ -149,7 +149,7 @@ header h2 { font-size:1.2em; font-weight:normal; color:#fff; }
   to { transform: translateY(0); opacity: 1; } 
 }
 
-/* -------------------- LISTAS -------------------- */
+/* -------------------- LISTS -------------------- */
 .subblock-list, .sobre-mi-list { 
   list-style:none; 
   padding-left:0; 
@@ -187,14 +187,14 @@ header h2 { font-size:1.2em; font-weight:normal; color:#fff; }
   color:#fff; 
 }
 
-/* -------------------- CONTACTO -------------------- */
+/* -------------------- CONTACT -------------------- */
 .contacto-list.horizontal { 
   display: flex; 
   justify-content: center; 
   gap: 20px; 
   flex-wrap: wrap; 
   list-style: none; 
-  margin-top: 25px; /* espacio entre el título y la lista */
+  margin-top: 25px; /* space between title and list */
 }
 .contacto-list.horizontal li { 
   display: inline-block; 

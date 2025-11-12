@@ -1,9 +1,10 @@
 # 🌐 Portafolio Web - Alejandro Emilio Martín García
 
-Mi portafolio personal donde presento mis proyectos, habilidades y experiencia en programación.
+Bienvenido a mi portafolio personal donde presento mis proyectos, habilidades y experiencia en programación.
 
 ## 🚀 Tecnologías
 - HTML
+- JAVASCRIPT
 - CSS
 - GitHub Pages
 
