@@ -65,6 +65,7 @@ function typeWriterElement(el, delay = 28) {
 document.addEventListener("DOMContentLoaded", () => {
   const subblocks = document.querySelectorAll(".subblock");
 
+  // mostrar listas sobre-mi y contacto desde inicio (animación inicial)
   document.querySelectorAll(".sobre-mi-list, .contacto-list").forEach(list => list.classList.add("visible"));
 
   subblocks.forEach(sb => {
@@ -80,11 +81,23 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!header) return;
 
     header.addEventListener("click", () => {
-      const alreadyOpen = sb.classList.contains("active");
+      const isOpen = sb.classList.contains("active");
 
-      // cerrar otros
+      // 🔹 Si ya está abierto, lo cerramos al volver a hacer clic
+      if (isOpen) {
+        sb.classList.remove("active");
+        if (content) {
+          content.style.maxHeight = "0";
+          content.style.opacity = "0";
+          content.style.padding = "0 20px";
+          content.style.overflow = "hidden";
+        }
+        if (list) list.classList.remove("visible");
+        return;
+      }
+
+      // 🔹 Cerrar todos los demás
       subblocks.forEach(other => {
-        if (other === sb) return;
         other.classList.remove("active");
         const oc = other.querySelector(".subblock-content");
         const ol = other.querySelector(".subblock-list");
@@ -95,26 +108,25 @@ document.addEventListener("DOMContentLoaded", () => {
           oc.style.overflow = "hidden";
         }
         if (ol) ol.classList.remove("visible");
-        other.querySelectorAll(".typewriter p").forEach(p => p.innerText = p.dataset.original || p.innerText);
       });
 
-      if (alreadyOpen) {
-        sb.classList.remove("active");
-        return;
-      }
-
+      // 🔹 Abrir este
       sb.classList.add("active");
-
-      // expandir contenido
       if (content) {
         content.style.display = "block";
-        content.style.opacity = "1";
-        content.style.padding = "15px 20px 25px 20px";
-        content.style.maxHeight = "none"; // 🔥 no limitar altura
-        content.style.overflow = "visible"; // 🔥 mostrar todo
+        content.style.overflow = "hidden";
+        requestAnimationFrame(() => {
+          const totalHeight = content.scrollHeight + 20;
+          content.style.maxHeight = totalHeight + "px";
+          content.style.opacity = "1";
+          content.style.padding = "15px 20px 25px 20px";
+        });
+        setTimeout(() => {
+          if (sb.classList.contains("active")) content.style.overflow = "visible";
+        }, 700);
       }
 
-      // animar lista
+      // 🔹 Animar lista y texto
       let liDuration = 0;
       if (list) {
         list.classList.add("visible");
@@ -124,15 +136,16 @@ document.addEventListener("DOMContentLoaded", () => {
           setTimeout(() => {
             li.style.opacity = 1;
             li.style.transform = "translateY(0)";
-          }, 120 * i);
+          }, 120 * i + 120);
           liDuration = 120 * i + 200;
         });
       }
 
-      // typewriter después
       paragraphs.forEach((p, idx) => {
         p.innerText = "";
-        setTimeout(() => typeWriterElement(p, 25), liDuration + idx * 200);
+        setTimeout(() => {
+          typeWriterElement(p, 28);
+        }, liDuration + 120 + idx * 200);
       });
     });
   });
