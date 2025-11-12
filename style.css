@@ -102,9 +102,22 @@ header h2 { font-size:1.2em; font-weight:normal; color:#fff; }
   cursor: pointer;
   color: #fff;
   background: rgba(0,0,0,0.1);
+  position: relative;
   transition: background 0.3s ease;
 }
 
+/* Línea separadora constante */
+.subblock-header::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 2px; /* grosor constante */
+  background: #00ff99;
+}
+
+/* Hover / activo */
 .subblock-header:hover,
 .subblock.active .subblock-header {
   background: rgba(0,255,153,0.08);
@@ -130,31 +143,28 @@ header h2 { font-size:1.2em; font-weight:normal; color:#fff; }
   to { transform: translateY(0); opacity: 1; } 
 }
 
-/* -------------------- LISTAS -------------------- */
-.subblock-list, .sobre-mi-list { 
-  list-style:none; 
-  padding-left:0; 
-  margin:10px 0; 
-  text-align:center; 
+/* Listas tipo sobre-mi o contacto */
+.sobre-mi-list,
+.contacto-list {
+  list-style: none;
+  padding-left: 0;
+  margin: 10px 0;
+  text-align: center;
 }
-.subblock-list li::before, .sobre-mi-list li::before { 
-  content:"•"; 
-  color:#00ff99; 
-  margin-right:8px; 
+
+.sobre-mi-list li,
+.contacto-list li {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.45s ease, transform 0.45s ease;
 }
-.subblock-list li, .sobre-mi-list li { 
-  display:block; 
-  margin:2px 0; 
-  font-size:1em; 
-  line-height:1.2; 
-  opacity:0; 
-  transform:translateY(10px); 
-  transition:opacity 0.45s ease, transform 0.45s ease; 
+
+.sobre-mi-list.visible li,
+.contacto-list.visible li {
+  opacity: 1;
+  transform: translateY(0);
 }
-.subblock-list.visible li, .sobre-mi-list.visible li { 
-  opacity:1; 
-  transform:translateY(0); 
-}
+
 
 /* -------------------- TYPEWRITER -------------------- */
 .typewriter p { 

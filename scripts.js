@@ -65,6 +65,9 @@ function typeWriterElement(el, delay = 28) {
 document.addEventListener("DOMContentLoaded", () => {
   const subblocks = Array.from(document.querySelectorAll(".subblock"));
 
+  // Mostrar listas sobre-mi y contacto desde inicio
+  document.querySelectorAll(".sobre-mi-list, .contacto-list").forEach(list => list.classList.add("visible"));
+
   subblocks.forEach(sb => {
     const header = sb.querySelector(".subblock-header");
     const content = sb.querySelector(".subblock-content");
@@ -88,6 +91,7 @@ document.addEventListener("DOMContentLoaded", () => {
           content.style.maxHeight = "0";
           content.style.opacity = "0";
           content.style.padding = "0 20px";
+          content.style.overflow = "hidden";
         }
         if (list) {
           list.classList.remove("visible");
@@ -110,6 +114,7 @@ document.addEventListener("DOMContentLoaded", () => {
           oc.style.maxHeight = "0";
           oc.style.opacity = "0";
           oc.style.padding = "0 20px";
+          oc.style.overflow = "hidden";
         }
         if (ol) {
           ol.classList.remove("visible");
@@ -124,43 +129,46 @@ document.addEventListener("DOMContentLoaded", () => {
       // Abrir el subbloque actual
       sb.classList.add("active");
       if (content) {
-        content.style.maxHeight = content.scrollHeight + 40 + "px";
-        content.style.opacity = "1";
-        content.style.padding = "15px 20px 40px 20px";
+        content.style.display = "block";
+        content.style.overflow = "hidden";
+        content.style.opacity = "0";
+        content.style.padding = "0 20px";
+
+        requestAnimationFrame(() => {
+          const totalHeight = content.scrollHeight + 40; 
+          content.style.maxHeight = totalHeight + "px";
+          content.style.opacity = "1";
+          content.style.padding = "15px 20px 40px 20px";
+        });
+
+        setTimeout(() => {
+          if (sb.classList.contains("active")) content.style.overflow = "visible";
+        }, 700);
       }
 
       // Animación li
+      let liDuration = 0;
       if (list) {
         list.classList.add("visible");
         const items = Array.from(list.querySelectorAll("li"));
         items.forEach((li, i) => {
           li.style.opacity = 0;
           li.style.transform = "translateY(10px)";
+          li.style.transition = "opacity 0.45s ease, transform 0.45s ease";
           setTimeout(() => {
             li.style.opacity = 1;
             li.style.transform = "translateY(0)";
           }, 120 * i + 120);
+          liDuration = 120 * i + 200;
         });
       }
 
-      // Typewriter <p>
+      // Typewriter <p> después de animar <li>
       paragraphs.forEach((p, idx) => {
         p.innerText = "";
-        setTimeout(() => {
-          const original = p.dataset.original;
-          let i = 0;
-          const step = () => {
-            if (i < original.length) {
-              p.innerText += original.charAt(i);
-              i++;
-              setTimeout(step, 28);
-            }
-          };
-          step();
-        }, 120 * (list ? list.children.length : 0) + 140 + idx * 200);
+        setTimeout(() => typeWriterElement(p, 28), liDuration + 140 + idx * 200);
       });
 
     });
   });
 });
-
