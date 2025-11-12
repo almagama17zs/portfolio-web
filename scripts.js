@@ -65,9 +65,6 @@ function typeWriterElement(el, delay = 28) {
 document.addEventListener("DOMContentLoaded", () => {
   const subblocks = Array.from(document.querySelectorAll(".subblock"));
 
-  // Mostrar listas sobre-mi y contacto desde inicio
-  document.querySelectorAll(".sobre-mi-list, .contacto-list").forEach(list => list.classList.add("visible"));
-
   subblocks.forEach(sb => {
     const header = sb.querySelector(".subblock-header");
     const content = sb.querySelector(".subblock-content");
@@ -77,6 +74,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Guardar texto original
     paragraphs.forEach(p => {
       if (!p.dataset.original) p.dataset.original = p.innerText.trim();
+      p.innerText = ""; // dejar vacío al inicio
     });
 
     if (!header) return;
@@ -91,7 +89,6 @@ document.addEventListener("DOMContentLoaded", () => {
           content.style.maxHeight = "0";
           content.style.opacity = "0";
           content.style.padding = "0 20px";
-          content.style.overflow = "hidden";
         }
         if (list) {
           list.classList.remove("visible");
@@ -114,7 +111,6 @@ document.addEventListener("DOMContentLoaded", () => {
           oc.style.maxHeight = "0";
           oc.style.opacity = "0";
           oc.style.padding = "0 20px";
-          oc.style.overflow = "hidden";
         }
         if (ol) {
           ol.classList.remove("visible");
@@ -146,7 +142,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 700);
       }
 
-      // Animación li
+      // Animación de lista li
       let liDuration = 0;
       if (list) {
         list.classList.add("visible");
@@ -163,12 +159,24 @@ document.addEventListener("DOMContentLoaded", () => {
         });
       }
 
-      // Typewriter <p> después de animar <li>
+      // Typewriter <p> uno por uno
       paragraphs.forEach((p, idx) => {
-        p.innerText = "";
-        setTimeout(() => typeWriterElement(p, 28), liDuration + 140 + idx * 200);
+        setTimeout(() => {
+          const original = p.dataset.original;
+          p.innerText = "";
+          let i = 0;
+          const step = () => {
+            if (i < original.length) {
+              p.innerText += original.charAt(i);
+              i++;
+              setTimeout(step, 28);
+            }
+          };
+          step();
+        }, liDuration + 140 + idx * 800); // se asegura que aparezcan una tras otra
       });
 
     });
   });
 });
+
