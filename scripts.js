@@ -65,9 +65,6 @@ function typeWriterElement(el, delay = 28) {
 document.addEventListener("DOMContentLoaded", () => {
   const subblocks = Array.from(document.querySelectorAll(".subblock"));
 
-  // mostrar listas sobre-mi y contacto desde inicio
-  document.querySelectorAll(".sobre-mi-list, .contacto-list").forEach(list => list.classList.add("visible"));
-
   subblocks.forEach(sb => {
     const header = sb.querySelector(".subblock-header");
     const content = sb.querySelector(".subblock-content");
@@ -82,17 +79,15 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!header) return;
 
     header.addEventListener("click", () => {
-      const alreadyOpen = sb.classList.contains("active");
+      const isOpen = sb.classList.contains("active");
 
-      // Toggle: cerrar si ya abierto
-      if (alreadyOpen) {
+      // Cerrar si estaba abierto
+      if (isOpen) {
         sb.classList.remove("active");
         if (content) {
-          content.style.transition = "max-height 0.6s ease, opacity 0.6s ease, padding 0.4s ease";
           content.style.maxHeight = "0";
           content.style.opacity = "0";
           content.style.padding = "0 20px";
-          content.style.overflow = "hidden";
         }
         if (list) {
           list.classList.remove("visible");
@@ -101,7 +96,7 @@ document.addEventListener("DOMContentLoaded", () => {
             li.style.transform = "translateY(10px)";
           });
         }
-        paragraphs.forEach(p => p.innerText = p.dataset.original || p.innerText);
+        paragraphs.forEach(p => p.innerText = p.dataset.original);
         return;
       }
 
@@ -112,11 +107,9 @@ document.addEventListener("DOMContentLoaded", () => {
         const oc = other.querySelector(".subblock-content");
         const ol = other.querySelector(".subblock-list");
         if (oc) {
-          oc.style.transition = "max-height 0.6s ease, opacity 0.6s ease, padding 0.4s ease";
           oc.style.maxHeight = "0";
           oc.style.opacity = "0";
           oc.style.padding = "0 20px";
-          oc.style.overflow = "hidden";
         }
         if (ol) {
           ol.classList.remove("visible");
@@ -125,54 +118,49 @@ document.addEventListener("DOMContentLoaded", () => {
             li.style.transform = "translateY(10px)";
           });
         }
-        other.querySelectorAll(".typewriter p").forEach(p => p.innerText = p.dataset.original || p.innerText);
+        other.querySelectorAll(".typewriter p").forEach(p => p.innerText = p.dataset.original);
       });
 
-      // Abrir este subbloque
+      // Abrir el subbloque actual
       sb.classList.add("active");
-
       if (content) {
-        content.style.display = "block";
-        content.style.overflow = "hidden";
-        content.style.opacity = "0";
-        content.style.padding = "0 20px";
-
-        requestAnimationFrame(() => {
-          const totalHeight = content.scrollHeight + 40; 
-          content.style.transition = "max-height 0.6s ease, opacity 0.6s ease, padding 0.4s ease";
-          content.style.maxHeight = totalHeight + "px";
-          content.style.opacity = "1";
-          content.style.padding = "15px 20px 40px 20px"; 
-        });
-
-        setTimeout(() => {
-          if (sb.classList.contains("active")) content.style.overflow = "visible";
-        }, 700);
+        content.style.maxHeight = content.scrollHeight + 40 + "px";
+        content.style.opacity = "1";
+        content.style.padding = "15px 20px 40px 20px";
       }
 
       // Animación li
-      let liDuration = 0;
       if (list) {
         list.classList.add("visible");
         const items = Array.from(list.querySelectorAll("li"));
         items.forEach((li, i) => {
           li.style.opacity = 0;
           li.style.transform = "translateY(10px)";
-          li.style.transition = "opacity 0.45s ease, transform 0.45s ease";
           setTimeout(() => {
             li.style.opacity = 1;
             li.style.transform = "translateY(0)";
           }, 120 * i + 120);
-          liDuration = 120 * i + 200;
         });
       }
 
-      // Typewriter <p> después de animar <li>
+      // Typewriter <p>
       paragraphs.forEach((p, idx) => {
         p.innerText = "";
-        setTimeout(() => typeWriterElement(p, 28), liDuration + 140 + idx * 200);
+        setTimeout(() => {
+          const original = p.dataset.original;
+          let i = 0;
+          const step = () => {
+            if (i < original.length) {
+              p.innerText += original.charAt(i);
+              i++;
+              setTimeout(step, 28);
+            }
+          };
+          step();
+        }, 120 * (list ? list.children.length : 0) + 140 + idx * 200);
       });
 
     });
   });
 });
+
