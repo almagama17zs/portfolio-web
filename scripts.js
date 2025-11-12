@@ -61,8 +61,24 @@ function typeWriterElement(el, delay = 28) {
   step();
 }
 
-// -------------------- SUBBLOQUES --------------------
+// -------------------- ANIMACIÓN SOBRE MI --------------------
 document.addEventListener("DOMContentLoaded", () => {
+  // Animar <li> de sobre-mi-list al cargar
+  const sobreMiList = document.querySelector(".sobre-mi-list");
+  if (sobreMiList) {
+    const items = Array.from(sobreMiList.querySelectorAll("li"));
+    items.forEach((li, i) => {
+      li.style.opacity = 0;
+      li.style.transform = "translateY(10px)";
+      li.style.transition = "opacity 0.45s ease, transform 0.45s ease";
+      setTimeout(() => {
+        li.style.opacity = 1;
+        li.style.transform = "translateY(0)";
+      }, 120 * i + 120);
+    });
+  }
+
+  // -------------------- SUBBLOQUES --------------------
   const subblocks = Array.from(document.querySelectorAll(".subblock"));
 
   subblocks.forEach(sb => {
@@ -101,7 +117,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
-      // Cerrar otros subbloques abiertos
+      // Cerrar otros subbloques
       subblocks.forEach(other => {
         if (other === sb) return;
         other.classList.remove("active");
@@ -142,7 +158,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 700);
       }
 
-      // -------------------- Animación <li> --------------------
+      // Animación li del subbloque
       let liDuration = 0;
       if (list) {
         list.classList.add("visible");
@@ -159,7 +175,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
       }
 
-      // -------------------- Animación <p> uno a uno --------------------
+      // Animación <p> typewriter uno a uno después de li
       const typeDelay = 28;
       paragraphs.forEach((p, idx) => {
         setTimeout(() => {
