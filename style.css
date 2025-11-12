@@ -96,15 +96,15 @@ header h2 { font-size:1.2em; font-weight:normal; color:#fff; }
 }
 
 .subblock-header {
-  padding:15px 20px;
+  padding:15px 20px 17px 20px; /* padding-bottom extra para separar del borde */
   font-weight:bold;
   font-size:1.2em;
   cursor:pointer;
   color:#fff;
   text-align:center;
   background:rgba(0,0,0,0.1);
-  border-bottom:2px solid #00ff99; /* línea inferior siempre visible */
-  box-sizing:border-box; /* para que border-bottom no sume a la altura */
+  border-bottom:none; /* eliminar borde doble */
+  box-sizing:border-box;
   transition: background 0.3s ease;
 }
 
@@ -112,6 +112,7 @@ header h2 { font-size:1.2em; font-weight:normal; color:#fff; }
 .subblock.active .subblock-header {
   background: rgba(0,255,153,0.08);
 }
+
 
 /* Contenido */
 .subblock-content { 
