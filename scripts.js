@@ -64,7 +64,7 @@ function typeWriterElement(el, delay = 28) {
 // -------------------- ANIMACIÓN SOBRE MI --------------------
 document.addEventListener("DOMContentLoaded", () => {
   const subblocks = Array.from(document.querySelectorAll(".subblock"));
-  const soloLists = Array.from(document.querySelectorAll(".sobre-mi-list")); // listas independientes
+  const soloLists = Array.from(document.querySelectorAll(".sobre-mi-list")); // listas fuera de subbloques
 
   // -------------------- Animar listas fuera de subbloques --------------------
   soloLists.forEach(list => {
@@ -138,7 +138,7 @@ document.addEventListener("DOMContentLoaded", () => {
         other.querySelectorAll(".typewriter p").forEach(p => p.innerText = p.dataset.original);
       });
 
-      // Abrir el subbloque actual
+      // Abrir subbloque actual
       sb.classList.add("active");
       if (content) {
         content.style.maxHeight = content.scrollHeight + 40 + "px";
@@ -147,7 +147,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       // Animación li
-      let liDuration = 0;
+      let totalLiDuration = 0;
       if (list) {
         list.classList.add("visible");
         const items = Array.from(list.querySelectorAll("li"));
@@ -159,29 +159,29 @@ document.addEventListener("DOMContentLoaded", () => {
             li.style.opacity = 1;
             li.style.transform = "translateY(0)";
           }, 120 * i + 120);
-          liDuration = 120 * i + 200; // tiempo total que tarda en aparecer todos los li
+          totalLiDuration = 120 * i + 200; // duración total de los li
         });
       }
 
       // Typewriter <p> uno a uno en orden
-      let delayAcc = liDuration + 150; // empieza después de los li
-      paragraphs.forEach((p, idx) => {
+      let delayAcc = totalLiDuration + 150; // empezar después de los li
+      paragraphs.forEach((p) => {
+        const original = p.dataset.original;
         p.innerText = ""; // vaciamos antes de animar
         setTimeout(() => {
-          const original = p.dataset.original;
           let i = 0;
           const step = () => {
             if (i < original.length) {
               p.innerText += original.charAt(i);
               i++;
               setTimeout(step, 28);
-            } else {
-              // cuando termina un <p>, sumar tiempo para el siguiente
-              delayAcc += original.length * 28 + 50;
             }
           };
           step();
         }, delayAcc);
+
+        // actualizar delayAcc para el siguiente <p>
+        delayAcc += original.length * 28 + 100; // tiempo para que termine este <p> + pequeño gap
       });
 
     });
