@@ -74,7 +74,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const list = sb.querySelector(".subblock-list");
     const paragraphs = Array.from(sb.querySelectorAll(".typewriter p"));
 
-    // Guardar texto original si no está guardado
+    // Guardar texto original
     paragraphs.forEach(p => {
       if (!p.dataset.original) p.dataset.original = p.innerText.trim();
     });
@@ -138,11 +138,11 @@ document.addEventListener("DOMContentLoaded", () => {
         content.style.padding = "0 20px";
 
         requestAnimationFrame(() => {
-          const totalHeight = content.scrollHeight + 40; // suficiente espacio para todos los <p>
+          const totalHeight = content.scrollHeight + 40; 
           content.style.transition = "max-height 0.6s ease, opacity 0.6s ease, padding 0.4s ease";
           content.style.maxHeight = totalHeight + "px";
           content.style.opacity = "1";
-          content.style.padding = "15px 20px 40px 20px"; // más espacio abajo
+          content.style.padding = "15px 20px 40px 20px"; 
         });
 
         setTimeout(() => {
