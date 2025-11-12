@@ -84,7 +84,7 @@ document.addEventListener("DOMContentLoaded", () => {
     header.addEventListener("click", () => {
       const alreadyOpen = sb.classList.contains("active");
 
-      // Si ya abierto: cerramos (toggle)
+      // Toggle: cerrar si ya abierto
       if (alreadyOpen) {
         sb.classList.remove("active");
         if (content) {
@@ -96,18 +96,16 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         if (list) {
           list.classList.remove("visible");
-          // resetear li estilos
           list.querySelectorAll("li").forEach(li => {
             li.style.opacity = 0;
             li.style.transform = "translateY(10px)";
           });
         }
-        // restaurar textos
         paragraphs.forEach(p => p.innerText = p.dataset.original || p.innerText);
         return;
       }
 
-      // Cerrar todos los demás
+      // Cerrar otros abiertos
       subblocks.forEach(other => {
         if (other === sb) return;
         other.classList.remove("active");
@@ -130,36 +128,34 @@ document.addEventListener("DOMContentLoaded", () => {
         other.querySelectorAll(".typewriter p").forEach(p => p.innerText = p.dataset.original || p.innerText);
       });
 
-      // Abrir el actual
+      // Abrir este subbloque
       sb.classList.add("active");
 
-      // Expandir content con suficiente espacio extra (para que no corte última línea)
       if (content) {
         content.style.display = "block";
         content.style.overflow = "hidden";
         content.style.opacity = "0";
         content.style.padding = "0 20px";
-        // small delay to ensure layout applied
+
         requestAnimationFrame(() => {
-          // scrollHeight es la altura real; dejamos margen extra +28 para no cortar
-          const totalHeight = content.scrollHeight + 28;
+          const totalHeight = content.scrollHeight + 40; // suficiente espacio para todos los <p>
           content.style.transition = "max-height 0.6s ease, opacity 0.6s ease, padding 0.4s ease";
           content.style.maxHeight = totalHeight + "px";
           content.style.opacity = "1";
-          content.style.padding = "15px 20px 28px 20px";
+          content.style.padding = "15px 20px 40px 20px"; // más espacio abajo
         });
+
         setTimeout(() => {
           if (sb.classList.contains("active")) content.style.overflow = "visible";
         }, 700);
       }
 
-      // Animación LI: ponemos visible y animamos cada item (aseguramos que el 1º se vea)
+      // Animación li
       let liDuration = 0;
       if (list) {
         list.classList.add("visible");
         const items = Array.from(list.querySelectorAll("li"));
         items.forEach((li, i) => {
-          // asegurar estilos iniciales
           li.style.opacity = 0;
           li.style.transform = "translateY(10px)";
           li.style.transition = "opacity 0.45s ease, transform 0.45s ease";
@@ -171,12 +167,10 @@ document.addEventListener("DOMContentLoaded", () => {
         });
       }
 
-      // Typewriter: empezamos después de que las li terminen (liDuration)
+      // Typewriter <p> después de animar <li>
       paragraphs.forEach((p, idx) => {
         p.innerText = "";
-        setTimeout(() => {
-          typeWriterElement(p, 28);
-        }, liDuration + 140 + idx * 200);
+        setTimeout(() => typeWriterElement(p, 28), liDuration + 140 + idx * 200);
       });
 
     });

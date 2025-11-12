@@ -7,7 +7,7 @@
 }
 body { 
   background:#1c1c1c; 
-  color:#00ff99; 
+  color:#fff; 
   line-height:1.6; 
   text-align:center; 
   overflow-x:hidden;
@@ -51,8 +51,8 @@ header img {
   border-radius:50%; 
   object-fit:cover; 
 }
-header h1 { font-size:2em; }
-header h2 { font-size:1.2em; font-weight:normal; }
+header h1 { font-size:2em; color:#fff; }
+header h2 { font-size:1.2em; font-weight:normal; color:#fff; }
 
 /* -------------------- BLOQUES -------------------- */
 .block { 
@@ -94,8 +94,8 @@ header h2 { font-size:1.2em; font-weight:normal; }
   box-sizing:border-box; 
   position:relative; 
 }
-.subblock::after { content:none; }
 
+/* El encabezado mantiene su línea inferior igual al resto */
 .subblock-header { 
   padding:15px 20px; 
   font-weight:bold; 
@@ -104,11 +104,12 @@ header h2 { font-size:1.2em; font-weight:normal; }
   color:#fff; 
   text-align:center; 
   transition:background 0.3s ease, box-shadow 0.3s ease; 
-  border-bottom:2px solid #00ff99; /* mantiene línea delimitadora */
+  border-bottom:2px solid #00ff99; 
 }
-.subblock-header:hover, .subblock.active .subblock-header { 
+.subblock-header:hover, 
+.subblock.active .subblock-header { 
   background:rgba(0,255,153,0.08); 
-  box-shadow:0 0 8px #00ff99; /* brillo al pasar y al estar abierto */
+  box-shadow:inset 0 -2px 0 #00ff99; /* mantiene línea inferior igual */
 }
 
 /* -------------------- CONTENIDO -------------------- */
@@ -120,9 +121,9 @@ header h2 { font-size:1.2em; font-weight:normal; }
   padding:0 20px; 
 }
 .subblock.active .subblock-content { 
-  max-height:2000px; 
+  max-height:3000px; 
   opacity:1; 
-  padding:15px 20px 50px 20px; /* más espacio abajo para mostrar todo */
+  padding:15px 20px 50px 20px; 
   overflow:visible; 
   animation:slideDown 0.6s ease; 
 }
@@ -160,12 +161,13 @@ header h2 { font-size:1.2em; font-weight:normal; }
 /* -------------------- TYPEWRITER -------------------- */
 .typewriter p { 
   display:block; 
-  overflow:hidden; 
+  overflow:visible; 
   white-space:pre-wrap; 
-  margin:3px 0; 
-  line-height:1.2; 
+  margin:4px 0; 
+  line-height:1.3; 
   padding:0; 
-  border:none; /* sin rayita verde */
+  border:none; 
+  color:#fff; 
 }
 
 /* -------------------- CONTACTO -------------------- */
@@ -201,7 +203,7 @@ footer canvas {
   z-index:1; 
   pointer-events:none; 
 }
-footer p { position:relative; z-index:2; }
+footer p { position:relative; z-index:2; color:#fff; }
 
 /* -------------------- MEDIA QUERIES -------------------- */
 @media(max-width:768px){
