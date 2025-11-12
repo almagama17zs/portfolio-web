@@ -115,24 +115,26 @@ header h2 { font-size:1.2em; font-weight:normal; color:#fff; }
   cursor:pointer;
   color:#fff;
   text-align:center;
-  position: relative; /* para el pseudo-elemento */
+  position: relative; /* para ::after */
   transition: background 0.3s ease;
+  border-bottom: none; /* quitamos border-bottom para que no se duplique */
 }
 
 .subblock-header::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  height: 2px; /* grosor de la línea */
-  background: #00ff99;
+  content:"";
+  position:absolute;
+  left:0;
+  bottom:0;
+  width:100%;
+  height:2px; /* grosor constante */
+  background:#00ff99;
 }
 
 .subblock-header:hover,
 .subblock.active .subblock-header {
-  background: rgba(0,255,153,0.08); /* efecto hover/activo */
+  background: rgba(0,255,153,0.08);
 }
+
 
 /* -------------------- CONTENIDO -------------------- */
 .subblock-content { 
