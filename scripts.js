@@ -65,7 +65,6 @@ function typeWriterElement(el, delay = 28) {
 document.addEventListener("DOMContentLoaded", () => {
   const subblocks = document.querySelectorAll(".subblock");
 
-  // mostrar listas sobre-mi y contacto desde inicio (animación inicial)
   document.querySelectorAll(".sobre-mi-list, .contacto-list").forEach(list => list.classList.add("visible"));
 
   subblocks.forEach(sb => {
@@ -74,7 +73,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const list = sb.querySelector(".subblock-list");
     const paragraphs = sb.querySelectorAll(".typewriter p");
 
-    // guardar textos originales (solo una vez)
     paragraphs.forEach(p => {
       if (!p.dataset.original) p.dataset.original = p.innerText.trim();
     });
@@ -84,14 +82,13 @@ document.addEventListener("DOMContentLoaded", () => {
     header.addEventListener("click", () => {
       const alreadyOpen = sb.classList.contains("active");
 
-      // cerrar todo
+      // cerrar otros
       subblocks.forEach(other => {
         if (other === sb) return;
         other.classList.remove("active");
         const oc = other.querySelector(".subblock-content");
         const ol = other.querySelector(".subblock-list");
         if (oc) {
-          oc.style.transition = "max-height 0.6s ease, opacity 0.6s ease, padding 0.4s ease";
           oc.style.maxHeight = "0";
           oc.style.opacity = "0";
           oc.style.padding = "0 20px";
@@ -101,59 +98,41 @@ document.addEventListener("DOMContentLoaded", () => {
         other.querySelectorAll(".typewriter p").forEach(p => p.innerText = p.dataset.original || p.innerText);
       });
 
-      // si estaba abierto, ya lo hemos cerrado -> salir
       if (alreadyOpen) {
         sb.classList.remove("active");
         return;
       }
 
-      // abrir este
       sb.classList.add("active");
 
-      // 1) expandir content midiendo altura después de forzar display:block
+      // expandir contenido
       if (content) {
-        content.style.display = "block"; // necesario en algunos navegadores para obtener scrollHeight correcto
-        content.style.overflow = "hidden";
-        content.style.opacity = "0";
-        content.style.padding = "0 20px";
-        // tiny delay to ensure styles applied
-        requestAnimationFrame(() => {
-          const totalHeight = content.scrollHeight + 20; // + padding margin extra para que no corte
-          content.style.transition = "max-height 0.6s ease, opacity 0.6s ease, padding 0.4s ease";
-          content.style.maxHeight = totalHeight + "px";
-          content.style.opacity = "1";
-          content.style.padding = "15px 20px 25px 20px";
-        });
-        // al final de la transición (aprox 650ms) volvemos overflow a visible
-        setTimeout(() => {
-          if (content && sb.classList.contains("active")) {
-            content.style.overflow = "visible";
-          }
-        }, 700);
+        content.style.display = "block";
+        content.style.opacity = "1";
+        content.style.padding = "15px 20px 25px 20px";
+        content.style.maxHeight = "none"; // 🔥 no limitar altura
+        content.style.overflow = "visible"; // 🔥 mostrar todo
       }
 
-      // 2) listas (li) - animación secuencial
+      // animar lista
       let liDuration = 0;
       if (list) {
         list.classList.add("visible");
         list.querySelectorAll("li").forEach((li, i) => {
           li.style.opacity = 0;
           li.style.transform = "translateY(10px)";
-          li.style.transition = "opacity 0.45s ease, transform 0.45s ease";
           setTimeout(() => {
             li.style.opacity = 1;
             li.style.transform = "translateY(0)";
-          }, 120 * i + 120);
+          }, 120 * i);
           liDuration = 120 * i + 200;
         });
       }
 
-      // 3) typewriter: empezamos después de que las li hayan terminado
+      // typewriter después
       paragraphs.forEach((p, idx) => {
         p.innerText = "";
-        setTimeout(() => {
-          typeWriterElement(p, 28);
-        }, liDuration + 120 + idx * 200);
+        setTimeout(() => typeWriterElement(p, 25), liDuration + idx * 200);
       });
     });
   });
