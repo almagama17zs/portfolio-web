@@ -71,10 +71,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const list = sb.querySelector(".subblock-list");
     const paragraphs = Array.from(sb.querySelectorAll(".typewriter p"));
 
-    // Guardar texto original
+    // Guardar texto original y vaciar <p>
     paragraphs.forEach(p => {
       if (!p.dataset.original) p.dataset.original = p.innerText.trim();
-      p.innerText = ""; // dejar vacío al inicio
+      p.innerText = "";
     });
 
     if (!header) return;
@@ -101,7 +101,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
-      // Cerrar otros abiertos
+      // Cerrar otros subbloques abiertos
       subblocks.forEach(other => {
         if (other === sb) return;
         other.classList.remove("active");
@@ -122,7 +122,7 @@ document.addEventListener("DOMContentLoaded", () => {
         other.querySelectorAll(".typewriter p").forEach(p => p.innerText = p.dataset.original);
       });
 
-      // Abrir el subbloque actual
+      // Abrir subbloque
       sb.classList.add("active");
       if (content) {
         content.style.display = "block";
@@ -142,7 +142,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 700);
       }
 
-      // Animación de lista li
+      // -------------------- Animación <li> --------------------
       let liDuration = 0;
       if (list) {
         list.classList.add("visible");
@@ -155,11 +155,12 @@ document.addEventListener("DOMContentLoaded", () => {
             li.style.opacity = 1;
             li.style.transform = "translateY(0)";
           }, 120 * i + 120);
-          liDuration = 120 * i + 200;
+          liDuration = 120 * i + 200; 
         });
       }
 
-      // Typewriter <p> uno por uno
+      // -------------------- Animación <p> uno a uno --------------------
+      const typeDelay = 28;
       paragraphs.forEach((p, idx) => {
         setTimeout(() => {
           const original = p.dataset.original;
@@ -169,14 +170,13 @@ document.addEventListener("DOMContentLoaded", () => {
             if (i < original.length) {
               p.innerText += original.charAt(i);
               i++;
-              setTimeout(step, 28);
+              setTimeout(step, typeDelay);
             }
           };
           step();
-        }, liDuration + 140 + idx * 800); // se asegura que aparezcan una tras otra
+        }, liDuration + 140 + idx * 800);
       });
 
     });
   });
 });
-
